@@ -28,9 +28,44 @@ export const C = {
 export const F  = "'Press Start 2P', monospace";
 export const FS = "'Segoe UI', system-ui, sans-serif";
 export const DIFF = {
-  easy:   { label:"Recluta",    col:"#4caf7d", fwStart:100, fwDmg:20, bonus:1,   timer:60, tag:"Nivel 1", icon:"shield", totalQ:5,  desc:"Para todos los equipos. Conceptos esenciales." },
-  medium: { label:"Analista",   col:"#c9a84c", fwStart:100, fwDmg:15, bonus:2,   timer:45, tag:"Nivel 2", icon:"bolt",   totalQ:10, desc:"Escenarios reales CompTIA Security+." },
-  hard:   { label:"Arquitecto", col:"#e05260", fwStart:100, fwDmg:10, bonus:3.5, timer:35, tag:"Nivel 3", icon:"gem",    totalQ:15, desc:"Amenazas APT avanzadas. Sin piedad." },
+  easy: {
+    label: "Recluta",
+    col: "#4caf7d",
+    fwStart: 100,
+    fwDmg: 20,
+    bonus: 1,
+    timer: 60,
+    tag: "Nivel 1",
+    icon: "shield",
+    totalQ: 15,
+    desc: "Para todos los equipos. Conceptos esenciales.",
+  },
+
+  medium: {
+    label: "Analista",
+    col: "#c9a84c",
+    fwStart: 100,
+    fwDmg: 15,
+    bonus: 2,
+    timer: 60,
+    tag: "Nivel 2",
+    icon: "bolt",
+    totalQ: 25,
+    desc: "Escenarios reales CompTIA Security+.",
+  },
+
+  hard: {
+    label: "Arquitecto",
+    col: "#e05260",
+    fwStart: 100,
+    fwDmg: 10,
+    bonus: 3.5,
+    timer: 60,
+    tag: "Nivel 3",
+    icon: "gem",
+    totalQ: 50,
+    desc: "Amenazas APT avanzadas. Sin piedad.",
+  },
 };
 export const DIFF_ICONS = { shield:"🛡️", bolt:"⚡", gem:"💎" };
 export const RANKS = [

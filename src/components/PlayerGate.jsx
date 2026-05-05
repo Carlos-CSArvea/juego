@@ -107,7 +107,7 @@ export default function PlayerGate({ onConfirm }) {
         style={{
           position: "absolute",
           inset: 0,
-          backgroundImage: "url('/backgrounds/escenario-inicio.png')",
+          backgroundImage: `url('${import.meta.env.BASE_URL}backgrounds/escenario-inicio.png')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           opacity: 0.22,

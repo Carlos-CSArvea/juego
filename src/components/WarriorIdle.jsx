@@ -1,14 +1,17 @@
+const BASE = import.meta.env.BASE_URL;
+
 export default function WarriorIdle() {
   return (
     <>
       <style>
         {`
-          @keyframes warriorIdleSprite {
+          @keyframes warriorIdleStartSprite {
             from {
               background-position: 0px 0px;
             }
+
             to {
-              background-position: -625px 0px;
+              background-position: -375px 0px;
             }
           }
         `}
@@ -21,15 +24,16 @@ export default function WarriorIdle() {
           bottom: "16%",
           width: 125,
           height: 130,
-          backgroundImage: "url('/sprites/jaguar/warrior_idle_sheet.png')",
+          backgroundImage: `url('${BASE}sprites/jaguar/warrior_idle_start_sheet.png')`,
           backgroundRepeat: "no-repeat",
-          backgroundSize: "625px 130px",
+          backgroundSize: "375px 130px",
           imageRendering: "pixelated",
           transform: "scale(1.25)",
           transformOrigin: "bottom center",
           zIndex: 5,
           pointerEvents: "none",
-          animation: "warriorIdleSprite 1s steps(5) infinite",
+          animation: "warriorIdleStartSprite 0.85s steps(3) infinite",
+          filter: "drop-shadow(0 16px 12px rgba(0,0,0,.5))",
         }}
       />
     </>

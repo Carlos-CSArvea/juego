@@ -4,19 +4,21 @@ import DifficultySeal from "./DifficultySeal";
 const DIFFICULTY_TEXT = {
   easy: {
     title: "Recluta",
-    subtitle: "Nivel 1 · 60s · 5 preguntas",
+    subtitle: "Nivel 1 · 60s · 15 preguntas",
     description: "Para todos los equipos. Conceptos esenciales.",
     accent: C.mossL,
   },
+
   medium: {
     title: "Analista",
-    subtitle: "Nivel 2 · 45s · 10 preguntas",
+    subtitle: "Nivel 2 · 60s · 25 preguntas",
     description: "Escenarios reales de ciberseguridad.",
     accent: C.gold,
   },
+
   hard: {
     title: "Arquitecto",
-    subtitle: "Nivel 3 · 35s · 15 preguntas",
+    subtitle: "Nivel 3 · 60s · 50 preguntas",
     description: "Amenazas avanzadas. Sin piedad.",
     accent: C.red,
   },

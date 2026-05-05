@@ -2,6 +2,8 @@ import { C } from "../config/gameConfig";
 import WarriorIdle from "./WarriorIdle";
 import EnemyIdle from "./EnemyIdle";
 
+const BASE = import.meta.env.BASE_URL;
+
 export default function TitleCanvas() {
   return (
     <div
@@ -18,7 +20,7 @@ export default function TitleCanvas() {
       <div
         style={{
           height: 310,
-          backgroundImage: "url('/backgrounds/escenario-inicio.png')",
+          backgroundImage: `url('${BASE}backgrounds/escenario-inicio.png')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",

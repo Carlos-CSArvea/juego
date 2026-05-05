@@ -11,6 +11,7 @@ import TitleCanvas from './components/TitleCanvas';
 import ResultsScreen from './components/ResultsScreen';
 import './styles/global.css';
 import RankingDificultades from "./components/RankingDificultades";
+import BattleScreen from "./components/BattleScreen";
 
 import {
   guardarPuntaje,
@@ -53,6 +54,7 @@ const [cargandoRanking, setCargandoRanking] = useState(true);
   const [delta, setDelta] = useState(null);
   const [timer, setTimer] = useState(0);
   const [results, setResults] = useState(null);
+const [answerStatus, setAnswerStatus] = useState({});
 
   const timerRef = useRef(null);
   const correctCount = useRef(0);
@@ -125,17 +127,45 @@ const [cargandoRanking, setCargandoRanking] = useState(true);
 }, [pool, TOTAL_Q, stopTimer, jugador, diff, score, cargarRanking]);
 
   const handleTimeout = useCallback(() => {
-    setChosen(-1);
-    const nFw = Math.max(0, fw - (cfg?.fwDmg ?? 0));
-    setHitTick(t => t + 1);
-    setShake(true);
-    shakeToRef.current = setTimeout(() => setShake(false), 320);
-    phaseToRef.current = setTimeout(() => {
-      setFw(nFw); setPhase("feedback");
-      if (nFw <= 0) endToRef.current = setTimeout(endGame, 1000);
-    }, 180);
-  }, [fw, cfg, endGame]);
+  if (phase !== "choices" || !cfg) return;
 
+  setChosen(-1);
+
+  const nFw = Math.max(0, fw - (cfg?.fwDmg ?? 0));
+  const nRep = Math.max(0, rep - 1);
+
+  setAnswerStatus((prev) => {
+    const next = {
+      ...prev,
+      [qIdx]: "wrong",
+    };
+
+    if (nRep <= 0) {
+      for (let i = qIdx + 1; i < TOTAL_Q; i += 1) {
+        next[i] = "wrong";
+      }
+    }
+
+    return next;
+  });
+
+  setHitTick((t) => t + 1);
+  setShake(true);
+
+  shakeToRef.current = setTimeout(() => {
+    setShake(false);
+  }, 320);
+
+  phaseToRef.current = setTimeout(() => {
+    setFw(nFw);
+    setRep(nRep);
+    setPhase("feedback");
+
+    if (nRep <= 0) {
+      endToRef.current = setTimeout(endGame, 1200);
+    }
+  }, 180);
+}, [phase, cfg, fw, rep, qIdx, TOTAL_Q, endGame]);
   const startTimer = useCallback(() => {
     if (!diff) return;
     clearInterval(timerRef.current);
@@ -179,8 +209,9 @@ const [cargandoRanking, setCargandoRanking] = useState(true);
     const dc = DIFF[d];
     setDiff(d);
     setFw(dc.fwStart);
-    setRep(3);
-    setScore(0);
+    setRep(3); // 3 escudos del templo
+setAnswerStatus({});
+setScore(0);
 
     const p = shuffle(QB[d]).slice(0, dc.totalQ).map(shuffleQ);
 
@@ -198,36 +229,109 @@ const [cargandoRanking, setCargandoRanking] = useState(true);
     setScreen("game");
   }, [clearAllTimeouts, jugador, jugadorConfirmado]);
   const choose = useCallback((idx) => {
-    if (phase !== "choices" || !q || !cfg) return;
-    stopTimer(); setChosen(idx);
-    const correct = idx === q.correct;
-    const fwD = correct ? (q.fw[idx] > 0 ? Math.min(q.fw[idx], 100 - fw) : 0) : -cfg.fwDmg;
-    const repD = q.rep[idx];
-    const nFw = Math.min(100, Math.max(0, fw + fwD));
-    const nRep = Math.min(5, Math.max(1, rep + repD));
-    if (correct) { correctCount.current++; setCorrectTick(t => t + 1); }
-    else { setHitTick(t => t + 1); setShake(true); shakeToRef.current = setTimeout(() => setShake(false), 320); }
-    setParticles(p => [...p, { x: window.innerWidth / 2, y: window.innerHeight / 2, col: correct ? C.green : C.red }]);
-    if (fwD || repD) {
-      const pts = [];
-      if (fwD) pts.push((fwD > 0 ? "+" : "") + fwD + "% FW");
-      if (repD) pts.push((repD > 0 ? "+" : "") + repD + " REP");
-      const col = fwD >= 0 && repD >= 0 ? C.green : C.red;
-      setDelta({ txt: pts.join(" "), col });
-      deltaToRef.current = setTimeout(() => setDelta(null), 1500);
+  if (phase !== "choices" || !q || !cfg) return;
+
+  stopTimer();
+  setChosen(idx);
+
+  const correct = idx === q.correct;
+
+  const fwD = correct
+    ? q.fw?.[idx] > 0
+      ? Math.min(q.fw[idx], 100 - fw)
+      : 0
+    : -cfg.fwDmg;
+
+  const nFw = Math.min(100, Math.max(0, fw + fwD));
+  const nRep = correct ? rep : Math.max(0, rep - 1);
+
+  setAnswerStatus((prev) => {
+    const next = {
+      ...prev,
+      [qIdx]: correct ? "correct" : "wrong",
+    };
+
+    if (!correct && nRep <= 0) {
+      for (let i = qIdx + 1; i < TOTAL_Q; i += 1) {
+        next[i] = "wrong";
+      }
     }
-    setScore(s => s + (correct ? Math.round(120 * cfg.bonus) : 0));
-    phaseToRef.current = setTimeout(() => {
-      setFw(nFw); setRep(nRep); setPhase("feedback");
-      if (nFw <= 0) endToRef.current = setTimeout(endGame, 1000);
-    }, 180);
-  }, [phase, q, cfg, fw, rep, stopTimer, endGame]);
+
+    return next;
+  });
+
+  if (correct) {
+    correctCount.current += 1;
+    setCorrectTick((t) => t + 1);
+  } else {
+    setHitTick((t) => t + 1);
+    setShake(true);
+
+    shakeToRef.current = setTimeout(() => {
+      setShake(false);
+    }, 320);
+  }
+
+  setParticles((p) => [
+    ...p,
+    {
+      x: window.innerWidth / 2,
+      y: window.innerHeight / 2,
+      col: correct ? C.green : C.red,
+    },
+  ]);
+
+  if (fwD || !correct) {
+    const pts = [];
+
+    if (fwD) {
+      pts.push((fwD > 0 ? "+" : "") + fwD + "% ESCUDO");
+    }
+
+    if (!correct) {
+      pts.push("-1 VIDA");
+    }
+
+    setDelta({
+      txt: pts.join(" "),
+      col: correct ? C.green : C.red,
+    });
+
+    deltaToRef.current = setTimeout(() => {
+      setDelta(null);
+    }, 1500);
+  }
+
+  setScore((s) => s + (correct ? Math.round(120 * cfg.bonus) : 0));
+
+  phaseToRef.current = setTimeout(() => {
+    setFw(nFw);
+    setRep(nRep);
+    setPhase("feedback");
+
+    if (!correct && nRep <= 0) {
+      endToRef.current = setTimeout(endGame, 1200);
+    }
+  }, 180);
+}, [phase, q, cfg, fw, rep, qIdx, TOTAL_Q, stopTimer, endGame]);
 
   const nextQ = useCallback(() => {
-    const ni = qIdx + 1;
-    if (ni >= pool.length) { endGame(); return; }
-    setQIdx(ni); setPhase("typing"); setChosen(null);
-  }, [qIdx, pool.length, endGame]);
+  if (rep <= 0) {
+    endGame();
+    return;
+  }
+
+  const ni = qIdx + 1;
+
+  if (ni >= pool.length) {
+    endGame();
+    return;
+  }
+
+  setQIdx(ni);
+  setPhase("typing");
+  setChosen(null);
+}, [rep, qIdx, pool.length, endGame]);
 
   // FIX: memoizar estilos recurrentes
   const card = useMemo(() => ({ background: C.bgCard, border: `1px solid ${C.border}`, borderRadius: 12, padding: "12px 14px", marginBottom: 10 }), []);
@@ -431,136 +535,30 @@ const [cargandoRanking, setCargandoRanking] = useState(true);
         </div>
       )}
 
-      {/* GAME */}
-      {screen === "game" && cfg && q && (
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "10px 12px", minHeight: "100vh", display: "flex", flexDirection: "column" }}>
-          {/* HUD */}
-          <div style={{ ...card, ...glow(C.cyan), background: `linear-gradient(135deg,${C.bgCard},${C.bgDeep})`, position: "relative", overflow: "hidden", marginBottom: 8, flexShrink: 0 }}>
-            <div style={{ position: "absolute", top: 0, left: "-100%", width: "50%", height: "100%", background: `linear-gradient(90deg,transparent,${C.cyan}08,transparent)`, animation: "scanH 3s linear infinite" }} />
-            <div style={{ display: "flex", alignItems: "center", gap: 16, flexWrap: "wrap" }}>
-              <div style={{ flexShrink: 0 }}>
-                <div style={{ fontFamily: F, fontSize: "clamp(6px,1.4vw,8px)", color: C.cyan, letterSpacing: 1 }}>GUARDIANES CYBER DEFENSE</div>
-                <div style={{ fontFamily: FS, fontSize: 10, color: cfg.col, marginTop: 2 }}>Nivel: {cfg.label} - P.{qIdx + 1}/{TOTAL_Q}</div>
-              </div>
-              <div style={{ flex: 1, minWidth: 160 }}>
-                <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 3 }}>
-                  <span style={{ fontFamily: FS, fontSize: 9, color: C.textDim }}>Escudo Firewall</span>
-                  <span style={{ fontFamily: F, fontSize: 8, color: fwColor }}>{Math.round(fw)}%</span>
-                </div>
-                <div style={{ display: "flex", gap: 2 }}>
-                  {Array.from({ length: 10 }, (_, i) => {
-                    const a = fw >= (i + 1) * 10;
-                    return <div key={i} style={{ flex: 1, height: 10, borderRadius: 2, background: a ? fwColor : "#1e2035", border: `1px solid ${a ? fwColor : C.border}`, transition: "background .4s" }} />;
-                  })}
-                </div>
-              </div>
-              <div style={{ display: "flex", alignItems: "center", gap: 6, flexShrink: 0 }}>
-                <span style={{ fontFamily: FS, fontSize: 9, color: C.textDim }}>Confianza:</span>
-                {[1, 2, 3, 4, 5].map(i => <Diamond key={i} on={i <= rep} size={14} />)}
-              </div>
-              <div style={{ textAlign: "right", flexShrink: 0 }}>
-                <div style={{ fontFamily: F, fontSize: "clamp(10px,1.8vw,13px)", color: C.gold }}>{String(score).padStart(6, "0")}</div>
-                <div style={{ fontFamily: FS, fontSize: 8, color: C.textDim }}>PUNTOS</div>
-              </div>
-              <button onClick={goToMenu} style={{ fontFamily: FS, fontSize: 10, color: C.textDim, background: "none", border: `1px solid ${C.border}`, borderRadius: 6, padding: "3px 10px", cursor: "pointer", flexShrink: 0 }}>Menu</button>
-            </div>
-          </div>
-
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(320px,1fr))", gap: 10, flex: 1 }}>
-            {/* Col izquierda */}
-            <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-              <div style={{ ...card, ...glow(C.purple), padding: 0, overflow: "hidden", flexShrink: 0 }}>
-                <BattleCanvas fw={fw} hitTick={hitTick} correctTick={correctTick} />
-                <div style={{ display: "flex", justifyContent: "space-between", padding: "5px 10px", background: C.bgDeep, borderTop: `1px solid ${C.border}` }}>
-                  <span style={{ fontFamily: FS, fontSize: 9, color: C.cyan }}>Guardianes HQ</span>
-                  <span style={{ fontFamily: FS, fontSize: 9, color: C.gold, fontWeight: "bold" }}>VS</span>
-                  <span style={{ fontFamily: FS, fontSize: 9, color: C.red }}>Vectores de Amenaza</span>
-                </div>
-              </div>
-              <div style={{ ...card, ...glow(cfg.col), flexShrink: 0 }}>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
-                  <div>
-                    <div style={{ fontFamily: F, fontSize: 9, color: cfg.col, marginBottom: 3 }}>{DIFF_ICONS[cfg.icon]} {cfg.label}</div>
-                    <div style={{ fontFamily: FS, fontSize: 10, color: C.textDim }}>{TOTAL_Q} preguntas - {cfg.timer}s</div>
-                  </div>
-                  <div style={{ textAlign: "right" }}>
-                    <div style={{ fontFamily: F, fontSize: 11, color: C.cyan }}>{qIdx}/{TOTAL_Q}</div>
-                    <div style={{ fontFamily: FS, fontSize: 9, color: C.textDim }}>respondidas</div>
-                  </div>
-                </div>
-                <div style={{ display: "flex", gap: 3 }}>
-                  {Array.from({ length: TOTAL_Q }, (_, i) => {
-                    const done = i < qIdx, cur = i === qIdx;
-                    return <div key={i} style={{ flex: 1, height: 6, borderRadius: 2, background: done ? C.green : cur ? C.gold : "#1e2035", border: `1px solid ${done ? C.green : cur ? C.gold : C.border}`, transition: "all .3s" }} />;
-                  })}
-                </div>
-              </div>
-              <div style={{ ...card, background: C.bgDeep, border: `1px solid ${C.border}`, flexShrink: 0 }}>
-                <div style={{ fontFamily: FS, fontSize: 10, color: C.textDim, lineHeight: 1.7 }}>
-                  <strong style={{ color: C.text }}>Tip:</strong>{" "}
-                  {diff === "easy" && "Lee cada opcion con calma. Los conceptos basicos son tu mejor aliado."}
-                  {diff === "medium" && "Piensa en el escenario completo antes de responder."}
-                  {diff === "hard" && "Las amenazas avanzadas requieren conocimiento profundo."}
-                </div>
-              </div>
-            </div>
-
-            {/* Col derecha */}
-            <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-              <div style={{ ...card, ...glow(C.gold), position: "relative", flexShrink: 0 }}>
-                <div style={{ position: "absolute", top: -1, right: -1, width: 16, height: 16, background: `linear-gradient(135deg,${C.gold},${C.goldD})`, borderRadius: "0 12px 0 8px" }} />
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 10, gap: 8 }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                    {q.joke && <span style={{ fontFamily: FS, fontSize: 9, color: C.gold, background: `${C.gold}11`, border: `1px solid ${C.gold}44`, borderRadius: 4, padding: "2px 6px" }}>Humor</span>}
-                    <span style={{ fontFamily: FS, fontSize: 10, color: C.textDim }}>Amenaza - P.{qIdx + 1}</span>
-                  </div>
-                  {phase === "choices" && <TimerRing seconds={timer} total={cfg.timer} />}
-                </div>
-                <div style={{ minHeight: 50 }}>
-                  <Typewriter key={qIdx} text={q.q} onDone={() => setPhase("choices")} />
-                </div>
-              </div>
-
-              {phase === "typing" && (
-                <div style={{ textAlign: "center", padding: "10px 0", fontFamily: FS, fontSize: 12, color: C.textDim }}>Analizando amenaza...</div>
-              )}
-
-              {phase === "choices" && (
-                <div style={{ display: "flex", flexDirection: "column", gap: 7, animation: "popIn .25s ease" }}>
-                  {q.choices.map((c, i) => (
-                    <button key={i} onClick={() => choose(i)} style={{ background: `linear-gradient(135deg,${C.bgCard},${C.bgDeep})`, border: `1px solid ${C.border}`, borderRadius: 10, padding: "10px 12px", cursor: "pointer", fontFamily: FS, fontSize: "clamp(12px,1.6vw,14px)", color: C.text, display: "flex", alignItems: "flex-start", gap: 10, textAlign: "left", width: "100%", lineHeight: 1.6, transition: "all .15s" }}
-                      onMouseEnter={e => { e.currentTarget.style.background = `linear-gradient(135deg,${C.cyan}11,${C.bgCard})`; e.currentTarget.style.borderColor = C.cyan; e.currentTarget.style.transform = "translateX(4px)"; }}
-                      onMouseLeave={e => { e.currentTarget.style.background = `linear-gradient(135deg,${C.bgCard},${C.bgDeep})`; e.currentTarget.style.borderColor = C.border; e.currentTarget.style.transform = "none"; }}>
-                      <span style={{ background: `linear-gradient(135deg,${C.cyan},${C.purple})`, color: "#fff", borderRadius: 6, padding: "2px 7px", fontFamily: F, fontSize: 7, fontWeight: 900, minWidth: 22, textAlign: "center", flexShrink: 0, marginTop: 2 }}>
-                        {["A", "B", "C", "D"][i]}
-                      </span>
-                      {c}
-                    </button>
-                  ))}
-                </div>
-              )}
-
-              {phase === "feedback" && (
-                <div style={{ ...card, ...glow(chosen === q.correct ? C.green : C.red), background: `linear-gradient(135deg,${chosen === q.correct ? C.green + "11" : C.red + "11"},${C.bgDeep})`, animation: "popIn .3s ease" }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 10 }}>
-                    <div style={{ width: 34, height: 34, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", background: chosen === q.correct ? `${C.green}22` : `${C.red}22`, border: `2px solid ${chosen === q.correct ? C.green : C.red}`, fontSize: 18, flexShrink: 0 }}>
-                      {chosen === -1 ? "T" : chosen === q.correct ? "V" : "X"}
-                    </div>
-                    <div style={{ fontFamily: F, fontSize: "clamp(8px,1.4vw,10px)", color: chosen === q.correct ? C.green : C.red }}>
-                      {chosen === -1 ? "TIEMPO AGOTADO" : chosen === q.correct ? "CORRECTO" : "INCORRECTO"}
-                    </div>
-                  </div>
-                  {chosen !== -1 && <div style={{ fontFamily: FS, fontSize: "clamp(11px,1.4vw,13px)", color: chosen === q.correct ? "#a0e8b0" : "#ffaaaa", lineHeight: 1.7, marginBottom: 12, paddingLeft: 44 }}>{q.exp}</div>}
-                  {chosen === -1 && <div style={{ fontFamily: FS, fontSize: "clamp(11px,1.4vw,13px)", color: "#ffaaaa", lineHeight: 1.7, marginBottom: 12, paddingLeft: 44 }}>Respuesta correcta: <strong style={{ color: C.gold }}>{q.choices[q.correct]}</strong></div>}
-                  <button onClick={nextQ} style={{ background: `linear-gradient(135deg,${C.cyan},${C.purple})`, color: "#fff", border: "none", fontFamily: FS, fontWeight: "bold", fontSize: "clamp(11px,1.4vw,13px)", padding: "11px 18px", cursor: "pointer", borderRadius: 8, width: "100%", letterSpacing: 1 }}>
-                    {qIdx + 1 >= TOTAL_Q ? "Ver Resultados" : "Siguiente Amenaza"}
-                  </button>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
+     {/* GAME */}
+{screen === "game" && cfg && q && (
+  <BattleScreen
+    jugador={jugador}
+    cfg={cfg}
+    diff={diff}
+    q={q}
+    qIdx={qIdx}
+    TOTAL_Q={TOTAL_Q}
+    fw={fw}
+    rep={rep}
+    score={score}
+    phase={phase}
+    timer={timer}
+    chosen={chosen}
+    hitTick={hitTick}
+    correctTick={correctTick}
+    choose={choose}
+    nextQ={nextQ}
+    setPhase={setPhase}
+    goToMenu={goToMenu}
+    answerStatus={answerStatus}
+  />
+)}
 
       {/* RESULTS */}
       {screen === "results" && results && (
