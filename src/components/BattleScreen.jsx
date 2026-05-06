@@ -56,10 +56,11 @@ function ProgressBar({ current, total, answerStatus = {} }) {
   );
 }
 
-function ChoiceButton({ letter, text, onClick }) {
+function ChoiceButton({ letter, text, onClick, disabled = false }) {
   return (
     <button
-      onClick={onClick}
+      onClick={disabled ? undefined : onClick}
+      disabled={disabled}
       style={{
         width: "100%",
         display: "grid",
@@ -68,26 +69,33 @@ function ChoiceButton({ letter, text, onClick }) {
         alignItems: "start",
         padding: "14px 15px",
         borderRadius: 14,
-        border: `1px solid ${C.border}`,
-        background:
-          "linear-gradient(135deg, rgba(31,23,13,.96), rgba(9,7,4,.98))",
-        color: C.text,
-        cursor: "pointer",
+        border: `1px solid ${disabled ? C.textMuted : C.border}`,
+        background: disabled
+          ? "linear-gradient(135deg, rgba(18,14,9,.86), rgba(6,5,3,.92))"
+          : "linear-gradient(135deg, rgba(31,23,13,.96), rgba(9,7,4,.98))",
+        color: disabled ? C.textMuted : C.text,
+        cursor: disabled ? "not-allowed" : "pointer",
+        opacity: disabled ? 0.72 : 1,
         textAlign: "left",
         fontFamily: FS,
         fontSize: "clamp(12px, 1.45vw, 14px)",
         lineHeight: 1.55,
         boxShadow:
           "0 10px 26px rgba(0,0,0,.25), inset 0 0 0 1px rgba(255,255,255,.035)",
-        transition: "transform .15s ease, border-color .15s ease, background .15s ease",
+        transition:
+          "transform .15s ease, border-color .15s ease, background .15s ease",
       }}
       onMouseEnter={(e) => {
+        if (disabled) return;
+
         e.currentTarget.style.transform = "translateX(5px)";
         e.currentTarget.style.borderColor = C.gold;
         e.currentTarget.style.background =
           "linear-gradient(135deg, rgba(58,39,12,.96), rgba(12,9,5,.98))";
       }}
       onMouseLeave={(e) => {
+        if (disabled) return;
+
         e.currentTarget.style.transform = "none";
         e.currentTarget.style.borderColor = C.border;
         e.currentTarget.style.background =
@@ -103,8 +111,8 @@ function ChoiceButton({ letter, text, onClick }) {
           placeItems: "center",
           background:
             "radial-gradient(circle, rgba(214,168,79,.35), rgba(58,39,12,.96))",
-          border: `1px solid ${C.gold}`,
-          color: C.gold,
+          border: `1px solid ${disabled ? C.textMuted : C.gold}`,
+          color: disabled ? C.textMuted : C.gold,
           fontFamily: F,
           fontSize: 10,
           textShadow: "2px 2px 0 rgba(0,0,0,.8)",
@@ -122,6 +130,11 @@ function FeedbackPanel({ chosen, q, nextQ, isLast, sinEscudos }) {
   const ok = chosen === q.correct;
   const timeout = chosen === -1;
   const color = timeout || !ok ? C.red : C.green;
+
+  const selectedText =
+    chosen !== null && chosen !== -1 ? q.choices[chosen] : null;
+
+  const correctText = q.choices[q.correct];
 
   return (
     <div
@@ -169,7 +182,11 @@ function FeedbackPanel({ chosen, q, nextQ, isLast, sinEscudos }) {
               marginBottom: 4,
             }}
           >
-            {timeout ? "TIEMPO AGOTADO" : ok ? "RESPUESTA CORRECTA" : "RESPUESTA INCORRECTA"}
+            {timeout
+              ? "TIEMPO AGOTADO"
+              : ok
+              ? "RESPUESTA CORRECTA"
+              : "RESPUESTA INCORRECTA"}
           </div>
 
           <div
@@ -179,37 +196,62 @@ function FeedbackPanel({ chosen, q, nextQ, isLast, sinEscudos }) {
               color: C.textDim,
             }}
           >
-            {ok ? "El templo resiste la amenaza." : "El enemigo debilitó el escudo."}
+            {ok
+              ? "El templo resiste la amenaza."
+              : "El enemigo debilitó el escudo."}
           </div>
         </div>
       </div>
 
-      {chosen !== -1 ? (
-        <div
-          style={{
-            fontFamily: FS,
-            fontSize: "clamp(12px, 1.45vw, 14px)",
-            color: ok ? "#BFEBCB" : "#FFB7A8",
-            lineHeight: 1.65,
-            marginBottom: 14,
-          }}
-        >
-          {q.exp}
-        </div>
-      ) : (
+      {!ok && !timeout && (
         <div
           style={{
             fontFamily: FS,
             fontSize: "clamp(12px, 1.45vw, 14px)",
             color: "#FFB7A8",
-            lineHeight: 1.65,
-            marginBottom: 14,
+            lineHeight: 1.6,
+            marginBottom: 10,
+            padding: "10px 12px",
+            borderRadius: 12,
+            background: "rgba(185,70,50,.10)",
+            border: `1px solid ${C.red}55`,
+          }}
+        >
+          Tu respuesta:{" "}
+          <strong style={{ color: C.red }}>{selectedText}</strong>
+        </div>
+      )}
+
+      {!ok && (
+        <div
+          style={{
+            fontFamily: FS,
+            fontSize: "clamp(12px, 1.45vw, 14px)",
+            color: "#F7D98B",
+            lineHeight: 1.6,
+            marginBottom: 10,
+            padding: "10px 12px",
+            borderRadius: 12,
+            background: "rgba(214,168,79,.10)",
+            border: `1px solid ${C.gold}66`,
           }}
         >
           Respuesta correcta:{" "}
-          <strong style={{ color: C.gold }}>{q.choices[q.correct]}</strong>
+          <strong style={{ color: C.gold }}>{correctText}</strong>
         </div>
       )}
+
+      <div
+        style={{
+          fontFamily: FS,
+          fontSize: "clamp(12px, 1.45vw, 14px)",
+          color: ok ? "#BFEBCB" : "#FFB7A8",
+          lineHeight: 1.65,
+          marginBottom: 14,
+        }}
+      >
+        {q.exp}
+      </div>
 
       {sinEscudos && (
         <div
@@ -226,6 +268,7 @@ function FeedbackPanel({ chosen, q, nextQ, isLast, sinEscudos }) {
           registran como fallidas.
         </div>
       )}
+
       <button
         onClick={nextQ}
         style={{
@@ -519,7 +562,7 @@ export default function BattleScreen({
                     fontSize: 13,
                   }}
                 >
-                  {qIdx}/{TOTAL_Q}
+                  {qIdx + 1}/{TOTAL_Q}
                 </div>
               </div>
 
@@ -645,24 +688,25 @@ export default function BattleScreen({
                 }}
               >
                 {q.choices.map((choice, i) => (
-                  <ChoiceButton
-                    key={i}
-                    letter={["A", "B", "C", "D"][i]}
-                    text={choice}
-                    onClick={() => choose(i)}
-                  />
-                ))}
+  <ChoiceButton
+    key={i}
+    letter={["A", "B", "C", "D"][i]}
+    text={choice}
+    onClick={() => choose(i)}
+    disabled={chosen !== null}
+  />
+))}
               </div>
             )}
 
             {phase === "feedback" && (
               <FeedbackPanel
-                chosen={chosen}
-                q={q}
-                nextQ={nextQ}
-                isLast={qIdx + 1 >= TOTAL_Q}
-                sinEscudos={rep <= 0}
-              />
+  chosen={chosen}
+  q={q}
+  nextQ={nextQ}
+  isLast={qIdx + 1 >= TOTAL_Q}
+  sinEscudos={rep <= 0}
+/>
             )}
           </section>
         </main>

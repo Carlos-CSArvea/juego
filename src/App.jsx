@@ -31,15 +31,16 @@ export default function App() {
   const [jugadorConfirmado, setJugadorConfirmado] = useState(false);
 
   const [rankings, setRankings] = useState({
-  easy: [],
-  medium: [],
-  hard: [],
-});
+    easy: [],
+    medium: [],
+    hard: [],
+  });
 
-const [cargandoRanking, setCargandoRanking] = useState(true);
+  const [cargandoRanking, setCargandoRanking] = useState(true);
   const [screen, setScreen] = useState("title");
   const [diff, setDiff] = useState(null);
   const partidaGuardadaRef = useRef(false);
+  const resolvingRef = useRef(false);
   const [fw, setFw] = useState(100);
   const [rep, setRep] = useState(3);
   const [score, setScore] = useState(0);
@@ -54,7 +55,7 @@ const [cargandoRanking, setCargandoRanking] = useState(true);
   const [delta, setDelta] = useState(null);
   const [timer, setTimer] = useState(0);
   const [results, setResults] = useState(null);
-const [answerStatus, setAnswerStatus] = useState({});
+  const [answerStatus, setAnswerStatus] = useState({});
 
   const timerRef = useRef(null);
   const correctCount = useRef(0);
@@ -69,16 +70,16 @@ const [answerStatus, setAnswerStatus] = useState({});
   const q = pool[qIdx];
 
   const cargarRanking = useCallback(async () => {
-  try {
-    setCargandoRanking(true);
-    const top = await obtenerRankingsPorDificultad(5);
-    setRankings(top);
-  } catch (error) {
-    console.error("Error cargando rankings:", error.message);
-  } finally {
-    setCargandoRanking(false);
-  }
-}, []);
+    try {
+      setCargandoRanking(true);
+      const top = await obtenerRankingsPorDificultad(5);
+      setRankings(top);
+    } catch (error) {
+      console.error("Error cargando rankings:", error.message);
+    } finally {
+      setCargandoRanking(false);
+    }
+  }, []);
 
   function confirmarJugador(datosJugador) {
     setJugador(datosJugador);
@@ -114,58 +115,59 @@ const [answerStatus, setAnswerStatus] = useState({});
     setScreen("results");
 
     try {
-      if (!partidaGuardadaRef.current && score > 0) {
+      if (!partidaGuardadaRef.current) {
   partidaGuardadaRef.current = true;
 
   await guardarPuntaje(jugador.nombre, jugador.area, diff, score);
   await cargarRanking();
 }
-      
+
     } catch (error) {
       console.error("Error guardando ranking:", error.message);
     }
-}, [pool, TOTAL_Q, stopTimer, jugador, diff, score, cargarRanking]);
+  }, [pool, TOTAL_Q, stopTimer, jugador, diff, score, cargarRanking]);
 
   const handleTimeout = useCallback(() => {
-  if (phase !== "choices" || !cfg) return;
+    if (resolvingRef.current || phase !== "choices" || !cfg) return;
 
-  setChosen(-1);
+    resolvingRef.current = true;
 
-  const nFw = Math.max(0, fw - (cfg?.fwDmg ?? 0));
-  const nRep = Math.max(0, rep - 1);
+    stopTimer();
+    setChosen(-1);
+    setPhase("feedback");
 
-  setAnswerStatus((prev) => {
-    const next = {
-      ...prev,
-      [qIdx]: "wrong",
-    };
+    const nFw = Math.max(0, fw - (cfg?.fwDmg ?? 0));
+    const nRep = Math.max(0, rep - 1);
 
-    if (nRep <= 0) {
-      for (let i = qIdx + 1; i < TOTAL_Q; i += 1) {
-        next[i] = "wrong";
+    setAnswerStatus((prev) => {
+      const next = {
+        ...prev,
+        [qIdx]: "wrong",
+      };
+
+      if (nRep <= 0) {
+        for (let i = qIdx + 1; i < TOTAL_Q; i += 1) {
+          next[i] = "wrong";
+        }
       }
-    }
 
-    return next;
-  });
+      return next;
+    });
 
-  setHitTick((t) => t + 1);
-  setShake(true);
+    setHitTick((t) => t + 1);
+    setShake(true);
 
-  shakeToRef.current = setTimeout(() => {
-    setShake(false);
-  }, 320);
+    shakeToRef.current = setTimeout(() => {
+      setShake(false);
+    }, 320);
 
-  phaseToRef.current = setTimeout(() => {
     setFw(nFw);
     setRep(nRep);
-    setPhase("feedback");
 
     if (nRep <= 0) {
       endToRef.current = setTimeout(endGame, 1200);
     }
-  }, 180);
-}, [phase, cfg, fw, rep, qIdx, TOTAL_Q, endGame]);
+  }, [phase, cfg, fw, rep, qIdx, TOTAL_Q, stopTimer, endGame]);
   const startTimer = useCallback(() => {
     if (!diff) return;
     clearInterval(timerRef.current);
@@ -184,7 +186,17 @@ const [answerStatus, setAnswerStatus] = useState({});
     return stopTimer;
   }, [phase, startTimer, stopTimer]);
 
-  const goToMenu = useCallback(() => { clearAllTimeouts(); setScreen("title"); }, [clearAllTimeouts]);
+  const goToMenu = useCallback(() => {
+    clearAllTimeouts();
+
+    resolvingRef.current = false;
+
+    setDelta(null);
+    setParticles([]);
+    setChosen(null);
+    setPhase("typing");
+    setScreen("title");
+  }, [clearAllTimeouts]);
 
   const startGame = useCallback((d) => {
     if (!jugadorConfirmado) {
@@ -203,6 +215,7 @@ const [answerStatus, setAnswerStatus] = useState({});
       return;
     }
     partidaGuardadaRef.current = false;
+    resolvingRef.current = false;
 
     clearAllTimeouts();
 
@@ -210,8 +223,8 @@ const [answerStatus, setAnswerStatus] = useState({});
     setDiff(d);
     setFw(dc.fwStart);
     setRep(3); // 3 escudos del templo
-setAnswerStatus({});
-setScore(0);
+    setAnswerStatus({});
+    setScore(0);
 
     const p = shuffle(QB[d]).slice(0, dc.totalQ).map(shuffleQ);
 
@@ -229,109 +242,111 @@ setScore(0);
     setScreen("game");
   }, [clearAllTimeouts, jugador, jugadorConfirmado]);
   const choose = useCallback((idx) => {
-  if (phase !== "choices" || !q || !cfg) return;
+    if (resolvingRef.current || phase !== "choices" || !q || !cfg) return;
 
-  stopTimer();
-  setChosen(idx);
+    resolvingRef.current = true;
 
-  const correct = idx === q.correct;
+    stopTimer();
+    setChosen(idx);
+    setPhase("feedback");
 
-  const fwD = correct
-    ? q.fw?.[idx] > 0
-      ? Math.min(q.fw[idx], 100 - fw)
-      : 0
-    : -cfg.fwDmg;
+    const correct = idx === q.correct;
 
-  const nFw = Math.min(100, Math.max(0, fw + fwD));
-  const nRep = correct ? rep : Math.max(0, rep - 1);
+    const fwD = correct
+      ? q.fw?.[idx] > 0
+        ? Math.min(q.fw[idx], 100 - fw)
+        : 0
+      : -cfg.fwDmg;
 
-  setAnswerStatus((prev) => {
-    const next = {
-      ...prev,
-      [qIdx]: correct ? "correct" : "wrong",
-    };
+    const nFw = Math.min(100, Math.max(0, fw + fwD));
+    const nRep = correct ? rep : Math.max(0, rep - 1);
 
-    if (!correct && nRep <= 0) {
-      for (let i = qIdx + 1; i < TOTAL_Q; i += 1) {
-        next[i] = "wrong";
+    setAnswerStatus((prev) => {
+      const next = {
+        ...prev,
+        [qIdx]: correct ? "correct" : "wrong",
+      };
+
+      if (!correct && nRep <= 0) {
+        for (let i = qIdx + 1; i < TOTAL_Q; i += 1) {
+          next[i] = "wrong";
+        }
       }
-    }
 
-    return next;
-  });
-
-  if (correct) {
-    correctCount.current += 1;
-    setCorrectTick((t) => t + 1);
-  } else {
-    setHitTick((t) => t + 1);
-    setShake(true);
-
-    shakeToRef.current = setTimeout(() => {
-      setShake(false);
-    }, 320);
-  }
-
-  setParticles((p) => [
-    ...p,
-    {
-      x: window.innerWidth / 2,
-      y: window.innerHeight / 2,
-      col: correct ? C.green : C.red,
-    },
-  ]);
-
-  if (fwD || !correct) {
-    const pts = [];
-
-    if (fwD) {
-      pts.push((fwD > 0 ? "+" : "") + fwD + "% ESCUDO");
-    }
-
-    if (!correct) {
-      pts.push("-1 VIDA");
-    }
-
-    setDelta({
-      txt: pts.join(" "),
-      col: correct ? C.green : C.red,
+      return next;
     });
 
-    deltaToRef.current = setTimeout(() => {
-      setDelta(null);
-    }, 1500);
-  }
+    if (correct) {
+      correctCount.current += 1;
+      setCorrectTick((t) => t + 1);
+    } else {
+      setHitTick((t) => t + 1);
+      setShake(true);
 
-  setScore((s) => s + (correct ? Math.round(120 * cfg.bonus) : 0));
+      shakeToRef.current = setTimeout(() => {
+        setShake(false);
+      }, 320);
+    }
 
-  phaseToRef.current = setTimeout(() => {
+    setParticles((p) => [
+      ...p,
+      {
+        x: window.innerWidth / 2,
+        y: window.innerHeight / 2,
+        col: correct ? C.green : C.red,
+      },
+    ]);
+
+    if (fwD || !correct) {
+      const pts = [];
+
+      if (fwD) {
+        pts.push((fwD > 0 ? "+" : "") + fwD + "% ESCUDO");
+      }
+
+      if (!correct) {
+        pts.push("-1 VIDA");
+      }
+
+      setDelta({
+        txt: pts.join(" "),
+        col: correct ? C.green : C.red,
+      });
+
+      deltaToRef.current = setTimeout(() => {
+        setDelta(null);
+      }, 1500);
+    }
+
+    setScore((s) => s + (correct ? Math.round(120 * cfg.bonus) : 0));
+
     setFw(nFw);
     setRep(nRep);
-    setPhase("feedback");
 
     if (!correct && nRep <= 0) {
       endToRef.current = setTimeout(endGame, 1200);
     }
-  }, 180);
-}, [phase, q, cfg, fw, rep, qIdx, TOTAL_Q, stopTimer, endGame]);
+  }, [phase, q, cfg, fw, rep, qIdx, TOTAL_Q, stopTimer, endGame]);
 
   const nextQ = useCallback(() => {
-  if (rep <= 0) {
-    endGame();
-    return;
-  }
+    resolvingRef.current = false;
 
-  const ni = qIdx + 1;
+    if (rep <= 0) {
+      endGame();
+      return;
+    }
 
-  if (ni >= pool.length) {
-    endGame();
-    return;
-  }
+    const ni = qIdx + 1;
 
-  setQIdx(ni);
-  setPhase("typing");
-  setChosen(null);
-}, [rep, qIdx, pool.length, endGame]);
+    if (ni >= pool.length) {
+      endGame();
+      return;
+    }
+
+    setQIdx(ni);
+    setPhase("typing");
+    setChosen(null);
+  }, [rep, qIdx, pool.length, endGame]);
 
   // FIX: memoizar estilos recurrentes
   const card = useMemo(() => ({ background: C.bgCard, border: `1px solid ${C.border}`, borderRadius: 12, padding: "12px 14px", marginBottom: 10 }), []);
@@ -449,7 +464,7 @@ setScore(0);
                       GUARDIANES
                     </div>
 
-                    
+
                   </div>
 
                   <div style={{ fontFamily: FS, fontSize: "clamp(10px,1.6vw,13px)", color: C.mossL, letterSpacing: 3, marginBottom: 4, fontWeight: 300 }}>
@@ -479,9 +494,9 @@ setScore(0);
 
             <aside className="guardian-ranking-panel">
               <RankingDificultades
-  rankings={rankings}
-  cargando={cargandoRanking}
-/>
+                rankings={rankings}
+                cargando={cargandoRanking}
+              />
             </aside>
           </div>
         </>
@@ -535,30 +550,30 @@ setScore(0);
         </div>
       )}
 
-     {/* GAME */}
-{screen === "game" && cfg && q && (
-  <BattleScreen
-    jugador={jugador}
-    cfg={cfg}
-    diff={diff}
-    q={q}
-    qIdx={qIdx}
-    TOTAL_Q={TOTAL_Q}
-    fw={fw}
-    rep={rep}
-    score={score}
-    phase={phase}
-    timer={timer}
-    chosen={chosen}
-    hitTick={hitTick}
-    correctTick={correctTick}
-    choose={choose}
-    nextQ={nextQ}
-    setPhase={setPhase}
-    goToMenu={goToMenu}
-    answerStatus={answerStatus}
-  />
-)}
+      {/* GAME */}
+      {screen === "game" && cfg && q && (
+        <BattleScreen
+          jugador={jugador}
+          cfg={cfg}
+          diff={diff}
+          q={q}
+          qIdx={qIdx}
+          TOTAL_Q={TOTAL_Q}
+          fw={fw}
+          rep={rep}
+          score={score}
+          phase={phase}
+          timer={timer}
+          chosen={chosen}
+          hitTick={hitTick}
+          correctTick={correctTick}
+          choose={choose}
+          nextQ={nextQ}
+          setPhase={setPhase}
+          goToMenu={goToMenu}
+          answerStatus={answerStatus}
+        />
+      )}
 
       {/* RESULTS */}
       {screen === "results" && results && (
