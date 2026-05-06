@@ -1,6 +1,6 @@
-import QB_EASY_MODULE from "./QB_guardianes_easy_balanceado";
-import QB_MEDIUM_MODULE from "./QB_guardianes_medium_balanceado";
-import QB_HARD_MODULE from "./QB_guardianes_hard_balanceado";
+import QB_EASY_MODULE from "./QB_guardianes_easy_balanceado.js";
+import QB_MEDIUM_MODULE from "./QB_guardianes_medium_balanceado.js";
+import QB_HARD_MODULE from "./QB_guardianes_hard_balanceado.js";
 
 export const QB = {
   easy: QB_EASY_MODULE.easy ?? [],

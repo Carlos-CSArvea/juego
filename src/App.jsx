@@ -16,9 +16,14 @@ import BattleScreen from "./components/BattleScreen";
 import {
   guardarPuntaje,
   obtenerRankingsPorDificultad,
+  existeJugadorRegistrado,
 } from "./services/rankingService";
 import PlayerGate from "./components/PlayerGate";
 import DifficultyCard from "./components/DifficultyCard";
+import {
+  preloadImages,
+  CRITICAL_GAME_ASSETS,
+} from "./utils/preloadAssets";
 
 // ── APP ───────────────────────────────────────────────────────────
 export default function App() {
@@ -81,14 +86,46 @@ export default function App() {
     }
   }, []);
 
-  function confirmarJugador(datosJugador) {
-    setJugador(datosJugador);
-    setJugadorConfirmado(true);
-  }
+  const confirmarJugador = useCallback(async (datos) => {
+    try {
+      const yaExiste = await existeJugadorRegistrado(datos.nombre, datos.area);
+
+      if (yaExiste) {
+        return {
+          ok: false,
+          error:
+            "Ya existe un registro con ese nombre y esa área. Usa tu nombre completo.",
+        };
+      }
+
+      setJugador(datos);
+      setJugadorConfirmado(true);
+
+      return {
+        ok: true,
+      };
+    } catch (error) {
+      console.error("Error validando jugador:", error.message);
+
+      return {
+        ok: false,
+        error:
+          "No se pudo validar el registro. Revisa tu conexión e intenta de nuevo.",
+      };
+    }
+  }, []);
+
+
 
   useEffect(() => {
     cargarRanking();
   }, [cargarRanking]);
+
+  useEffect(() => {
+    preloadImages(CRITICAL_GAME_ASSETS);
+  }, []);
+
+
   // FIX: clearAllTimeouts centralizado
   const clearAllTimeouts = useCallback(() => {
     clearTimeout(shakeToRef.current);
@@ -116,11 +153,11 @@ export default function App() {
 
     try {
       if (!partidaGuardadaRef.current) {
-  partidaGuardadaRef.current = true;
+        partidaGuardadaRef.current = true;
 
-  await guardarPuntaje(jugador.nombre, jugador.area, diff, score);
-  await cargarRanking();
-}
+        await guardarPuntaje(jugador.nombre, jugador.area, diff, score);
+        await cargarRanking();
+      }
 
     } catch (error) {
       console.error("Error guardando ranking:", error.message);
@@ -198,7 +235,7 @@ export default function App() {
     setScreen("title");
   }, [clearAllTimeouts]);
 
-  const startGame = useCallback((d) => {
+  const startGame = useCallback(async (d) => {
     if (!jugadorConfirmado) {
       return;
     }
@@ -218,6 +255,8 @@ export default function App() {
     resolvingRef.current = false;
 
     clearAllTimeouts();
+
+    await preloadImages(CRITICAL_GAME_ASSETS);
 
     const dc = DIFF[d];
     setDiff(d);
@@ -370,70 +409,71 @@ export default function App() {
       {/* TITLE */}
       {jugadorConfirmado && screen === "title" && (
         <>
-          <style>{`
-            .guardian-menu-layout {
-              width: min(1220px, calc(100vw - 32px));
-              margin: 0 auto;
-              padding: 18px 0 42px;
-              display: grid;
-              grid-template-columns: minmax(0, 1.35fr) minmax(340px, 0.72fr);
-              gap: 22px;
-              align-items: start;
-            }
 
-            .guardian-left-panel {
-              min-width: 0;
-              display: flex;
-              flex-direction: column;
-              gap: 14px;
-            }
+        <style>{`
+  .guardian-menu-layout {
+    width: min(1220px, calc(100vw - 32px));
+    margin: 0 auto;
+    padding: 18px 0 42px;
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(340px, 0.72fr);
+    gap: 22px;
+    align-items: start;
+  }
 
-            .guardian-hero-card {
-              border-radius: 0 0 22px 22px;
-              overflow: hidden;
-              border: 2px solid ${C.gold}55;
-              border-top: none;
-              background: linear-gradient(180deg, ${C.bgCard}, ${C.bgDeep});
-              box-shadow: 0 22px 60px rgba(0,0,0,.38), inset 0 0 0 1px rgba(255,255,255,.035);
-            }
+  .guardian-left-panel {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
 
-            .guardian-title-copy {
-              background: linear-gradient(180deg, #0a1a1e00, #0a1a1ecc, #0a0f05);
-              padding: 16px 20px 15px;
-              text-align: center;
-              border-top: 2px solid ${C.gold}44;
-            }
+  .guardian-hero-card {
+    border-radius: 0 0 22px 22px;
+    overflow: hidden;
+    border: 2px solid ${C.gold}55;
+    border-top: none;
+    background: linear-gradient(180deg, ${C.bgCard}, ${C.bgDeep});
+    box-shadow: 0 22px 60px rgba(0,0,0,.38), inset 0 0 0 1px rgba(255,255,255,.035);
+  }
 
-            .guardian-difficulty-list {
-              display: flex;
-              flex-direction: column;
-              gap: 12px;
-            }
+  .guardian-title-copy {
+    background: linear-gradient(180deg, #0a1a1e00, #0a1a1ecc, #0a0f05);
+    padding: 16px 20px 15px;
+    text-align: center;
+    border-top: 2px solid ${C.gold}44;
+  }
 
-            .guardian-ranking-panel {
-              position: sticky;
-              top: 18px;
-              min-width: 0;
-            }
+  .guardian-difficulty-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
 
-            .guardian-ranking-panel > div {
-              margin-top: 0 !important;
-              min-height: 320px;
-            }
+  .guardian-ranking-panel {
+    position: sticky;
+    top: 18px;
+    min-width: 0;
+  }
 
-            @media (max-width: 1060px) {
-              .guardian-menu-layout {
-                width: min(760px, calc(100vw - 24px));
-                grid-template-columns: 1fr;
-                gap: 16px;
-                padding-top: 12px;
-              }
+  .guardian-ranking-panel > div {
+    margin-top: 0 !important;
+    min-height: 320px;
+  }
 
-              .guardian-ranking-panel {
-                position: static;
-              }
-            }
-          `}</style>
+  @media (max-width: 1060px) {
+    .guardian-menu-layout {
+      width: min(760px, calc(100vw - 24px));
+      grid-template-columns: 1fr;
+      gap: 16px;
+      padding-top: 12px;
+    }
+
+    .guardian-ranking-panel {
+      position: static;
+    }
+  }
+`}</style>
 
           <div className="guardian-menu-layout">
             <div className="guardian-left-panel">

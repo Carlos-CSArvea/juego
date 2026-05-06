@@ -1,4 +1,5 @@
 {
+  
   "name": "guardianes-cyber-defense",
   "version": "1.0.0",
   "private": true,
@@ -8,7 +9,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist --no-history"
+    "deploy": "gh-pages -d dist --no-history",
+    "audit:questions": "node scripts/auditQuestions.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.105.1",

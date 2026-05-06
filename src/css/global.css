@@ -15,3 +15,122 @@
     background-position: -625px 0;
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
+/* ── Guardianes: pantalla de inicio ───────────────────────────── */
+
+.guardian-menu-layout {
+  width: min(1220px, calc(100vw - 32px)) !important;
+  max-width: 1220px !important;
+  margin: 0 auto !important;
+  padding: 18px 0 42px !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.35fr) minmax(340px, 0.72fr) !important;
+  gap: 22px !important;
+  align-items: start !important;
+  box-sizing: border-box !important;
+}
+
+.guardian-left-panel {
+  min-width: 0 !important;
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 14px !important;
+}
+
+.guardian-hero-card {
+  width: 100% !important;
+  max-width: 100% !important;
+  border-radius: 0 0 22px 22px !important;
+  overflow: hidden !important;
+  border: 2px solid rgba(214, 168, 79, 0.34) !important;
+  border-top: none !important;
+  background: linear-gradient(
+    180deg,
+    rgba(24, 18, 10, 0.92),
+    #0d0a06
+  ) !important;
+  box-shadow:
+    0 22px 60px rgba(0, 0, 0, 0.38),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.035) !important;
+}
+
+.guardian-title-copy {
+  width: 100% !important;
+  box-sizing: border-box !important;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 26, 30, 0),
+    rgba(10, 26, 30, 0.8),
+    #0a0f05
+  ) !important;
+  padding: 16px 20px 15px !important;
+  text-align: center !important;
+  border-top: 2px solid rgba(214, 168, 79, 0.27) !important;
+}
+
+.guardian-difficulty-list {
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 12px !important;
+}
+
+.guardian-ranking-panel {
+  width: 100% !important;
+  min-width: 0 !important;
+  position: sticky !important;
+  top: 18px !important;
+}
+
+.guardian-ranking-panel > div {
+  margin-top: 0 !important;
+  min-height: 320px !important;
+}
+
+.guardian-title-divider-left {
+  height: 1px !important;
+  flex: 1 !important;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #2e8b72,
+    #d6a84f
+  ) !important;
+}
+
+.guardian-title-divider-right {
+  height: 1px !important;
+  flex: 1 !important;
+  background: linear-gradient(
+    90deg,
+    #d6a84f,
+    #2e8b72,
+    transparent
+  ) !important;
+}
+
+@media (max-width: 1060px) {
+  .guardian-menu-layout {
+    width: min(760px, calc(100vw - 24px)) !important;
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+    padding-top: 12px !important;
+  }
+
+  .guardian-ranking-panel {
+    position: static !important;
+  }
+}

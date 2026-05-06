@@ -121,6 +121,34 @@ Deno.serve(async (req) => {
       },
     });
 
+    const { data: yaExiste, error: existeError } = await supabase.rpc(
+      "existe_jugador_registrado",
+      {
+        p_nombre: nombre,
+        p_area: area,
+      }
+    );
+
+    if (existeError) {
+      return jsonResponse(
+        {
+          ok: false,
+          error: existeError.message,
+        },
+        500
+      );
+    }
+
+    if (yaExiste) {
+      return jsonResponse(
+        {
+          ok: false,
+          error: "Ya existe un registro con ese nombre y esa área.",
+        },
+        409
+      );
+    }
+
     const { error } = await supabase.from("ranking").insert([
       {
         nombre,

@@ -55,3 +55,19 @@ export async function obtenerRankingsPorDificultad(limite = 5) {
     hard,
   };
 }
+
+export async function existeJugadorRegistrado(nombre, area) {
+  const nombreLimpio = nombre.trim();
+  const areaLimpia = area.trim();
+
+  const { data, error } = await supabase.rpc("existe_jugador_registrado", {
+    p_nombre: nombreLimpio,
+    p_area: areaLimpia,
+  });
+
+  if (error) {
+    throw error;
+  }
+
+  return Boolean(data);
+}

@@ -1,122 +1,2415 @@
 // Banco de preguntas Guardianes - Nivel easy
-// easy -> CompTIA Security+ (fundamentos, conciencia, controles basicos)
-// Archivo dividido desde QB_guardianes_balanceado.js
+// Tono usuario final: claro, directo y poco tecnico.
+// Total: 100 preguntas.
 
 const QB_RAW = {
-  easy:[
-    {q:"Llega un correo del area de RRHH solicitando que confirmes tu RFC y CURP respondiendo al mismo correo en las proximas 2 horas o tu pago quedara retenido. El dominio del remitente termina en .net y no en el dominio corporativo. Cual es la accion correcta?",joke:false,choices:["No respondes y reportas el correo al equipo de seguridad antes de actuar, al priorizar contencion, validacion y decision formal antes de actuar sobre el activo","Validas rapidamente que el mensaje menciona un proceso sensible de nomina y respondes solo con los datos solicitados para evitar impacto operativo","Reenvias el correo a tu jefe directo solicitando autorizacion y esperas su criterio antes de entregar cualquier informacion","Marcas el correo como spam, eliminas el mensaje y continuas sin interactuar con el remitente ni abrir enlaces"],correct:0,exp:"Urgencia, dominio externo, peticion de datos personales y plazo corto son indicadores tipicos de phishing. Reportar antes de borrar permite al SOC analizar y bloquear.",fw:[12,-12,-8,-10],rep:[1,-1,-1,-1]},
-    {q:"Un companero nuevo te pide que le compartas tu usuario y contrasena solo por hoy porque su acceso aun no esta listo y necesita entregar un reporte. Que haces?",joke:true,choices:["Le explicas que no puedes y le ayudas a abrir un ticket con TI, dentro del modelo de seguridad aplicable al escenario descrito y sus controles asociados","Le prestas el acceso de forma temporal, acuerdas que solo lo use para el reporte y despues cambias la contrasena","Le compartes la clave en un medio fisico solo durante la jornada para evitar enviarla por canales digitales","Le sugieres usar una cuenta de otro companero que ya tenga permisos mientras TI termina de crear su acceso"],correct:0,exp:"Las credenciales son personales e intransferibles. Compartirlas viola politicas y hace que cualquier accion quede registrada a tu nombre.",fw:[12,-15,-15,-18],rep:[1,-1,-1,-1]},
-    {q:"Estas por ingresar tus credenciales corporativas en un portal. La barra del navegador muestra el dominio principal escrito con un caracter cirilico que parece una a latina. Que indica esta senal?",joke:false,choices:["Es probablemente un ataque de homografo o typosquatting, manteniendo evidencia, control del alcance y alineacion con buenas practicas de seguridad","Es un cambio visual del navegador o del renderizado de caracteres, por lo que se podria validar continuando con cautela","Es una actualizacion del portal corporativo que probablemente modifico la forma en que se visualiza el dominio","Indica que el sitio implementa mecanismos modernos de compatibilidad Unicode junto con HTTPS y certificados actualizados"],correct:0,exp:"Los atacantes registran dominios visualmente identicos usando caracteres unicode para suplantar sitios legitimos.",fw:[12,-10,-10,-8],rep:[1,-1,-1,0]},
-    {q:"Encuentras una memoria USB en la sala de juntas con la etiqueta Nomina Q4 confidencial. No es tuya. Cual es la accion adecuada?",joke:true,choices:["La entregas al area de seguridad sin conectarla a ningun equipo, porque atiende el riesgo principal del escenario y permite seguimiento por el area responsable","La conectas en tu equipo solo para identificar al dueno y devolverla rapidamente sin copiar informacion","La revisas en una maquina vieja o secundaria para reducir el riesgo sobre tu equipo principal y ubicar al propietario","La dejas exactamente donde estaba para que el propietario pueda recuperarla sin alterar la evidencia fisica"],correct:0,exp:"Las USB abandonadas con etiquetas atractivas son una tecnica clasica de USB Drop Attack y pueden ejecutar cargas automaticas al conectarse.",fw:[12,-22,-15,-8],rep:[1,-1,-1,0]},
-    {q:"Tu equipo muestra un mensaje a pantalla completa con un cronometro de 48 horas y la leyenda Tus archivos han sido cifrados, deposita en esta cuenta para recuperarlos. Que tipo de incidente es?",joke:false,choices:["Ransomware, debes desconectar el equipo de la red y reportar de inmediato, al priorizar contencion, validacion y decision formal antes de actuar sobre el activo","Una actualizacion fallida de Windows que bloqueo temporalmente el acceso a archivos y requiere validacion con soporte","Una infeccion de bajo impacto tipo adware que normalmente se atiende despues de validar el alcance en el equipo","Una prueba interna del area de TI o continuidad que debe confirmarse antes de tratarla como incidente critico"],correct:0,exp:"Ante ransomware se prioriza contencion (desconexion de red) y reporte. Pagar no garantiza recuperacion y financia al atacante.",fw:[12,-12,-10,-10],rep:[1,0,-1,-1]},
-    {q:"Cual de las siguientes es la mejor practica para construir una contrasena que recuerdes pero sea dificil de adivinar?",joke:false,choices:["Una frase larga combinada con simbolos y numeros no relacionados con tus datos personales","Tu fecha de nacimiento invertida y mezclada con algunos simbolos para que no sea evidente a simple vista","El nombre de tu mascota combinado con el ano actual y una mayuscula para cumplir reglas comunes de complejidad","Una palabra conocida del diccionario con mayusculas, numeros y un simbolo al final para aumentar complejidad"],correct:0,exp:"Las frases largas (passphrases) resisten mejor ataques de diccionario y fuerza bruta. Los datos personales son los primeros que prueba un atacante.",fw:[10,-12,-12,-12],rep:[1,-1,-1,-1]},
-    {q:"Tu cuenta tiene activado un segundo factor por aplicacion. De pronto recibes 8 notificaciones push pidiendo aprobar un inicio de sesion que tu no iniciaste. Que esta ocurriendo?",joke:false,choices:["Es un ataque de fatiga de MFA, alguien tiene tu contrasena y busca que apruebes por error","Es un error temporal de la aplicacion MFA y aprobar una solicitud puede detener el ciclo de notificaciones","Tu cuenta esta renovando sesiones entre dispositivos registrados y por eso genera multiples solicitudes seguidas","Es parte del proceso normal de renovacion de sesion y debe aprobarse si coincide con tu horario de uso"],correct:0,exp:"El MFA fatigue (push bombing) bombardea al usuario hasta que aprueba por agotamiento. Debes rechazar, cambiar contrasena y reportar.",fw:[12,-25,-15,-10],rep:[1,-1,-1,-1]},
-    {q:"Recibes una llamada de alguien que dice ser del area de soporte tecnico. Conoce tu nombre, tu puesto y el modelo de tu laptop. Te pide instalar una herramienta de control remoto para resolver una falla critica. Que haces?",joke:true,choices:["Cuelgas y validas llamando al numero oficial de TI desde el directorio interno, al priorizar contencion, validacion y decision formal antes de actuar sobre el activo","Le das acceso remoto porque conoce datos internos suficientes y aparenta venir de soporte autorizado","Le pides que envie un correo con instrucciones y procedes si el mensaje parece formal y contiene firma corporativa","Le proporcionas credenciales temporalmente para acelerar la solucion y despues solicitas el cambio de contrasena"],correct:0,exp:"Los datos personales pueden obtenerse de redes sociales o filtraciones. La validacion siempre debe hacerse por canales oficiales iniciados por ti.",fw:[12,-22,-15,-18],rep:[1,-1,-1,-1]},
-    {q:"En la oficina, una persona vestida con uniforme de mensajeria carga cajas pesadas y te pide que le sostengas la puerta de acceso restringido porque sus manos estan ocupadas. Que haces?",joke:false,choices:["Le indicas amablemente que debe registrarse en recepcion antes de pasar, aplicando el control adecuado sin crear excepciones informales ni perder trazabilidad","Le sostienes la puerta por cortesia porque parece proveedor operativo y esta cargando material de trabajo","Le permites pasar y lo acompanas al destino para mantener control visual durante su recorrido","Le permites el acceso para no interrumpir la operacion y avisas a seguridad al terminar el traslado"],correct:0,exp:"El tailgating o piggybacking aprovecha la cortesia para evadir controles fisicos. Cualquier visitante debe pasar por el proceso de registro.",fw:[10,-12,-10,-8],rep:[1,-1,-1,0]},
-    {q:"Tu navegador muestra una advertencia de certificado no valido al intentar acceder al portal de un proveedor que usas todos los dias. Cual es la respuesta correcta?",joke:false,choices:["No continuas, validas con el proveedor por canal alterno y reportas a TI, al priorizar contencion, validacion y decision formal antes de actuar sobre el activo","Aceptas la excepcion solo porque es un portal recurrente y documentas la alerta para revisarla mas tarde","Cambias de navegador para descartar un problema local de cache o compatibilidad antes de escalar el caso","Desactivas temporalmente la validacion del navegador para completar la operacion y luego la habilitas nuevamente"],correct:0,exp:"Una alerta de certificado puede indicar suplantacion (MitM), expiracion o configuracion incorrecta. Nunca debe ignorarse en sitios donde ingresas credenciales.",fw:[12,-15,-12,-20],rep:[1,-1,-1,-1]},
-    {q:"Que problema principal genera reutilizar la misma contrasena en multiples servicios?",joke:false,choices:["Si un servicio sufre una filtracion, los atacantes prueban esas credenciales en otros sitios (credential stuffing)","Reduce el rendimiento del navegador porque debe validar mas sesiones y credenciales almacenadas en varios sitios","Incrementa la frecuencia de expiracion porque varios servicios sincronizan politicas de seguridad distintas","No tiene impacto si la contrasena es suficientemente larga, compleja y no se comparte por canales inseguros"],correct:0,exp:"El credential stuffing automatizado prueba credenciales filtradas en miles de sitios. Una sola filtracion puede comprometer muchas cuentas.",fw:[10,-10,-8,-12],rep:[1,-1,0,-1]},
-    {q:"Que significan las siglas CIA en el contexto de la seguridad de la informacion?",joke:true,choices:["Confidencialidad, Integridad y Disponibilidad, aplicando el control adecuado sin crear excepciones informales ni perder trazabilidad","Control, Identificacion y Auditoria, como agrupacion de actividades para gobernar accesos y revisiones de seguridad","Cifrado, Identidad y Autenticacion, como controles tecnicos basicos para proteger informacion y validar usuarios","Centro de Inteligencia Aplicada, como funcion encargada de analizar amenazas, indicadores y alertas relevantes"],correct:0,exp:"La triada CIA es el modelo fundamental: proteger los datos del acceso no autorizado, mantenerlos correctos y asegurar que esten disponibles cuando se necesiten.",fw:[10,-8,-8,-8],rep:[1,0,0,0]},
-    {q:"Te llega un adjunto llamado Cotizacion_Urgente.pdf.exe de un remitente desconocido. Que indica la doble extension?",joke:false,choices:["Es un ejecutable disfrazado de PDF, una tecnica clasica para evadir la sospecha del usuario","Es un PDF con una extension auxiliar del proveedor para ejecutar compresion, vista previa o integracion documental","Es una variante moderna del formato PDF utilizada por algunas herramientas para incluir funciones interactivas","Es un documento con firma digital o verificacion adicional incluida en el nombre del archivo para confirmar origen"],correct:0,exp:"Windows oculta extensiones conocidas por defecto. Los atacantes aprovechan esto para que .exe parezca un PDF inofensivo.",fw:[12,-18,-12,-10],rep:[1,-1,-1,0]},
-    {q:"El area de nomina dice haber recibido una solicitud tuya para cambiar tu cuenta bancaria de deposito, pero tu nunca la enviaste. Que indica esto?",joke:false,choices:["Posible compromiso de tu correo o suplantacion, debes reportarlo de inmediato, dentro del modelo de seguridad aplicable al escenario descrito y sus controles asociados","Un error administrativo de nomina que debe aclararse con el area antes de generar una alerta de seguridad","Que el banco realizo una actualizacion operativa de la cuenta y el sistema de nomina reflejo el cambio","Que el sistema de nomina sincronizo informacion reciente y genero una solicitud pendiente de confirmacion"],correct:0,exp:"El fraude de redireccion de nomina es una variante de BEC (Business Email Compromise). Requiere validacion fuera de banda y reporte inmediato.",fw:[12,-20,-15,-10],rep:[1,-1,-1,-1]},
-    {q:"Cual es el principal beneficio de bloquear tu sesion (Win+L) cuando te alejas de tu equipo, aunque sea por minutos?",joke:false,choices:["Evita que cualquier persona acceda a tu informacion, correos o sesiones abiertas en tu nombre","Ahorra bateria y reduce actividad local mientras el equipo no se utiliza durante algunos minutos","Permite que el equipo sincronice sesiones y politicas corporativas sin interferencia del usuario","Es un requisito de orden operativo que ayuda a estandarizar el uso del equipo, aunque no bloquea amenazas por si solo"],correct:0,exp:"Un equipo desbloqueado equivale a entregar todas tus credenciales. Es uno de los controles mas baratos y efectivos.",fw:[10,-12,-8,-10],rep:[1,-1,0,-1]},
-    {q:"Estas en una cafeteria y necesitas revisar correos corporativos urgentes. La red WiFi se llama CafeGratis_Free y no pide clave. Cual es la mejor opcion?",joke:false,choices:["Conectarte mediante VPN corporativa o usar el hotspot de tu celular, porque atiende el riesgo principal del escenario y permite seguimiento por el area responsable","Conectarte directamente porque el portal corporativo usa HTTPS y las credenciales viajan cifradas","Solicitar al establecimiento la red oficial con contrasena para evitar conectarte a una red abierta no identificada","Pedir a un colega que valide el acceso desde su equipo o sesion antes de que tu ingreses credenciales"],correct:0,exp:"Las redes abiertas pueden ser controladas por atacantes (Evil Twin). VPN cifra el tunel completo independientemente de la red.",fw:[12,-12,-15,-15],rep:[1,-1,-1,-1]},
-    {q:"En un evento, un cartel invita a escanear un QR para reclamar un descuento corporativo. El QR tiene una pegatina pegada encima del original. Que sospechas?",joke:true,choices:["Que el QR fue reemplazado por uno malicioso (quishing) y debes evitar escanearlo, sin ampliar la exposicion","Que se trata de una promocion actualizada a ultimo momento y el organizador coloco un QR nuevo encima del anterior","Que el QR original estaba danado o desactualizado y fue reemplazado fisicamente para mantener la campana activa","Que el QR adicional redirige a una pagina intermedia de publicidad o medicion antes de llegar a la promocion"],correct:0,exp:"El quishing reemplaza QR fisicos legitimos con stickers que apuntan a sitios de phishing. Es una tendencia creciente en oficinas y eventos.",fw:[12,-15,-10,-12],rep:[1,-1,0,-1]},
-    {q:"Una aplicacion de linterna gratuita pide acceso a contactos, microfono, ubicacion y SMS al instalarla. Que conclusion debes sacar?",joke:false,choices:["Los permisos no corresponden a la funcion, probablemente sea spyware o adware, aplicando el control adecuado sin crear excepciones informales ni perder trazabilidad","Es una version con servicios ampliados que requiere permisos adicionales para habilitar funciones complementarias","Los permisos se solicitan por compatibilidad entre versiones del sistema operativo, aunque la app no los utilice siempre","Las aplicaciones gratuitas suelen solicitar permisos amplios por plantillas de desarrollo reutilizadas o librerias externas"],correct:0,exp:"El principio de minimo privilegio aplica a apps. Permisos desproporcionados son una bandera roja que indica posible exfiltracion de datos.",fw:[10,-12,-12,-15],rep:[1,-1,-1,-1]},
-    {q:"Imprimiste un documento con datos de clientes y nadie lo recogio. Lo encuentras horas despues en la bandeja. Que politica se incumplio?",joke:false,choices:["Politica de escritorio limpio e impresion segura, los documentos sensibles deben recogerse de inmediato","Politica de ahorro de recursos, porque imprimir documentos no recogidos genera desperdicio y costos operativos","Politica de presentacion documental, al no controlar correctamente la salida fisica del documento corporativo","Politica de gestion documental, porque el papel impreso debe clasificarse antes de desecharse o reutilizarse"],correct:0,exp:"La impresion segura (pull printing) y el escritorio limpio reducen el riesgo de fugas accidentales. Documentos sensibles olvidados son un vector real.",fw:[10,-12,-10,-15],rep:[1,-1,-1,-1]},
-    {q:"Tu director te escribe por correo a las 11pm pidiendo que compres tarjetas de regalo de 5000 pesos urgentemente para un cliente y le envies los codigos por foto. Que tipo de fraude es?",joke:false,choices:["Suplantacion ejecutiva (CEO fraud o BEC), debes validar fuera del correo antes de cualquier accion","Una solicitud ejecutiva urgente que parece alineada a una necesidad comercial y debe atenderse con rapidez","Un error de comunicacion que probablemente se aclarara cuando el director o su asistente confirme la operacion","Una prueba interna para medir velocidad de respuesta ante solicitudes ejecutivas fuera de horario"],correct:0,exp:"El fraude de tarjetas de regalo via suplantacion ejecutiva es uno de los esquemas mas comunes. La urgencia y el canal unico son indicadores clave.",fw:[12,-25,-15,-12],rep:[1,-1,-1,-1]},
-    {q:"Por que es critico aplicar parches del sistema operativo y de aplicaciones de forma oportuna?",joke:false,choices:["Cierran vulnerabilidades conocidas que ya estan documentadas y son explotadas activamente","Mejoran la estabilidad general, compatibilidad y experiencia de usuario del sistema operativo","Actualizan componentes del sistema para mantener compatibilidad con nuevas aplicaciones corporativas","Solo impactan equipos recientemente aprovisionados que aun no tienen una linea base completa"],correct:0,exp:"Una vulnerabilidad publica sin parchear es un vector de ataque trivial. Los atacantes escanean masivamente buscando sistemas sin actualizar.",fw:[10,-8,-10,-12],rep:[1,0,-1,-1]},
-    {q:"Cual de los siguientes datos NO debe enviarse por correo electronico sin cifrado?",joke:false,choices:["Numeros de tarjeta de credito, contrasenas o expedientes medicos completos, porque atiende el riesgo principal del escenario y permite seguimiento por el area responsable","La ubicacion del comedor de la oficina, siempre que ya sea informacion interna de baja sensibilidad","El horario publico del equipo cuando ya fue compartido formalmente por canales corporativos autorizados","El nombre de un proyecto ya anunciado cuando no incluye fechas, presupuesto, clientes o informacion sensible"],correct:0,exp:"Los datos sensibles requieren canales aprobados con cifrado. El correo simple no garantiza confidencialidad ni integridad.",fw:[10,-15,-5,-5],rep:[1,-1,0,0]},
-    {q:"En un equipo compartido (recepcion, sala de juntas, kiosco), el navegador te ofrece guardar tu contrasena. Que debes hacer?",joke:false,choices:["Rechazar siempre y cerrar sesion completamente al terminar, manteniendo evidencia, control del alcance y alineacion con buenas practicas de seguridad","Aceptar el guardado para agilizar accesos posteriores si el equipo se usa dentro de una ubicacion controlada","Aceptar unicamente en sitios de bajo impacto operativo donde no se administren datos sensibles ni permisos altos","Aceptar temporalmente y borrar la credencial del navegador al terminar la actividad para reducir exposicion"],correct:0,exp:"Las credenciales guardadas pueden recuperarse facilmente desde el perfil del navegador. Nunca se almacenan en equipos no personales.",fw:[10,-15,-12,-12],rep:[1,-1,-1,-1]},
-    {q:"Que es la ingenieria social en el contexto de seguridad?",joke:false,choices:["Tecnicas que manipulan emociones humanas (urgencia, miedo, autoridad) para obtener informacion o acceso","Diseno de dinamicas sociales internas para mejorar comunicacion, cultura y adopcion de procesos corporativos","Metodologia para coordinar equipos multidisciplinarios alrededor de procesos humanos y tecnologia","Tecnologia usada en redes sociales empresariales para conectar usuarios, comunidades y flujos de colaboracion"],correct:0,exp:"La ingenieria social explota la psicologia, no la tecnologia. Es el vector inicial mas comun en ataques exitosos.",fw:[10,-8,-8,-8],rep:[1,0,0,0]},
-    {q:"Cual es la diferencia practica entre virus, troyano y gusano?",joke:false,choices:["Virus se adjunta a archivos, troyano se disfraza de software legitimo, gusano se propaga solo por la red","Son categorias comerciales equivalentes utilizadas por proveedores para describir software malicioso","Se diferencian principalmente por lenguaje, plataforma y empaquetado usado durante su desarrollo","Su diferencia principal esta en el impacto operativo y la velocidad con que afectan archivos o sistemas"],correct:0,exp:"Cada tipo de malware tiene un mecanismo de propagacion distinto, aunque hoy muchos combinan caracteristicas.",fw:[10,-8,-8,-8],rep:[1,0,0,0]},
-    {q:"Tu antivirus muestra una alerta y bloquea un archivo recien descargado. Que NO debes hacer?",joke:false,choices:["Mover el archivo a una carpeta excluida del antivirus para poder usarlo, dentro del modelo de seguridad aplicable al escenario descrito y sus controles asociados","Reportar el incidente a TI como primera accion y esperar instrucciones antes de manipular el archivo","Eliminar el archivo desde cuarentena para retirar el objeto bloqueado sin intentar ejecutarlo nuevamente","Verificar el origen del archivo y solicitar confirmacion del proveedor antes de usarlo o reenviarlo"],correct:0,exp:"Las exclusiones manuales de antivirus son una tecnica usada por atacantes para evadir deteccion. Nunca se hacen sin validacion.",fw:[10,-20,-12,-15],rep:[1,-1,-1,-1]},
-    {q:"Te asignan un nuevo proveedor que solicita acceso a un sistema interno. Que debe ocurrir antes de otorgar acceso?",joke:false,choices:["Validar la justificacion, autorizar el minimo privilegio necesario y registrarlo formalmente","Crear una cuenta con permisos amplios temporalmente para evitar bloqueos durante la integracion del proveedor","Compartir tu cuenta de forma temporal mientras se completa el alta formal del proveedor en el sistema","Darle acceso amplio porque ya existe relacion comercial y se requiere rapidez para iniciar el servicio"],correct:0,exp:"El proceso de aprovisionamiento (joiner-mover-leaver) y minimo privilegio aplican tambien a terceros. Las cuentas compartidas rompen la trazabilidad.",fw:[12,-25,-20,-15],rep:[1,-1,-1,-1]},
-    {q:"Por que las preguntas de seguridad tipo nombre de tu mascota o ciudad de nacimiento son consideradas un mecanismo debil?",joke:false,choices:["La informacion suele estar publica en redes sociales o puede inferirse facilmente","Las respuestas se olvidan con facilidad y generan friccion operativa en procesos de recuperacion de cuentas","Los sistemas pueden almacenarlas con protecciones variables y eso reduce su valor como mecanismo de validacion","Solo funcionan de forma confiable en procesos atendidos por mesa de ayuda durante horarios definidos"],correct:0,exp:"OSINT (informacion publica) hace triviales las preguntas de seguridad clasicas. Por eso muchos servicios ya no las usan.",fw:[10,-10,-8,-8],rep:[1,-1,0,0]},
-    {q:"En el contexto de respaldos, cual es la mejor estrategia minima recomendada?",joke:false,choices:["3 copias en 2 medios diferentes, 1 fuera de sitio o aislada (regla 3-2-1), con validacion y evidencia","Mantener una copia local en el mismo equipo para restauracion rapida ante errores menores o eliminaciones accidentales","Confiar en la redundancia del proveedor cloud cuando el servicio tiene alta disponibilidad contractual","Generar respaldos bajo demanda cuando se detectan sintomas de falla o cambios importantes en la informacion"],correct:0,exp:"La regla 3-2-1 protege contra fallas de hardware, errores humanos y ransomware. Una copia aislada (offline o inmutable) es clave contra cifrado masivo.",fw:[10,-10,-10,-10],rep:[1,-1,-1,-1]},
-    {q:"Que hace una solucion de antivirus de nueva generacion (EDR) que un antivirus tradicional no hace bien?",joke:false,choices:["Analiza comportamiento, registra telemetria y permite respuesta y caza de amenazas","Bloquea temporalmente comunicaciones sospechosas durante el escaneo para reducir propagacion mientras analiza","Reemplaza parcialmente controles de red al aplicar decisiones de seguridad directamente desde el endpoint","Cifra archivos locales para proteger datos del usuario mientras analiza comportamiento sospechoso"],correct:0,exp:"EDR (Endpoint Detection and Response) va mas alla de firmas: detecta tecnicas, no solo malware conocido.",fw:[10,-8,-8,-8],rep:[1,0,0,0]},
-    {q:"Estas viendo un proyector en sala de juntas y aparece una notificacion privada de WhatsApp con datos sensibles. Que politica preventiva ayudaria?",joke:true,choices:["Activar el modo presentacion o silenciar notificaciones antes de proyectar, porque atiende el riesgo principal del escenario y permite seguimiento por el area responsable","Cubrir rapidamente la informacion sensible en pantalla y continuar la presentacion sin detener la reunion","Interrumpir la proyeccion cuando aparezca una notificacion para evitar que terceros vean informacion privada","Eliminar aplicaciones personales del equipo corporativo para reducir exposicion durante reuniones y presentaciones"],correct:0,exp:"El modo presentacion oculta notificaciones. Es un control simple para evitar exposicion accidental de informacion personal o corporativa.",fw:[8,-5,-5,-8],rep:[1,0,0,0]},
-    {q:"Que es un ataque de fuerza bruta?",joke:false,choices:["Probar combinaciones de contrasenas de forma sistematica hasta encontrar la correcta","Forzar acceso a un servidor mediante manipulacion fisica de hardware o medios de almacenamiento","Generar grandes volumenes de trafico para agotar recursos del servicio y provocar indisponibilidad","Usar una llamada con pretexto de autoridad para presionar al usuario y obtener acceso o informacion"],correct:0,exp:"Los bloqueos por intentos fallidos, MFA y contrasenas largas mitigan este ataque clasico.",fw:[10,-8,-8,-8],rep:[1,0,0,0]},
-    {q:"Cuando un sistema te obliga a cambiar la contrasena cada 30 dias, una mala practica frecuente es:",joke:false,choices:["Solo cambiar un numero al final manteniendo el resto igual (Verano1, Verano2, Verano3)","Usar un gestor de contrasenas para crear una credencial distinta, larga y no reutilizada","Verificar que la nueva credencial no coincida con contrasenas expuestas previamente en filtraciones","Combinar el cambio de contrasena con MFA para reducir impacto si la credencial vuelve a filtrarse"],correct:0,exp:"Las contrasenas predecibles incrementales son trivialmente adivinables. NIST ya desaconseja la rotacion forzada en favor de longitud y unicidad.",fw:[10,-10,-8,-10],rep:[1,-1,0,-1]},
-    {q:"Que es un gestor de contrasenas y que problema resuelve?",joke:false,choices:["Una boveda cifrada que almacena y genera contrasenas unicas y fuertes para cada servicio","Una hoja de calculo protegida donde se documentan credenciales y se comparte solo con usuarios autorizados","Un servicio del navegador que recuerda contrasenas y facilita inicio de sesion en portales frecuentes","Un sistema de recuperacion que envia credenciales al correo registrado cuando el usuario no las recuerda"],correct:0,exp:"Los gestores resuelven el problema humano de memorizar muchas contrasenas unicas y fuertes. Eliminan la reutilizacion.",fw:[10,-8,-5,-8],rep:[1,0,0,0]},
-    {q:"Antes de descartar un disco duro o USB con informacion corporativa, que debe ocurrir?",joke:false,choices:["Borrado seguro o destruccion fisica certificada segun la sensibilidad, porque atiende el riesgo principal del escenario y permite seguimiento por el area responsable","Eliminar archivos manualmente y vaciar la papelera antes de entregar el medio a otra persona o area","Formatear rapidamente el medio y reutilizarlo en otro equipo cuando ya no se requiere la informacion","Donarlo o reasignarlo si todavia funciona, siempre que se retire primero la informacion visible del usuario"],correct:0,exp:"Los datos eliminados no son inaccesibles. Existen herramientas de recuperacion. La destruccion controlada es la unica forma confiable.",fw:[10,-15,-12,-15],rep:[1,-1,-1,-1]},
-    {q:"Estas trabajando en un avion y tu vecino te observa la pantalla constantemente mientras revisas un documento confidencial. Que control habria sido mejor?",joke:true,choices:["Usar un filtro de privacidad fisico en la pantalla y limitar el manejo de informacion sensible en publico","Cubrir parcialmente la pantalla cuando se revise informacion sensible en espacios publicos","Pedir al vecino de asiento que respete la privacidad del documento mientras terminas la revision","Reducir el brillo de la pantalla para disminuir el angulo visible y limitar observacion casual"],correct:0,exp:"El shoulder surfing es un riesgo real en espacios publicos. Los filtros de privacidad lo mitigan eficazmente.",fw:[10,-8,-8,-8],rep:[1,0,0,0]},
-    {q:"Que diferencia hay entre HTTPS y HTTP en terminos de seguridad?",joke:false,choices:["HTTPS cifra la comunicacion y autentica el servidor mediante certificado, como control primario aplicable","HTTPS mejora la comunicacion al usar optimizaciones modernas del navegador y certificados del servidor","HTTP protege principalmente campos sensibles como contrasenas cuando el sitio implementa controles propios","Son variantes del mismo protocolo web y la diferencia depende de como el servidor los configure"],correct:0,exp:"HTTPS usa TLS para confidencialidad e integridad y verifica la identidad del servidor mediante PKI.",fw:[10,-8,-10,-10],rep:[1,0,0,0]},
-    {q:"Que es una VPN corporativa y para que sirve?",joke:false,choices:["Establece un tunel cifrado entre tu equipo y la red corporativa, incluso desde redes no confiables","Optimiza la ruta hacia servicios corporativos y puede mejorar estabilidad en redes externas","Sustituye algunos controles del endpoint al encapsular la comunicacion hacia la red corporativa","Oculta parcialmente la ubicacion de origen y permite navegar con mayor privacidad en redes publicas"],correct:0,exp:"La VPN protege la confidencialidad e integridad del trafico, pero no sustituye otros controles de endpoint.",fw:[10,-8,-8,-12],rep:[1,0,0,-1]},
-    {q:"Recibes una invitacion a una reunion de Teams o Zoom desde un dominio externo desconocido, con un enlace que pide instalar un plugin. Que haces?",joke:false,choices:["No instalas nada, validas la reunion con el supuesto organizador por canal alterno","Instalas el complemento solicitado para garantizar compatibilidad y no retrasar una reunion urgente","Reenvias el enlace a otros participantes para confirmar si ellos reciben la misma solicitud de instalacion","Ignoras la invitacion y no interactuas con el enlace para evitar exponerte al posible sitio externo"],correct:0,exp:"Los plugins falsos son vectores de RAT (acceso remoto). Las plataformas legitimas no requieren plugins externos para reuniones basicas.",fw:[12,-18,-10,-8],rep:[1,-1,-1,0]},
-    {q:"Cual es el riesgo de habilitar macros en un documento de Office recibido por correo?",joke:false,choices:["Las macros pueden ejecutar codigo arbitrario y son un vector clasico de malware","Solo modifican formato, tablas o automatizaciones internas del documento cuando provienen de una plantilla conocida","Aumentan el tamano del archivo porque agregan automatizaciones, formularios y componentes embebidos","Se usan para ajustar idioma, formato o reglas de visualizacion del documento de forma automatica"],correct:0,exp:"Microsoft bloquea macros de internet por defecto justamente por su uso historico en ataques (Emotet, Dridex, etc).",fw:[12,-20,-15,-12],rep:[1,-1,-1,-1]},
-    {q:"Cual es el objetivo principal del cifrado completo de disco (BitLocker, FileVault) en una laptop corporativa?",joke:false,choices:["Proteger los datos en caso de robo o perdida del equipo fisico, al priorizar contencion, validacion y decision formal antes de actuar sobre el activo","Mejorar el rendimiento del equipo al optimizar lectura de disco y proteger operaciones del sistema","Comprimir datos locales para reducir espacio utilizado y facilitar respaldos del equipo","Evitar conexiones externas no autorizadas cuando el equipo se pierde o sale de la red corporativa"],correct:0,exp:"Sin cifrado de disco, basta con extraer el disco fisico para leer los datos. Es un control de proteccion at rest fundamental.",fw:[10,-10,-10,-10],rep:[1,-1,-1,-1]},
-    {q:"Una aplicacion web te muestra el mensaje 'Error SQL: syntax error near...' al introducir un dato inusual. Que indica esto a un atacante?",joke:false,choices:["La aplicacion expone errores internos y podria ser vulnerable a inyeccion SQL","Que la base de datos presenta una falla operativa y el mensaje corresponde a diagnostico interno","Que el servidor requiere mas recursos para procesar entradas complejas sin generar errores visibles","Que el navegador no interpreta correctamente la respuesta de la aplicacion y requiere actualizacion"],correct:0,exp:"Los errores expuestos son fugas de informacion (information disclosure) que facilitan reconocimiento al atacante.",fw:[10,-10,-8,-10],rep:[1,-1,0,-1]},
-    {q:"Cual es el proposito principal de los logs de auditoria en un sistema?",joke:false,choices:["Registrar quien hizo que y cuando, para responsabilidad y deteccion de incidentes","Conservar mas informacion historica para respaldos, auditorias y reconstruccion de actividades pasadas","Introducir controles de registro adicionales que pueden reducir rendimiento a cambio de mayor trazabilidad","Cumplir un requisito documental que demuestra existencia de monitoreo aunque no se use en operaciones diarias"],correct:0,exp:"Los logs son la base de auditoria, forensia y deteccion. Sin logs, los incidentes son invisibles.",fw:[10,-8,-8,-8],rep:[1,0,0,0]},
-    {q:"Cual es la diferencia entre autenticacion y autorizacion?",joke:false,choices:["Autenticacion verifica quien eres, autorizacion define que puedes hacer, dentro del modelo de seguridad aplicable al escenario descrito y sus controles asociados","Son terminos equivalentes en la practica operativa y pueden usarse indistintamente en reportes de seguridad","Autenticacion se enfoca en usuarios finales y autorizacion se reserva para operaciones administrativas","Autorizacion define primero las reglas permitidas y despues el usuario se autentica para aplicarlas"],correct:0,exp:"Primero te autenticas (login), luego el sistema autoriza segun tus permisos. Son fases distintas del control de acceso.",fw:[10,-8,-8,-8],rep:[1,0,0,0]},
-    {q:"Una companera deja la empresa hoy. Cuando deben revocarse sus accesos a sistemas?",joke:false,choices:["Idealmente el mismo dia de su salida o antes, segun procedimiento de baja, aplicando el control adecuado sin crear excepciones informales ni perder trazabilidad","Cuando el siguiente proceso de auditoria revise cuentas activas y confirme que ya no existe necesidad de acceso","Solo si la persona solicita formalmente el cierre de accesos o entrega todos sus activos corporativos","Mantener accesos deshabilitados pero disponibles facilita una posible reincorporacion sin reprovisionamiento completo"],correct:0,exp:"Las cuentas zombi son un riesgo grave. El proceso de offboarding debe ser inmediato y verificable.",fw:[10,-20,-15,-15],rep:[1,-1,-1,-1]},
-    {q:"Que riesgo tiene instalar software descargado de un sitio no oficial aunque el programa parezca legitimo?",joke:false,choices:["Puede contener instaladores troyanizados con malware adicional, porque atiende el riesgo principal del escenario y permite seguimiento por el area responsable","Aumenta el riesgo de bajo rendimiento porque el instalador puede incluir componentes adicionales no optimizados","Puede carecer de soporte formal, actualizaciones confiables o garantia de integridad del proveedor original","Puede instalar componentes adicionales que ocupan espacio y modifican configuraciones del sistema"],correct:0,exp:"Los crackers y sitios de descargas no oficiales son una fuente clasica de troyanos y stealers.",fw:[12,-15,-12,-12],rep:[1,-1,-1,-1]},
-    {q:"Subir un archivo corporativo a tu cuenta personal de Drive o Dropbox para trabajar desde casa, que riesgo principal genera?",joke:false,choices:["Fuga de informacion fuera del control corporativo, sin auditoria ni proteccion DLP","Consume almacenamiento personal y complica la gestion de versiones del documento corporativo","Puede afectar rendimiento del equipo al sincronizar archivos corporativos fuera del cliente oficial","No genera riesgo relevante si la carpeta es privada, tiene contrasena fuerte y no se comparte con terceros"],correct:0,exp:"Los servicios personales no estan bajo politicas corporativas, DLP ni respaldo controlado. Es una ruta tipica de fuga.",fw:[12,-22,-15,-15],rep:[1,-1,-1,-1]},
-    {q:"Tu telefono corporativo permite habilitar Bluetooth siempre visible. Que riesgo tiene mantenerlo asi?",joke:false,choices:["Facilita reconocimiento, ataques de proximidad y emparejamientos no autorizados, dentro del modelo de seguridad aplicable al escenario descrito y sus controles asociados","Consume bateria y puede generar exposicion solo si se combina con emparejamientos inseguros o redes no confiables","Puede interferir con llamadas o audio si el dispositivo intenta conectarse a accesorios cercanos","No genera ningun riesgo, cuando existe relacion previa, contexto aparentemente valido y no se observa un bloqueo tecnico inmediato"],correct:0,exp:"Bluetooth descubrible amplia la superficie de ataque (BlueBorne, KNOB, etc). Activarlo solo cuando se usa es buena practica.",fw:[10,-10,-12,-8],rep:[1,-1,-1,0]},
-    {q:"Pierdes tu laptop corporativa. Cual es la primera accion que debes ejecutar?",joke:false,choices:["Reportar de inmediato a TI y seguridad para iniciar bloqueo y borrado remoto, al priorizar contencion, validacion y decision formal antes de actuar sobre el activo","Esperar un periodo corto para confirmar si el equipo fue extraviado en una ubicacion conocida antes de activar borrado","Sustituir el equipo cuanto antes para recuperar continuidad operativa y reportar despues la perdida","Cambiar la contrasena del correo como primera barrera mientras se confirma el estado fisico del equipo"],correct:0,exp:"El tiempo es critico. MDM y bloqueo remoto solo funcionan si se activan rapido. Cualquier demora aumenta el riesgo.",fw:[12,-22,-12,-15],rep:[1,-1,-1,-1]},
-    {q:"Cual es el objetivo de los simulacros de phishing que envia el area de seguridad?",joke:false,choices:["Medir la madurez del usuario y reforzar capacitacion sin penalizar, dentro del modelo de seguridad aplicable al escenario descrito y sus controles asociados","Identificar usuarios de mayor riesgo para aplicar medidas disciplinarias y reducir reincidencia","Validar si los usuarios entregan credenciales para medir exposicion real ante ataques de phishing","Cumplir un requisito de auditoria y mantener evidencia de capacitacion periodica ante revisiones externas"],correct:0,exp:"Los simulacros buscan educar y medir, no castigar. Reportar un simulacro es la respuesta esperada.",fw:[10,-5,-5,-5],rep:[1,0,0,0]},
-    {q:"Recibes un correo legitimo en apariencia, pero el enlace al pasar el mouse muestra un dominio distinto al texto visible. Que indica esto?",joke:false,choices:["Es un enlace enmascarado, una tecnica clasica de phishing, porque atiende el riesgo principal del escenario y permite seguimiento por el area responsable","El navegador precarga el destino para acelerar la apertura del enlace cuando el usuario haga clic","El correo cuenta con autenticacion de dominio y por eso el cliente muestra un destino tecnico diferente","Es una funcion del cliente de correo o plataforma antispam para acortar y rastrear enlaces"],correct:0,exp:"El texto visible y el destino real pueden diferir. Siempre se valida la URL real antes de hacer clic.",fw:[10,-12,-10,-10],rep:[1,-1,0,-1]},
-    {q:"Tu colega comparte capturas de pantalla del sistema de clientes en un grupo de WhatsApp del equipo para resolver una duda rapida. Que politica se incumple?",joke:false,choices:["Manejo de informacion confidencial fuera de canales aprobados, dentro del modelo de seguridad aplicable al escenario descrito y sus controles asociados","Politica de uso de datos moviles, porque se compartio informacion corporativa por una aplicacion instalada en telefono","Politica de uso de dispositivos personales, al utilizar un medio no corporativo para resolver un tema laboral","No se incumple ninguna politica si el grupo pertenece al equipo y la captura se usa solo para resolver una duda operativa"],correct:0,exp:"WhatsApp personal no esta bajo control corporativo, no tiene DLP ni retencion. La informacion sensible debe quedarse en canales oficiales.",fw:[10,-15,-12,-12],rep:[1,-1,-1,-1]},
-    {q:"Un usuario te dice que su antivirus le pidio aprobar la instalacion de una herramienta llamada AnyDesk porque iba a recibir soporte. Que sospechas?",joke:false,choices:["Posible estafa de soporte tecnico falso para tomar control del equipo, al priorizar contencion, validacion y decision formal antes de actuar sobre el activo","Es una herramienta de soporte remoto comunmente usada por TI y podria formar parte de un proceso de atencion","Es una actualizacion automatica de soporte remoto solicitada por el antivirus para completar la sesion tecnica","Es parte de las funciones de asistencia remota del sistema operativo y se activa durante soporte tecnico"],correct:0,exp:"AnyDesk, TeamViewer y similares son herramientas legitimas abusadas en estafas de soporte. La regla: si tu no llamaste, no hay soporte.",fw:[12,-22,-15,-12],rep:[1,-1,-1,-1]},
-    {q:"Cual de las siguientes se considera informacion personal sensible bajo la mayoria de leyes de proteccion de datos?",joke:false,choices:["Datos de salud, biometricos, financieros, religiosos o de orientacion, porque reduce el impacto probable sin asumir confianza implicita ni exponer informacion adicional","Tu numero de empleado cuando permite identificarte dentro de procesos internos de recursos humanos","Tu correo corporativo publico si puede vincularse con otros datos internos o comunicaciones sensibles","El nombre del proyecto en el que trabajas si aun no ha sido comunicado fuera del equipo"],correct:0,exp:"Los datos sensibles requieren consentimiento explicito y controles reforzados. Su mal manejo puede tener consecuencias legales.",fw:[10,-12,-8,-8],rep:[1,-1,0,0]},
-    {q:"Que es un correo SPF, DKIM y DMARC visto desde el lado del usuario?",joke:false,choices:["Mecanismos que ayudan a verificar que el correo viene realmente del dominio que dice ser","Tipos de cifrado aplicados a adjuntos y cabeceras para proteger correos contra lectura no autorizada","Protocolos utilizados por plataformas de envio masivo para mejorar entregabilidad de mensajes corporativos","Filtros internos que validan rutas de correo entre buzones de la misma organizacion"],correct:0,exp:"Aunque son tecnicos, su funcion es reducir suplantacion de dominio. El usuario se beneficia con menos phishing eficaz.",fw:[10,-5,-5,-5],rep:[1,0,0,0]},
-    {q:"Tu hijo o familiar usa tu laptop corporativa para tareas escolares. Que politica se incumple tipicamente?",joke:false,choices:["Uso aceptable del equipo y separacion entre uso personal y corporativo, aplicando el control adecuado sin crear excepciones informales ni perder trazabilidad","Politica de horario laboral si el uso ocurre fuera del horario autorizado o sin supervision del responsable","Politica de actualizaciones automaticas porque un tercero podria instalar o retrasar parches del equipo","No incumple nada, como medida inicial para mantener continuidad operativa mientras se recopila mas contexto"],correct:0,exp:"Equipos corporativos contienen datos y accesos que no deben compartirse, ni con familia. Una mala descarga puede comprometer la red corporativa.",fw:[10,-15,-12,-10],rep:[1,-1,-1,-1]},
-    {q:"Cual es el primer paso correcto al sospechar que tu cuenta corporativa fue comprometida?",joke:false,choices:["Reportar a seguridad o TI de inmediato y seguir su procedimiento de respuesta","Cambiar inmediatamente la contrasena y observar si vuelven a presentarse accesos o mensajes sospechosos","Cerrar sesiones activas en todos los dispositivos para cortar accesos no reconocidos antes de escalar","Solicitar eliminacion y recreacion de la cuenta para asegurarse de que no queden sesiones comprometidas"],correct:0,exp:"El reporte temprano permite contener movimiento lateral, exfiltracion o uso de la cuenta para suplantar.",fw:[12,-12,-10,-15],rep:[1,-1,-1,-1]},
-    {q:"Una alerta del navegador te indica que tu contrasena fue encontrada en una filtracion publica conocida. Que accion es prioritaria?",joke:false,choices:["Cambiarla en ese sitio y en cualquier otro donde la hayas reutilizado, aplicando el control adecuado sin crear excepciones informales ni perder trazabilidad","Ignorar temporalmente la alerta si el servicio sigue funcionando y no se han observado accesos no reconocidos","Reportar la alerta como posible falso positivo del navegador y esperar confirmacion del proveedor","Esperar a que el proveedor del sitio confirme oficialmente la filtracion antes de hacer cambios"],correct:0,exp:"HaveIBeenPwned y bases similares se usan en credential stuffing. Una contrasena filtrada es publica para atacantes.",fw:[12,-15,-15,-10],rep:[1,-1,-1,-1]},
-    {q:"Cual de los siguientes es un control fisico de seguridad?",joke:false,choices:["Tarjeta de acceso, camara CCTV, esclusa o guardia, porque reduce el impacto probable sin asumir confianza implicita ni exponer informacion adicional","Antivirus de endpoint que protege fisicamente el equipo ante archivos maliciosos y medios extraibles","Firewall de aplicaciones web que restringe accesos no autorizados hacia sistemas expuestos","Cifrado de discos que protege el activo fisico si el equipo o medio de almacenamiento se pierde"],correct:0,exp:"La seguridad se divide en controles fisicos, tecnicos y administrativos. Una buena defensa los combina.",fw:[10,-5,-5,-5],rep:[1,0,0,0]},
-    {q:"Que es la clasificacion de la informacion?",joke:false,choices:["Asignar una etiqueta segun sensibilidad (publica, interna, confidencial, restringida) para aplicar controles","Ordenar archivos por nombre y ubicacion para facilitar su administracion y busqueda interna","Comprimir archivos antiguos para reducir espacio y conservar historicos de menor uso operativo","Eliminar archivos duplicados para reducir exposicion innecesaria y mejorar control documental"],correct:0,exp:"Sin clasificacion no hay forma consistente de saber que proteger ni como.",fw:[10,-5,-5,-5],rep:[1,0,0,0]},
-    {q:"Que es shadow IT?",joke:true,choices:["Uso de software, servicios o dispositivos sin aprobacion del area de TI, al priorizar contencion, validacion y decision formal antes de actuar sobre el activo","Un grupo reservado de tecnologia que opera herramientas especiales fuera de la estructura formal","Sistemas programados para ejecutarse fuera del horario laboral y evitar afectar la operacion diaria","Tecnicas de hacking etico utilizadas para evaluar sistemas sin interrumpir la operacion del negocio"],correct:0,exp:"Shadow IT escapa de la gobernanza, parches, monitoreo y DLP. Es una fuente comun de fugas e incidentes.",fw:[10,-10,-8,-10],rep:[1,-1,-1,-1]},
-    {q:"Que tipo de ataque ocurre cuando alguien observa tu PIN o contrasena por encima de tu hombro?",joke:false,choices:["Shoulder surfing, porque el atacante obtiene informacion observando directamente la pantalla, PIN o teclado","Pharming, cuando se manipula DNS o el archivo hosts para redirigir al usuario a un sitio falso","Smishing, cuando el vector principal es un mensaje SMS que busca credenciales o datos sensibles","Whaling, cuando la campana esta dirigida a ejecutivos o personas con autoridad para aprobar acciones criticas"],correct:0,exp:"Es un ataque fisico de baja tecnologia pero efectivo, especialmente en cajeros, oficinas abiertas y transporte publico.",fw:[10,-8,-8,-8],rep:[1,0,0,0]},
-    {q:"Cual es la diferencia principal entre phishing, spear phishing y whaling?",joke:false,choices:["Phishing es masivo, spear phishing es dirigido, whaling apunta a ejecutivos de alto nivel, con validacion y evidencia","Solo se diferencian por el idioma, porque parece atender el problema de forma rapida sin realizar cambios permanentes en la arquitectura","Son terminos equivalentes en la practica operativa y pueden usarse indistintamente en reportes de seguridad","Solo cambian segun el dia de la semana, porque parece atender el problema de forma rapida sin realizar cambios permanentes en la arquitectura"],correct:0,exp:"A mayor personalizacion, mayor tasa de exito. Whaling justifica controles especiales para directivos.",fw:[10,-10,-8,-8],rep:[1,-1,0,0]},
-    {q:"Recibes un SMS de tu supuesto banco con un enlace para 'verificar movimientos sospechosos'. Que tipo de ataque es?",joke:false,choices:["Smishing (phishing por SMS), porque el engaño usa mensajes de texto para inducir clics o entregar datos","Vishing, cuando el engano se realiza por llamada telefonica y se presiona al usuario con una supuesta urgencia","Whaling, cuando la campana esta dirigida a ejecutivos o personas con autoridad para aprobar acciones criticas","Pharming, cuando se manipula DNS o el archivo hosts para redirigir al usuario a un sitio falso"],correct:0,exp:"Los bancos no envian enlaces clicables para login. Siempre se accede por la app o el sitio escrito manualmente.",fw:[10,-12,-10,-10],rep:[1,-1,-1,-1]},
-    {q:"Que es vishing?",joke:false,choices:["Phishing realizado por llamada telefonica de voz, usando presion, autoridad o urgencia para obtener informacion","Phishing por video, como medida inicial para mantener continuidad operativa mientras se recopila mas contexto","Phishing visual con imagenes, si se considera una excepcion temporal y se deja evidencia para validacion posterior","Phishing en redes sociales, porque reduce friccion operativa y permite avanzar sin detener completamente el proceso"],correct:0,exp:"El vishing puede usar IVR falsos, voces clonadas con IA y suplantacion de numero (caller ID spoofing).",fw:[10,-8,-8,-8],rep:[1,0,0,0]},
-    {q:"Cual es una buena practica al recibir un USB de un proveedor en una reunion?",joke:false,choices:["Solicitar que el material se entregue por canal digital aprobado o pasarlo por equipo aislado de TI","Conectarlo de inmediato en tu laptop para revisar el contenido antes de compartirlo con otros participantes","Conectarlo en el equipo de la sala para proyectar el material al grupo y validar si corresponde al proveedor","Llevarlo a casa y revisarlo en un equipo personal para no exponer directamente el equipo corporativo"],correct:0,exp:"Aun proveedores legitimos pueden distribuir USB infectados sin saberlo. La revision en entorno aislado es lo seguro.",fw:[10,-15,-15,-12],rep:[1,-1,-1,-1]},
-    {q:"Tu equipo se enciende mas lento, el ventilador trabaja al maximo y notas procesos desconocidos. Que sospechas?",joke:false,choices:["Posible infeccion de malware (mineria, troyano, RAT) que requiere reporte a TI, dentro del modelo de seguridad aplicable al escenario descrito y sus controles asociados","El equipo necesita actualizaciones pendientes que pueden explicar lentitud, ventilador alto y procesos temporales","El antivirus podria estar ejecutando un escaneo programado que consume CPU y muestra procesos no familiares","Es una degradacion normal por antiguedad del equipo, acumulacion de aplicaciones y uso diario"],correct:0,exp:"Los sintomas de rendimiento suelen ser indicadores tempranos. Reportar permite analisis sin destruir evidencia.",fw:[10,-10,-8,-8],rep:[1,-1,0,0]},
-    {q:"Cual es el riesgo principal de hablar de proyectos confidenciales en lugares publicos (cafes, transporte, vuelos)?",joke:true,choices:["Eavesdropping: terceros pueden escuchar y obtener informacion sensible, porque reduce el impacto probable sin asumir confianza implicita ni exponer informacion adicional","Que terceros del lugar se incomoden por la conversacion y afecten la privacidad del espacio","Que el telefono consuma mas bateria al mantener llamadas o aplicaciones abiertas durante la conversacion","Solo representa riesgo si se habla en voz alta o se mencionan nombres, montos y datos concretos"],correct:0,exp:"La fuga verbal es un vector real, especialmente cuando se mencionan clientes, montos o estrategias. Los espacios publicos no son privados.",fw:[10,-10,-8,-10],rep:[1,-1,-1,-1]},
-    {q:"Tu equipo te pide reiniciar para aplicar parches de seguridad. Que es lo correcto?",joke:false,choices:["Guardar tu trabajo y reiniciar en cuanto sea posible, porque reduce el impacto probable sin asumir confianza implicita ni exponer informacion adicional","Posponer la actualizacion hasta una ventana operativa conveniente para no interrumpir actividades criticas","Cancelar la actualizacion si el equipo esta funcionando correctamente y no presenta sintomas de falla","Apagar el equipo para evitar que la actualizacion interfiera con la jornada y revisarlo despues"],correct:0,exp:"Los parches sin aplicar dejan el equipo expuesto. Posponer demasiado es una causa comun de incidentes evitables.",fw:[10,-10,-8,-12],rep:[1,-1,0,-1]},
-    {q:"Que es un certificado digital, en terminos sencillos?",joke:false,choices:["Un documento electronico que asocia una identidad con una clave publica, firmado por una autoridad confiable","Una contrasena cifrada que valida al usuario cuando intenta conectarse a un servicio seguro","Un respaldo del navegador que conserva informacion de seguridad para sesiones HTTPS futuras","Un tipo de cookie segura usada por el sitio para recordar identidad y configuraciones del usuario"],correct:0,exp:"Los certificados son la base de la confianza en HTTPS, firma de codigo y autenticacion fuerte.",fw:[10,-5,-5,-5],rep:[1,0,0,0]},
-    {q:"Que es un firewall personal o de host?",joke:false,choices:["Un control en tu propio equipo que filtra trafico entrante y saliente","Un dispositivo fisico conectado al router para filtrar trafico local antes de llegar al equipo","Un programa que limpia archivos temporales y reduce riesgos asociados a descargas no deseadas","Una version ligera del antivirus enfocada solo en conexiones y aplicaciones de red"],correct:0,exp:"Los firewalls de host complementan los perimetrales y son criticos cuando el equipo sale de la red corporativa.",fw:[10,-5,-5,-5],rep:[1,0,0,0]},
-    {q:"Por que se recomienda usar autenticacion biometrica (huella, rostro) en dispositivos moviles corporativos?",joke:false,choices:["Combina algo que eres con tu PIN, anadiendo un factor adicional, al priorizar contencion, validacion y decision formal antes de actuar sobre el activo","Mejora la experiencia del usuario y reduce friccion al desbloquear el dispositivo con mayor velocidad","Reduce costos operativos porque evita tarjetas, tokens fisicos o infraestructura adicional de autenticacion","Sustituye la contrasena en el dispositivo y elimina la necesidad de recordar un PIN o clave"],correct:0,exp:"La biometria local en dispositivos modernos suele estar en enclave seguro y eleva la dificultad para un atacante casual.",fw:[10,-8,-8,-12],rep:[1,0,0,-1]},
-    {q:"Que diferencia hay entre datos en reposo, en transito y en uso?",joke:false,choices:["Reposo: almacenados; transito: viajando por red; uso: cargados en memoria, al priorizar contencion, validacion y decision formal antes de actuar sobre el activo","Son terminos equivalentes en la practica operativa y pueden usarse indistintamente en reportes de seguridad","La prioridad debe centrarse en datos en transito porque son los mas expuestos a interceptacion externa","La clasificacion por estado de datos aplica principalmente a bases de datos y repositorios empresariales"],correct:0,exp:"Cada estado requiere controles distintos: cifrado de disco, TLS y proteccion de memoria respectivamente.",fw:[10,-8,-8,-8],rep:[1,0,0,0]},
-    {q:"Cual de los siguientes habitos digitales reduce notablemente tu superficie de ataque personal?",joke:false,choices:["Usar contrasenas unicas con gestor, MFA en todo, parches al dia y cuidado al hacer clic","Tener antivirus actualizado cubre la mayoria de amenazas comunes y reduce la necesidad de controles adicionales","Cambiar de correo periodicamente reduce exposicion ante listas filtradas y campanas automatizadas","Reducir al minimo el uso de internet limita exposicion a phishing, malware y sitios no confiables"],correct:0,exp:"La defensa en profundidad personal combina varios habitos. Ningun control unico es suficiente.",fw:[10,-8,-5,-12],rep:[1,0,0,-1]},
-    {q:"Que es la separacion de funciones (segregation of duties)?",joke:false,choices:["Distribuir tareas criticas entre varias personas para evitar fraude o error","Separar fisicamente a empleados con funciones distintas para reducir interferencias en procesos sensibles","Aplicar la separacion de funciones solo a directivos que pueden aprobar decisiones de alto impacto","Es equivalente a minimo privilegio porque ambos reducen permisos y limitan acciones innecesarias"],correct:0,exp:"Por ejemplo, quien aprueba un pago no debe ser quien lo ejecuta. Reduce riesgo de fraude interno.",fw:[10,-10,-8,-8],rep:[1,-1,0,0]},
-    {q:"Que es un baseline de seguridad?",joke:false,choices:["Un conjunto de configuraciones minimas seguras que todo equipo debe cumplir","La version mas reciente del antivirus que todo equipo debe tener instalada antes de operar","La cuenta administrativa definida como referencia para configurar y mantener todos los equipos","Un respaldo inicial del sistema que permite restaurar equipos a un estado operativo conocido"],correct:0,exp:"Sin baseline, cada equipo puede tener configuracion distinta. CIS Benchmarks son referencia comun.",fw:[10,-5,-5,-5],rep:[1,0,0,0]},
-    {q:"Una alerta legitima de seguridad en Windows te pide aprobar UAC para una accion que tu no iniciaste. Que haces?",joke:false,choices:["Cancelar y revisar que aplicacion solicito el privilegio, al priorizar contencion, validacion y decision formal antes de actuar sobre el activo","Aprobar la solicitud para evitar que una instalacion o actualizacion pendiente bloquee la operacion","Aprobar la ventana y reportar despues si el proceso parece inusual o no se reconoce completamente","Ignorar la ventana sin aprobarla para evitar cambios, pero continuar observando si vuelve a aparecer"],correct:0,exp:"UAC es la ultima linea antes de elevar privilegios. Aprobar lo que no iniciaste puede ejecutar malware con permisos de administrador.",fw:[12,-15,-12,-15],rep:[1,-1,-1,-1]},
-    {q:"Cual es la mejor accion al detectar un correo de phishing en tu bandeja?",joke:false,choices:["Reportarlo con el boton de phishing o reenviarlo a seguridad sin responder ni hacer clic","Eliminar el correo inmediatamente para reducir exposicion y evitar que se abra por accidente","Reenviar el correo al equipo para que todos identifiquen el intento y eviten hacer clic","Responder al remitente solicitando confirmacion antes de abrir enlaces o entregar informacion"],correct:0,exp:"Reportar permite al SOC bloquear el origen, correlacionar con otros usuarios y entrenar filtros.",fw:[12,-12,-15,-15],rep:[1,-1,-1,-1]},
-    {q:"Cual es el riesgo de hacer login en sistemas corporativos desde un equipo personal sin controles?",joke:false,choices:["El equipo personal puede tener malware que capture credenciales o datos corporativos","No hay riesgo relevante si se usa una contrasena robusta y el portal corporativo tiene HTTPS","Afecta principalmente el rendimiento o estabilidad de la conexion por no usar controles corporativos","Reduce el rendimiento del equipo corporativo al duplicar sesiones y sincronizaciones innecesarias"],correct:0,exp:"BYOD requiere controles especificos. Sin EDR, parches y politicas, un equipo personal es una ruta de compromiso.",fw:[10,-15,-12,-15],rep:[1,-1,-1,-1]},
-    {q:"Que es un keylogger?",joke:false,choices:["Software o hardware que registra todo lo que se escribe en el teclado, porque reduce el impacto probable sin asumir confianza implicita ni exponer informacion adicional","Una herramienta que registra actividad del teclado para ordenar documentos, accesos y atajos del sistema","Un tipo de antivirus que monitorea entradas del teclado para detectar comportamiento malicioso","Un servicio de respaldo que registra actividad para restaurar textos o formularios perdidos"],correct:0,exp:"Los keyloggers capturan contrasenas, mensajes y datos. Pueden ser fisicos (USB) o software, persistentes y dificiles de detectar.",fw:[10,-8,-8,-8],rep:[1,0,0,0]},
-    {q:"Cual es una senal habitual de un sitio web fraudulento de comercio electronico?",joke:false,choices:["Precios anormalmente bajos, ortografia descuidada, dominios recien creados, sin politicas claras","Que tenga muchos productos publicados rapidamente, sin informacion clara de inventario ni contacto verificable","Que use HTTPS y candado en el navegador, lo cual indica cifrado pero no necesariamente legitimidad comercial","Que tenga imagen corporativa profesional, logos conocidos y diseno visual similar a tiendas legitimas"],correct:0,exp:"HTTPS solo significa cifrado, no legitimidad. Las senales de fraude son contextuales.",fw:[10,-10,-15,-10],rep:[1,-1,-1,-1]},
-    {q:"En el contexto de seguridad en la nube, quien es responsable de la seguridad?",joke:false,choices:["Es un modelo de responsabilidad compartida entre proveedor y cliente, dentro del modelo de seguridad aplicable al escenario descrito y sus controles asociados","Solo el proveedor cloud, porque administra la infraestructura, disponibilidad y controles base del servicio","Solo el cliente, porque decide que datos sube, quien accede y como configura las identidades","Un tercero externo contratado para validar controles, operar seguridad y asumir cumplimiento"],correct:0,exp:"El proveedor cuida 'la nube' (infra) y el cliente cuida 'lo que pone en la nube' (datos, configuracion, identidades).",fw:[10,-10,-12,-10],rep:[1,-1,-1,-1]},
-    {q:"Que es un correo legitimo firmado digitalmente?",joke:false,choices:["Un correo cuya autoria e integridad pueden verificarse mediante firma criptografica","Un correo que incluye firma institucional, nombre del remitente, cargo y datos de contacto verificables","Un correo marcado como importante por el remitente o por reglas internas de clasificacion","Un correo enviado desde la cuenta de un directivo o representante autorizado de la organizacion"],correct:0,exp:"Las firmas digitales (S/MIME, PGP) garantizan que el mensaje proviene del remitente y no fue alterado.",fw:[10,-5,-5,-5],rep:[1,0,0,0]},
-    {q:"Que es una vulnerabilidad de dia cero (zero-day)?",joke:false,choices:["Una falla de seguridad que aun no tiene parche disponible y puede ser explotada activamente","Una vulnerabilidad antigua que ya fue documentada pero aun puede seguir presente en sistemas sin actualizar","Una alerta del antivirus que identifica comportamiento sospechoso antes de que exista un parche formal","Un respaldo creado el mismo dia en que se detecta una falla critica para recuperar informacion"],correct:0,exp:"Las zero-day son las mas valoradas en mercados de exploits porque las defensas tradicionales no las reconocen.",fw:[10,-8,-8,-8],rep:[1,0,0,0]},
-    {q:"Que rol cumple un Security Operations Center (SOC)?",joke:false,choices:["Monitorear, detectar, analizar y responder a incidentes de seguridad 24x7","Vender, seleccionar y administrar productos de seguridad usados por la organizacion","Contratar personal especializado para cubrir turnos, monitoreo y respuesta ante alertas","Gestionar el firewall, perfiles de seguridad y reglas perimetrales como punto central de defensa"],correct:0,exp:"El SOC es el centro nervioso de la operacion de ciberseguridad. Combina personas, procesos y tecnologia.",fw:[10,-5,-5,-5],rep:[1,0,0,0]},
-    {q:"Cual es la finalidad del entrenamiento periodico de concientizacion en seguridad?",joke:false,choices:["Mantener al usuario actualizado frente a tacticas en evolucion y reducir el factor humano","Cumplir con un requisito de auditoria y dejar evidencia de que el personal recibio informacion","Identificar empleados que fallaron simulacros para aplicar sanciones y reducir reincidencia","Seleccionar empleados con mejor respuesta a seguridad para roles de mayor responsabilidad"],correct:0,exp:"El humano es el vector mas explotado. La capacitacion continua es uno de los controles mas costo-efectivos.",fw:[10,-5,-5,-5],rep:[1,0,0,0]},
-    {q:"Cual es la diferencia entre un incidente y un evento de seguridad?",joke:false,choices:["Un evento es cualquier ocurrencia observable; un incidente afecta confidencialidad, integridad o disponibilidad","Son terminos equivalentes en la practica operativa y pueden usarse indistintamente en reportes de seguridad","Un incidente es una ocurrencia menor que se registra para analisis, mientras el evento requiere respuesta formal","Solo los eventos requieren reporte formal porque son observables y se registran en sistemas de monitoreo"],correct:0,exp:"No todo evento es incidente, pero todo incidente comienza como evento. La distincion guia la respuesta.",fw:[10,-8,-8,-8],rep:[1,0,0,0]},
-    {q:"Tu administracion te informa que tu actividad sera monitoreada en sistemas corporativos. Que principio respalda esta practica?",joke:false,choices:["Uso aceptable y monitoreo declarado en politicas, sin expectativa de privacidad en activos corporativos","Es ilegal en todos los casos si se realiza sin consentimiento individual explicito y documentado","Solo aplica a directivos o usuarios con informacion sensible y privilegios elevados","Solo aplica durante el horario laboral, cuando los sistemas estan siendo usados para actividades de negocio"],correct:0,exp:"Las politicas claras y firmadas dan base legal al monitoreo y eliminan ambiguedades sobre privacidad en equipos del empleador.",fw:[10,-8,-8,-8],rep:[1,0,0,0]},
-    {q:"Tu telefono te ofrece conectarse automaticamente a redes WiFi conocidas. Que riesgo tiene en viaje?",joke:false,choices:["Un atacante puede crear una red con el mismo nombre (Evil Twin) y tu telefono se conectara solo","Consume bateria y datos, pero no representa riesgo si la red ya fue usada previamente","Mejora la continuidad de conexion al seleccionar redes conocidas con mejor intensidad de senal","No tiene ningun riesgo material cuando el servicio esta restringido, autenticado y bajo politicas corporativas"],correct:0,exp:"Las redes guardadas se reconectan por SSID. Olvidar redes publicas y desactivar autoconexion mitiga este vector.",fw:[10,-12,-10,-10],rep:[1,-1,-1,-1]},
-    {q:"Que es el secuestro de SIM (SIM swapping)?",joke:false,choices:["Un atacante convence al operador de portar tu numero a otra SIM para interceptar codigos por SMS","Un malware alojado en la SIM que intercepta mensajes, contactos y codigos de verificacion","Cuando pierdes fisicamente la SIM y alguien intenta reutilizarla para acceder a tus cuentas","Cuando realizas una portabilidad autorizada y el numero se activa en una SIM nueva del operador"],correct:0,exp:"Por eso SMS es el factor mas debil de MFA. Aplicaciones autenticadoras o llaves fisicas son superiores.",fw:[10,-10,-8,-8],rep:[1,-1,0,0]},
-    {q:"Cual es la diferencia entre privacidad y seguridad?",joke:false,choices:["Seguridad protege los datos; privacidad define quien puede acceder y para que fines","Son terminos equivalentes en la practica operativa y pueden usarse indistintamente en reportes de seguridad","La privacidad aplica principalmente a personas fisicas y la seguridad a sistemas, infraestructura y procesos","La seguridad es opcional cuando los datos ya fueron clasificados como publicos o de bajo impacto"],correct:0,exp:"Puedes tener seguridad sin privacidad (datos seguros pero compartidos sin consentimiento) y viceversa.",fw:[10,-8,-8,-8],rep:[1,0,0,0]},
-    {q:"Que es el principio del menor asombro o least surprise en interfaces de seguridad?",joke:true,choices:["Las opciones por defecto deben ser las mas seguras para el usuario, porque atiende el riesgo principal del escenario y permite seguimiento por el area responsable","La interfaz debe usar elementos visuales claros que ayuden al usuario a identificar riesgos rapidamente","Las alertas deben llamar la atencion del usuario para evitar que ignore eventos de seguridad importantes","Los botones criticos deben resaltarse con colores de advertencia para reducir acciones accidentales"],correct:0,exp:"Los defaults seguros (secure by default) protegen al usuario que no es experto y reducen errores de configuracion.",fw:[10,-5,-5,-5],rep:[1,0,0,0]},
-    {q:"Que tipo de informacion debe protegerse incluso al desecharse?",joke:false,choices:["Documentos impresos con datos personales, financieros o estrategicos, porque reduce el impacto probable sin asumir confianza implicita ni exponer informacion adicional","Solo documentos firmados o autorizados formalmente, porque tienen valor legal y trazabilidad","Solo correos impresos que incluyan informacion interna, aprobaciones o conversaciones sensibles","Ninguno, porque una vez impreso el documento deja de estar conectado a sistemas corporativos"],correct:0,exp:"El dumpster diving (revisar basura) es una tecnica clasica de reconocimiento. Trituradoras y procesos de destruccion son obligatorios.",fw:[10,-12,-10,-12],rep:[1,-1,-1,-1]},
-    {q:"Recibes un correo del soporte de Microsoft 365 avisando que tu buzon esta lleno y debes hacer clic para liberar espacio o perderas tus correos. Que indica este patron?",joke:false,choices:["Phishing tipico que abusa de marcas conocidas y miedo a perder informacion, aplicando el control adecuado sin crear excepciones informales ni perder trazabilidad","Una notificacion legitima de servicio que debe atenderse para evitar perdida de correos o interrupcion del buzon","Un error de cuota o sincronizacion del servidor de correo que solicita liberar espacio mediante un enlace","Un mensaje del area de TI que utiliza marca Microsoft para facilitar que el usuario identifique el servicio afectado"],correct:0,exp:"Microsoft no envia correos con este formato. Las cuotas se gestionan internamente por el administrador del tenant.",fw:[12,-15,-10,-10],rep:[1,-1,-1,-1]},
-    {q:"Tu organizacion tiene una politica BYOD (Bring Your Own Device). Cual es un control esperable bajo esta politica?",joke:false,choices:["Inscripcion en MDM, separacion de perfiles personal y corporativo, posibilidad de borrado remoto del perfil corporativo","Acceso completo del area de TI al dispositivo personal para asegurar cumplimiento y respuesta ante incidentes","Reemplazo del antivirus personal por una solucion corporativa para mantener monitoreo uniforme","Eliminar aplicaciones personales para evitar mezcla de informacion privada y corporativa"],correct:0,exp:"BYOD bien implementado balancea privacidad personal y proteccion corporativa mediante contenedorizacion.",fw:[10,-8,-8,-8],rep:[1,0,0,0]},
-    {q:"Cual es el riesgo de aceptar todas las cookies sin revisar en sitios web?",joke:false,choices:["Compartir mas informacion de la necesaria con terceros, incluyendo rastreadores publicitarios","Hacer que el sitio cargue mas lento al rechazar cookies necesarias para personalizacion y medicion","Provocar que se pierda historial de navegacion o preferencias almacenadas por el sitio","Evitar que funciones del sitio operen correctamente al bloquear componentes de sesion o personalizacion"],correct:0,exp:"Las cookies de terceros permiten perfilamiento extenso. Limitarlas reduce huella digital.",fw:[8,-5,-5,-5],rep:[1,0,0,0]},
-    {q:"Que es un ataque de pharming?",joke:false,choices:["Redirigir trafico legitimo a sitios falsos manipulando DNS o el archivo hosts","Cultivar relaciones con usuarios en redes sociales para ganar confianza antes de pedir informacion","Enviar correos masivos para redirigir usuarios a sitios falsos usando asuntos atractivos o urgentes","Robar credenciales mediante mensajes SMS con enlaces que suplantan servicios conocidos"],correct:0,exp:"El pharming no requiere que el usuario haga clic; basta con manipular la resolucion de nombres.",fw:[10,-8,-8,-8],rep:[1,0,0,0]},
-    {q:"Cual es el riesgo de las extensiones de navegador descargadas de tiendas no oficiales o con permisos amplios?",joke:false,choices:["Pueden leer todo el contenido de las paginas que visitas, incluyendo formularios y sesiones","Afectan principalmente el rendimiento del navegador al cargar scripts adicionales durante la navegacion","Cambian la apariencia del navegador o de las paginas para mejorar visualizacion y productividad","No generan riesgo relevante si la extension funciona correctamente y proviene de una tienda conocida"],correct:0,exp:"Las extensiones con permisos de lectura/escritura en todos los sitios son equivalentes a malware si son maliciosas o son compradas por actores hostiles.",fw:[10,-12,-10,-12],rep:[1,-1,-1,-1]},
-    {q:"Cual es la mejor accion al recibir una llamada urgente solicitando informacion confidencial, aunque la persona suene como tu jefe?",joke:true,choices:["Colgar y devolver la llamada al numero conocido del jefe para validar, porque atiende el riesgo principal del escenario y permite seguimiento por el area responsable","Confiar en la llamada si la voz, el contexto y la urgencia coinciden con una solicitud real del jefe","Pedir confirmacion por correo y adelantar la informacion para no retrasar una decision urgente","Grabar la llamada como evidencia y proporcionar la informacion solicitada si parece consistente"],correct:0,exp:"Las voces clonadas con IA son una amenaza real. La validacion fuera de banda con un canal conocido es la unica defensa fiable.",fw:[12,-25,-15,-12],rep:[1,-1,-1,-1]},
-    {q:"Recibes un mensaje de LinkedIn de un supuesto reclutador con una oferta llamativa que te pide descargar un PDF para ver mas detalles. El perfil tiene pocas conexiones y fue creado recientemente. Que indica esta combinacion?",joke:false,choices:["Posible spear phishing dirigido a profesionales con malware en el adjunto","Una oportunidad laboral real que exige rapidez porque el proceso puede cerrar pronto","Un perfil normal de reclutador nuevo que aun no ha construido red amplia dentro de la plataforma","Un error o limitacion de LinkedIn que muestra pocas conexiones aunque la cuenta pertenezca a un reclutador real"],correct:0,exp:"Los grupos APT y cibercriminales usan LinkedIn para entregar malware via supuestas ofertas laborales. Perfiles nuevos con pocas conexiones son una bandera roja clasica.",fw:[12,-18,-12,-10],rep:[1,-1,-1,-1]},
-  ],
+  easy: [
+    {
+        "q": "Un correo de RRHH pide tu RFC y CURP con urgencia desde un dominio raro. Que haces?",
+        "joke": true,
+        "choices": [
+            "No responder y reportarlo a Seguridad o TI",
+            "Responder solo si el texto parece formal",
+            "Mandarlo a otros para preguntar si tambien lo recibieron",
+            "Borrarlo sin reportar nada"
+        ],
+        "correct": 0,
+        "exp": "La urgencia, los datos personales y el dominio raro son señales de phishing.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Un compañero te pide tu usuario y contraseña para terminar un reporte. Que haces?",
+        "joke": false,
+        "choices": [
+            "No compartir la cuenta y pedirle que abra ticket",
+            "Compartirla solo por unos minutos",
+            "Mandarla por chat para que quede evidencia, pero sin validar el riesgo",
+            "Cambiar la contraseña despues de prestarla"
+        ],
+        "correct": 0,
+        "exp": "Las cuentas son personales. Si alguien usa tu cuenta, las acciones quedan a tu nombre.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Un enlace parece de la empresa pero el dominio tiene letras extrañas. Que haces?",
+        "joke": false,
+        "choices": [
+            "No ingresar datos y validar el sitio por canal oficial",
+            "Entrar porque el sitio tiene candado",
+            "Probar con una clave vieja primero",
+            "Abrirlo desde el celular para revisar, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "Los sitios falsos imitan dominios reales. El candado no garantiza que sea legitimo.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Encuentras una USB con etiqueta de nomina en la sala de juntas. Que haces?",
+        "joke": false,
+        "choices": [
+            "Entregarla a Seguridad o TI sin conectarla",
+            "Conectarla para buscar al dueño, pero sin validar el riesgo",
+            "Revisarla en un equipo viejo",
+            "Dejarla donde estaba"
+        ],
+        "correct": 0,
+        "exp": "Una USB desconocida puede contener malware. No debe conectarse a equipos corporativos.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Tu equipo muestra que los archivos fueron cifrados y pide dinero. Que haces?",
+        "joke": false,
+        "choices": [
+            "Desconectar la red y reportar de inmediato",
+            "Pagar para recuperar rapido",
+            "Reiniciar varias veces",
+            "Buscar tutoriales en internet, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "Puede ser ransomware. La prioridad es contener y reportar.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Quieres crear una contraseña facil de recordar y dificil de adivinar. Que haces?",
+        "joke": false,
+        "choices": [
+            "Usar una frase larga sin datos personales",
+            "Usar tu fecha de nacimiento",
+            "Usar el nombre de tu mascota",
+            "Usar la misma clave de siempre, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "Las frases largas son mejores que palabras cortas con datos personales.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Recibes muchas solicitudes de aprobacion MFA que no iniciaste. Que haces?",
+        "joke": false,
+        "choices": [
+            "Rechazarlas y avisar a Seguridad o TI",
+            "Aprobar una para detenerlas, pero sin validar el riesgo",
+            "Esperar a que desaparezcan",
+            "Apagar el telefono"
+        ],
+        "correct": 0,
+        "exp": "Esto puede ser fatiga de MFA. Alguien podria tener tu contraseña.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Alguien que dice ser soporte te llama y pide instalar control remoto. Que haces?",
+        "joke": false,
+        "choices": [
+            "Cortar y llamar al numero oficial de TI",
+            "Instalarlo si conoce tu nombre",
+            "Pedirle que mande correo y seguirlo, pero sin validar el riesgo",
+            "Darle acceso solo para revisar"
+        ],
+        "correct": 0,
+        "exp": "Soporte real debe validarse por canales oficiales.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Un mensajero pide que le abras una puerta restringida porque trae cajas. Que haces?",
+        "joke": false,
+        "choices": [
+            "Pedir que se registre en recepcion",
+            "Abrirle por cortesia",
+            "Dejarlo pasar si va rapido",
+            "Acompañarlo sin registrarlo, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "La cortesia no debe saltarse controles de acceso.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "El navegador muestra alerta de certificado en un portal de proveedor. Que haces?",
+        "joke": false,
+        "choices": [
+            "No continuar y validar con TI o proveedor",
+            "Aceptar la excepcion porque siempre lo usas",
+            "Cambiar de navegador",
+            "Desactivar la alerta temporalmente"
+        ],
+        "correct": 0,
+        "exp": "Una alerta de certificado puede indicar un sitio falso o interceptacion.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Usas la misma contraseña en varias paginas. Que haces?",
+        "joke": false,
+        "choices": [
+            "Cambiar a claves unicas por servicio",
+            "Dejarla si es muy larga",
+            "Cambiar solo la del correo, pero sin validar el riesgo",
+            "Anotarla para no olvidarla"
+        ],
+        "correct": 0,
+        "exp": "Si una pagina se filtra, prueban esa clave en otras cuentas.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Preguntan que significa CIA en seguridad de la informacion. Que haces?",
+        "joke": false,
+        "choices": [
+            "Confidencialidad, integridad y disponibilidad",
+            "Control, identidad y auditoria, pero sin validar el riesgo",
+            "Cifrado, internet y acceso",
+            "Cliente, informacion y archivo"
+        ],
+        "correct": 0,
+        "exp": "La triada CIA resume lo que se busca proteger.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Te llega un archivo llamado Factura.pdf.exe. Que haces?",
+        "joke": false,
+        "choices": [
+            "No abrirlo y reportarlo",
+            "Abrirlo porque parece PDF",
+            "Renombrarlo a PDF",
+            "Mandarlo a un compañero"
+        ],
+        "correct": 0,
+        "exp": "La doble extension puede esconder un ejecutable malicioso.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Nomina dice que recibio una solicitud tuya para cambiar tu cuenta bancaria. Que haces?",
+        "joke": false,
+        "choices": [
+            "Reportarlo porque puede ser suplantacion",
+            "Esperar a que nomina lo revise",
+            "Cambiar tambien tu correo",
+            "Contestar que no fuiste tu y nada mas, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "Puede ser fraude de nomina o correo comprometido.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Te alejas de tu equipo por pocos minutos. Que haces?",
+        "joke": false,
+        "choices": [
+            "Bloquear la sesion antes de irte",
+            "Dejarlo abierto si estas cerca, pero sin validar el riesgo",
+            "Bajar el brillo",
+            "Cerrar solo el navegador"
+        ],
+        "correct": 0,
+        "exp": "Un equipo desbloqueado permite que alguien use tus accesos.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Necesitas correo en una cafeteria con WiFi abierto. Que haces?",
+        "joke": false,
+        "choices": [
+            "Usar hotspot propio o VPN corporativa",
+            "Conectarte si el portal tiene HTTPS, pero sin validar el riesgo",
+            "Pedir la clave del cafe y entrar",
+            "Pedir a otro que revise tu correo"
+        ],
+        "correct": 0,
+        "exp": "Las redes abiertas pueden ser falsas o inseguras.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Un QR de un cartel tiene una pegatina encima. Que haces?",
+        "joke": false,
+        "choices": [
+            "Evitar escanearlo y reportarlo",
+            "Escanearlo si ofrece descuento",
+            "Tomarle foto para probar despues",
+            "Compartirlo al equipo"
+        ],
+        "correct": 0,
+        "exp": "Un QR reemplazado puede llevar a una pagina falsa.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Una app de linterna pide contactos, microfono y ubicacion. Que haces?",
+        "joke": true,
+        "choices": [
+            "No instalarla porque pide permisos excesivos",
+            "Instalarla y quitar permisos despues, pero sin validar el riesgo",
+            "Instalarla si tiene buenas reseñas",
+            "Aceptar permisos solo una vez"
+        ],
+        "correct": 0,
+        "exp": "Una app debe pedir solo lo que necesita para funcionar.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Un documento con datos de clientes queda olvidado en la impresora. Que haces?",
+        "joke": false,
+        "choices": [
+            "Recogerlo y usar impresion segura en adelante",
+            "Dejarlo por si regresa el dueño, pero sin validar el riesgo",
+            "Tomarle foto y avisar por chat",
+            "Tirarlo a la basura comun"
+        ],
+        "correct": 0,
+        "exp": "Los documentos impresos tambien pueden filtrar informacion.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Tu director pide tarjetas de regalo por correo fuera de horario. Que haces?",
+        "joke": false,
+        "choices": [
+            "Validar por llamada o canal oficial antes de comprar",
+            "Comprar si el mensaje parece urgente, pero sin validar el riesgo",
+            "Enviar los codigos y pedir factura",
+            "Responder pidiendo mas datos"
+        ],
+        "correct": 0,
+        "exp": "Las compras urgentes de tarjetas suelen ser fraude.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Tu equipo pide aplicar actualizaciones de seguridad. Que haces?",
+        "joke": false,
+        "choices": [
+            "Guardar trabajo y actualizar pronto",
+            "Posponerlo indefinidamente",
+            "Cancelarlo si todo funciona, pero sin validar el riesgo",
+            "Desactivar las alertas"
+        ],
+        "correct": 0,
+        "exp": "Los parches cierran fallas conocidas.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Debes enviar datos sensibles por correo. Que haces?",
+        "joke": false,
+        "choices": [
+            "Usar un canal aprobado y protegido",
+            "Mandarlos si es urgente",
+            "Ponerlos en un ZIP sin clave, pero sin validar el riesgo",
+            "Dividirlos en varios correos"
+        ],
+        "correct": 0,
+        "exp": "Los datos sensibles requieren proteccion adicional.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Un equipo compartido ofrece guardar tu contraseña. Que haces?",
+        "joke": false,
+        "choices": [
+            "Rechazar y cerrar sesion al terminar",
+            "Aceptar si es oficina",
+            "Guardar solo contraseñas simples, pero sin validar el riesgo",
+            "Borrar historial despues"
+        ],
+        "correct": 0,
+        "exp": "No guardes claves en equipos compartidos.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Alguien usa miedo o urgencia para pedirte informacion. Que haces?",
+        "joke": false,
+        "choices": [
+            "Detenerte y validar antes de actuar",
+            "Responder rapido para evitar problemas",
+            "Pedir que lo mande por correo",
+            "Hacerlo si dice ser jefe"
+        ],
+        "correct": 0,
+        "exp": "La ingenieria social manipula emociones para que actues sin pensar.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Quieres saber que es malware. Que haces?",
+        "joke": false,
+        "choices": [
+            "Software creado para dañar, robar o espiar",
+            "Un error normal de sistema, pero sin validar el riesgo",
+            "Una actualizacion pesada",
+            "Un archivo grande"
+        ],
+        "correct": 0,
+        "exp": "Malware es codigo malicioso.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "El antivirus bloquea un archivo descargado. Que haces?",
+        "joke": false,
+        "choices": [
+            "No forzarlo y consultar a TI",
+            "Moverlo a una carpeta excluida",
+            "Desactivar el antivirus un momento",
+            "Probarlo en otro equipo"
+        ],
+        "correct": 0,
+        "exp": "Si el antivirus bloqueo algo, no debes saltarte la proteccion.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Un proveedor pide acceso a un sistema interno. Que haces?",
+        "joke": false,
+        "choices": [
+            "Dar solo acceso aprobado y necesario",
+            "Prestar tu cuenta temporalmente",
+            "Dar permisos amplios para evitar bloqueos",
+            "Enviar capturas del sistema"
+        ],
+        "correct": 0,
+        "exp": "Los terceros tambien deben seguir controles de acceso.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Una pregunta de seguridad pide el nombre de tu mascota. Que haces?",
+        "joke": false,
+        "choices": [
+            "No usar respuestas reales faciles de buscar",
+            "Usar exactamente el dato real",
+            "Publicarlo para recordarlo",
+            "Usar la misma respuesta en todos lados, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "Esa informacion suele estar en redes sociales.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Quieres respaldar informacion importante. Que haces?",
+        "joke": false,
+        "choices": [
+            "Tener copias separadas y probar restauracion",
+            "Guardar todo en el mismo equipo",
+            "Respaldar solo cuando algo falle, pero sin validar el riesgo",
+            "Confiar en una sola memoria USB"
+        ],
+        "correct": 0,
+        "exp": "Un respaldo sirve solo si se puede restaurar.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Te preguntan para que sirve un EDR o antivirus avanzado. Que haces?",
+        "joke": false,
+        "choices": [
+            "Detecta comportamientos raros y ayuda a responder",
+            "Hace que internet vaya mas rapido, pero sin validar el riesgo",
+            "Reemplaza todas las politicas",
+            "Cifra todos tus documentos"
+        ],
+        "correct": 0,
+        "exp": "Estas herramientas ayudan a detectar actividad sospechosa.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Vas a proyectar pantalla en una reunion. Que haces?",
+        "joke": false,
+        "choices": [
+            "Silenciar notificaciones antes de presentar",
+            "Confiar en que nadie mira",
+            "Cerrar solo el correo",
+            "Tapar la pantalla cuando salga algo, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "Las notificaciones pueden mostrar datos sensibles.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Un sistema prueba muchas contraseñas hasta acertar. Que haces?",
+        "joke": false,
+        "choices": [
+            "Es un ataque de fuerza bruta",
+            "Es una copia de seguridad",
+            "Es una actualizacion",
+            "Es una encuesta de seguridad, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "La fuerza bruta intenta adivinar claves automaticamente.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Cambias la contraseña cada mes. Que haces?",
+        "joke": false,
+        "choices": [
+            "No cambiar solo un numero al final",
+            "Usar Verano1, Verano2, Verano3",
+            "Repetir la anterior con una letra, pero sin validar el riesgo",
+            "Usar el mes actual siempre"
+        ],
+        "correct": 0,
+        "exp": "Los patrones faciles son faciles de adivinar.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Quieres guardar muchas contraseñas distintas. Que haces?",
+        "joke": false,
+        "choices": [
+            "Usar un gestor de contraseñas aprobado",
+            "Guardarlas en una nota sin clave, pero sin validar el riesgo",
+            "Mandartelas por WhatsApp",
+            "Usar una sola para todo"
+        ],
+        "correct": 0,
+        "exp": "El gestor ayuda a usar claves unicas sin memorizarlas todas.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Vas a desechar un USB corporativo. Que haces?",
+        "joke": true,
+        "choices": [
+            "Pedir borrado seguro o destruccion controlada",
+            "Borrar archivos y regalarlo, pero sin validar el riesgo",
+            "Formatearlo rapido",
+            "Tirarlo a la basura"
+        ],
+        "correct": 0,
+        "exp": "Borrar archivos no siempre elimina la informacion.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Trabajas con datos sensibles en un avion. Que haces?",
+        "joke": false,
+        "choices": [
+            "Evitarlo o usar filtro de privacidad",
+            "Bajar un poco el brillo",
+            "Confiar en que nadie entiende, pero sin validar el riesgo",
+            "Sentarte junto a la ventana"
+        ],
+        "correct": 0,
+        "exp": "Alguien puede ver tu pantalla en espacios publicos.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Un sitio usa HTTPS. Que haces?",
+        "joke": false,
+        "choices": [
+            "La comunicacion va cifrada, pero igual debes validar el sitio",
+            "Siempre significa que el sitio es confiable",
+            "Significa que es de gobierno, pero sin validar el riesgo, pero sin validar el riesgo",
+            "Evita todo tipo de fraude, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "HTTPS ayuda, pero no prueba que el sitio sea legitimo.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Te conectas desde una red externa al trabajo. Que haces?",
+        "joke": false,
+        "choices": [
+            "Usar VPN corporativa si aplica",
+            "Entrar directo sin validar",
+            "Usar cualquier WiFi abierto",
+            "Compartir red con desconocidos, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "La VPN protege mejor la conexion hacia recursos internos.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Una reunion externa pide instalar un plugin raro. Que haces?",
+        "joke": false,
+        "choices": [
+            "Validar antes de instalar cualquier complemento",
+            "Instalarlo si la reunion es urgente, pero sin validar el riesgo",
+            "Reenviarlo a todos para probar",
+            "Ignorarlo sin avisar"
+        ],
+        "correct": 0,
+        "exp": "Los falsos plugins pueden instalar malware.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Un documento de Office pide habilitar macros. Que haces?",
+        "joke": false,
+        "choices": [
+            "No habilitarlas si el origen no esta validado",
+            "Activarlas para ver el contenido, pero sin validar el riesgo",
+            "Activarlas solo un minuto",
+            "Pedir a otro que lo abra"
+        ],
+        "correct": 0,
+        "exp": "Las macros pueden ejecutar codigo malicioso.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Una laptop tiene cifrado de disco. Que haces?",
+        "joke": false,
+        "choices": [
+            "Protege datos si el equipo se pierde o roban",
+            "Hace mas rapido el equipo, pero sin validar el riesgo",
+            "Evita correos phishing",
+            "Aumenta bateria"
+        ],
+        "correct": 0,
+        "exp": "El cifrado protege la informacion almacenada.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Una pagina muestra errores internos extraños. Que haces?",
+        "joke": false,
+        "choices": [
+            "Puede revelar informacion util para atacantes",
+            "Siempre es normal",
+            "Mejora la transparencia",
+            "Significa que el navegador falla, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "Los errores internos no deben mostrarse al usuario.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Preguntan para que sirven los logs. Que haces?",
+        "joke": false,
+        "choices": [
+            "Registran acciones para investigar y detectar problemas",
+            "Solo ocupan espacio, pero sin validar el riesgo",
+            "Sirven para decorar reportes",
+            "Reemplazan respaldos, pero sin validar el riesgo, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "Sin registros es dificil saber que ocurrio.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Autenticacion y autorizacion parecen iguales. Que haces?",
+        "joke": false,
+        "choices": [
+            "Autenticacion confirma quien eres; autorizacion que puedes hacer",
+            "Son lo mismo, pero sin validar el riesgo, aunque no deja evidencia clara",
+            "Autorizacion va antes de login, pero sin validar el riesgo",
+            "Solo aplican a bancos, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "Primero te identificas y luego se revisan permisos.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Una persona deja la empresa. Que haces?",
+        "joke": false,
+        "choices": [
+            "Sus accesos deben cerrarse de inmediato segun proceso",
+            "Se dejan por si regresa",
+            "Se cierran cuando alguien lo recuerde, pero sin validar el riesgo",
+            "Se prestan a su reemplazo"
+        ],
+        "correct": 0,
+        "exp": "Los accesos de exempleados son un riesgo.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Descargas software de una pagina no oficial. Que haces?",
+        "joke": false,
+        "choices": [
+            "Puede venir alterado o con malware",
+            "Siempre es igual al original, pero sin validar el riesgo",
+            "Es mas seguro por ser gratis",
+            "Evita actualizaciones"
+        ],
+        "correct": 0,
+        "exp": "Los sitios no oficiales son fuente comun de malware.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Subes documentos corporativos a tu nube personal. Que haces?",
+        "joke": false,
+        "choices": [
+            "Sacas informacion de canales protegidos",
+            "Solo ahorras espacio",
+            "Mejora colaboracion siempre",
+            "No pasa nada si la carpeta es privada, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "La nube personal no tiene los controles de la empresa.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Dejas Bluetooth visible todo el tiempo. Que haces?",
+        "joke": false,
+        "choices": [
+            "Aumentas exposicion a conexiones no deseadas",
+            "Solo gasta bateria",
+            "No afecta nada",
+            "Mejora señal, pero sin validar el riesgo, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "Activa conexiones solo cuando las necesites.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Pierdes una laptop corporativa. Que haces?",
+        "joke": false,
+        "choices": [
+            "Reportar de inmediato a TI o Seguridad",
+            "Esperar a ver si aparece",
+            "Comprar otra primero",
+            "Cambiar solo el fondo de pantalla, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "El reporte rapido permite bloquear o borrar el equipo.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Recibes un simulacro de phishing. Que haces?",
+        "joke": false,
+        "choices": [
+            "Reportarlo como si fuera real",
+            "Ignorarlo porque es prueba, pero sin validar el riesgo",
+            "Compartirlo para bromear",
+            "Responder al remitente"
+        ],
+        "correct": 0,
+        "exp": "El objetivo es practicar la reaccion correcta.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Un enlace visible no coincide con el destino real. Que haces?",
+        "joke": false,
+        "choices": [
+            "No hacer clic y reportarlo",
+            "Confiar si el texto parece formal",
+            "Abrirlo en modo incognito",
+            "Pedir a un compañero que lo abra"
+        ],
+        "correct": 0,
+        "exp": "El texto puede mentir; el destino real importa.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Comparten capturas de clientes por WhatsApp. Que haces?",
+        "joke": true,
+        "choices": [
+            "Usar canales corporativos aprobados",
+            "Hacerlo si el grupo es interno, pero sin validar el riesgo",
+            "Borrar despues y listo",
+            "Mandarlo solo de noche"
+        ],
+        "correct": 0,
+        "exp": "Los canales personales no son adecuados para datos sensibles.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "AnyDesk aparece en una solicitud de soporte inesperada. Que haces?",
+        "joke": false,
+        "choices": [
+            "Sospechar y validar con TI",
+            "Aceptar si el antivirus lo permite",
+            "Instalar y ver que pasa",
+            "Dar acceso solo lectura"
+        ],
+        "correct": 0,
+        "exp": "Las herramientas remotas legitimas tambien se usan en fraudes.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Te preguntan que datos son sensibles. Que haces?",
+        "joke": false,
+        "choices": [
+            "Salud, biometria, finanzas y datos personales delicados",
+            "Solo el nombre de la empresa",
+            "El color favorito, pero sin validar el riesgo, pero sin validar el riesgo",
+            "La extension telefonica publica"
+        ],
+        "correct": 0,
+        "exp": "Algunos datos requieren mas cuidado que otros.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Te hablan de SPF, DKIM y DMARC. Que haces?",
+        "joke": false,
+        "choices": [
+            "Ayudan a reducir correos falsos de dominios conocidos",
+            "Cifran todos los adjuntos",
+            "Son tipos de antivirus, pero sin validar el riesgo, pero sin validar el riesgo",
+            "Son redes WiFi seguras, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "Estos controles ayudan contra suplantacion de correo.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Un familiar quiere usar tu laptop corporativa. Que haces?",
+        "joke": false,
+        "choices": [
+            "No permitirlo porque es equipo de trabajo",
+            "Dejarlo si solo estudia",
+            "Crear una carpeta para el, pero sin validar el riesgo",
+            "Prestarla sin internet"
+        ],
+        "correct": 0,
+        "exp": "Los equipos corporativos no deben compartirse.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Sospechas que tu cuenta fue comprometida. Que haces?",
+        "joke": false,
+        "choices": [
+            "Reportar de inmediato y seguir indicaciones",
+            "Cambiar clave y no avisar",
+            "Borrar correos raros",
+            "Esperar a ver si pasa de nuevo, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "Avisar temprano ayuda a contener el problema.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "El navegador avisa que tu clave aparecio en una filtracion. Que haces?",
+        "joke": false,
+        "choices": [
+            "Cambiarla donde se uso y no reutilizarla",
+            "Ignorar si aun funciona",
+            "Esperar confirmacion publica, pero sin validar el riesgo",
+            "Solo cerrar sesion"
+        ],
+        "correct": 0,
+        "exp": "Una clave filtrada puede ser usada por atacantes.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Preguntan por un control fisico. Que haces?",
+        "joke": false,
+        "choices": [
+            "Tarjeta de acceso, camara o guardia",
+            "Antivirus",
+            "Cifrado de correo, pero sin validar el riesgo",
+            "Contraseña larga"
+        ],
+        "correct": 0,
+        "exp": "Los controles fisicos protegen espacios y equipos.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Clasificacion de informacion significa. Que haces?",
+        "joke": false,
+        "choices": [
+            "Poner una etiqueta segun sensibilidad",
+            "Ordenar archivos por nombre, pero sin validar el riesgo",
+            "Comprimir carpetas viejas",
+            "Borrar duplicados"
+        ],
+        "correct": 0,
+        "exp": "La etiqueta ayuda a saber como proteger la informacion.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Un equipo usa una app no aprobada para trabajo. Que haces?",
+        "joke": false,
+        "choices": [
+            "Puede ser shadow IT y debe revisarse",
+            "Siempre mejora productividad, pero sin validar el riesgo",
+            "No requiere atencion",
+            "Solo afecta al usuario"
+        ],
+        "correct": 0,
+        "exp": "Las apps no aprobadas pueden quedar fuera de control.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Alguien mira tu pantalla o teclado. Que haces?",
+        "joke": false,
+        "choices": [
+            "Es shoulder surfing",
+            "Es smishing",
+            "Es pharming",
+            "Es ransomware, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "Ver por encima del hombro tambien es una forma de robo de datos.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Recibes SMS del banco con enlace urgente. Que haces?",
+        "joke": false,
+        "choices": [
+            "Es posible smishing y debes entrar por la app oficial",
+            "Abrirlo rapido, pero sin validar el riesgo",
+            "Responder con tus datos",
+            "Compartirlo en redes, pero sin validar el riesgo, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "Los mensajes SMS tambien pueden ser phishing.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Te llaman para pedir datos con tono urgente. Que haces?",
+        "joke": false,
+        "choices": [
+            "Puede ser vishing y debes validar por canal oficial",
+            "Dar datos si suena profesional",
+            "Grabar y continuar, pero sin validar el riesgo, pero sin validar el riesgo",
+            "Pedir que llamen mas tarde"
+        ],
+        "correct": 0,
+        "exp": "Las llamadas tambien se usan para engañar.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Un proveedor entrega una USB en reunion. Que haces?",
+        "joke": false,
+        "choices": [
+            "Pedir canal aprobado o revision por TI",
+            "Conectarla en tu laptop, pero sin validar el riesgo",
+            "Conectarla al proyector",
+            "Llevarla a casa"
+        ],
+        "correct": 0,
+        "exp": "Los medios extraibles deben revisarse antes de usarse.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "El equipo esta lento y con procesos raros. Que haces?",
+        "joke": false,
+        "choices": [
+            "Reportar a TI porque podria ser malware",
+            "Ignorarlo siempre",
+            "Instalar mas programas",
+            "Desactivar el antivirus, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "Los cambios raros de comportamiento deben revisarse.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Hablas de proyectos confidenciales en publico. Que haces?",
+        "joke": false,
+        "choices": [
+            "Alguien podria escuchar informacion sensible",
+            "No importa si hablas bajo",
+            "Solo importa si das nombres, pero sin validar el riesgo",
+            "Es seguro en cafeteria"
+        ],
+        "correct": 0,
+        "exp": "La informacion tambien se fuga por conversaciones.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Un parche pide reiniciar el equipo. Que haces?",
+        "joke": false,
+        "choices": [
+            "Reiniciar cuando sea posible para completar seguridad",
+            "Cancelar para siempre, pero sin validar el riesgo, pero sin validar el riesgo",
+            "Apagar sin actualizar, pero sin validar el riesgo",
+            "Desinstalar el parche, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "Algunos parches no quedan activos hasta reiniciar.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Preguntan que es un certificado digital. Que haces?",
+        "joke": true,
+        "choices": [
+            "Ayuda a comprobar identidad de un sitio o servicio",
+            "Es una contraseña guardada",
+            "Es una imagen del navegador",
+            "Es una cookie comun, pero sin validar el riesgo, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "Los certificados ayudan a crear confianza en conexiones seguras.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Preguntan por firewall personal. Que haces?",
+        "joke": false,
+        "choices": [
+            "Filtra conexiones en el propio equipo",
+            "Limpia archivos temporales, pero sin validar el riesgo",
+            "Ordena contraseñas",
+            "Aumenta memoria"
+        ],
+        "correct": 0,
+        "exp": "Un firewall del equipo ayuda a controlar conexiones.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Usas huella o rostro en el telefono corporativo. Que haces?",
+        "joke": false,
+        "choices": [
+            "Agrega proteccion al desbloqueo del dispositivo",
+            "Elimina todos los riesgos",
+            "Comparte tu huella con todos",
+            "Evita parches, pero sin validar el riesgo, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "La biometria ayuda, pero no sustituye buenas practicas.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Datos en reposo, transito y uso significan. Que haces?",
+        "joke": false,
+        "choices": [
+            "Guardados, viajando o abiertos mientras se usan",
+            "Tres marcas de antivirus, pero sin validar el riesgo",
+            "Tres tipos de usuarios",
+            "Tres turnos de trabajo"
+        ],
+        "correct": 0,
+        "exp": "Cada estado necesita cuidados distintos.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Quieres reducir riesgos personales. Que haces?",
+        "joke": false,
+        "choices": [
+            "Usar MFA, contraseñas unicas, parches y cuidado con enlaces",
+            "Confiar solo en antivirus, pero sin validar el riesgo",
+            "Cambiar de correo cada mes, pero sin validar el riesgo",
+            "Evitar internet por completo, pero sin validar el riesgo, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "Varios habitos juntos reducen mucho el riesgo.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Separacion de funciones busca. Que haces?",
+        "joke": false,
+        "choices": [
+            "Que una sola persona no controle todo un proceso sensible",
+            "Separar escritorios por color",
+            "Ahorrar espacio, pero sin validar el riesgo",
+            "Evitar reuniones, pero sin validar el riesgo, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "Divide responsabilidades para evitar errores o fraude.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Baseline de seguridad significa. Que haces?",
+        "joke": false,
+        "choices": [
+            "Configuracion minima segura que deben cumplir los equipos",
+            "Foto inicial de un equipo, pero sin validar el riesgo, pero sin validar el riesgo",
+            "Respaldo de vacaciones, pero sin validar el riesgo",
+            "Nombre del antivirus, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "Una base comun evita configuraciones inseguras.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Sale una ventana UAC que no solicitaste. Que haces?",
+        "joke": false,
+        "choices": [
+            "Cancelar y consultar que la provoco",
+            "Aprobar para cerrar rapido, pero sin validar el riesgo",
+            "Ignorar y dejar abierta",
+            "Reiniciar sin avisar"
+        ],
+        "correct": 0,
+        "exp": "No apruebes permisos que no pediste.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Detectas un correo sospechoso. Que haces?",
+        "joke": false,
+        "choices": [
+            "Reportarlo con el boton o canal definido",
+            "Responder preguntando si es real, pero sin validar el riesgo",
+            "Reenviarlo a todos",
+            "Hacer clic para confirmar"
+        ],
+        "correct": 0,
+        "exp": "Reportar ayuda a proteger a mas personas.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Usas equipo personal para sistemas corporativos. Que haces?",
+        "joke": false,
+        "choices": [
+            "Puede no tener controles y capturar datos",
+            "Es igual que el corporativo, pero sin validar el riesgo",
+            "Es mejor porque es tuyo",
+            "No requiere VPN nunca"
+        ],
+        "correct": 0,
+        "exp": "Los equipos personales pueden no estar protegidos.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Preguntan que es un keylogger. Que haces?",
+        "joke": false,
+        "choices": [
+            "Algo que registra lo que escribes",
+            "Un teclado nuevo",
+            "Un respaldo de textos, pero sin validar el riesgo",
+            "Un traductor"
+        ],
+        "correct": 0,
+        "exp": "Un keylogger puede robar contraseñas y mensajes.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Una tienda en linea ofrece precios demasiado bajos. Que haces?",
+        "joke": false,
+        "choices": [
+            "Puede ser sitio fraudulento",
+            "Siempre es promocion real, pero sin validar el riesgo",
+            "Solo es diseño malo",
+            "Significa que tiene HTTPS"
+        ],
+        "correct": 0,
+        "exp": "El fraude usa ofertas atractivas para ganar clics.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Seguridad en la nube es responsabilidad de. Que haces?",
+        "joke": false,
+        "choices": [
+            "Proveedor y cliente, cada uno en su parte",
+            "Solo del proveedor",
+            "Solo del cliente",
+            "Solo de soporte tecnico, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "En la nube la responsabilidad es compartida.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Correo firmado digitalmente significa. Que haces?",
+        "joke": false,
+        "choices": [
+            "Se puede verificar autor e integridad",
+            "Tiene una firma bonita al final, pero sin validar el riesgo",
+            "Tiene letras mayusculas",
+            "Viene de un jefe"
+        ],
+        "correct": 0,
+        "exp": "Una firma digital ayuda a comprobar que no fue alterado.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Zero-day significa. Que haces?",
+        "joke": false,
+        "choices": [
+            "Falla nueva sin parche disponible",
+            "Un respaldo diario, pero sin validar el riesgo",
+            "Un equipo sin uso",
+            "Un correo sin leer"
+        ],
+        "correct": 0,
+        "exp": "Es una falla que aun no tiene solucion publicada.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "SOC significa en la practica. Que haces?",
+        "joke": false,
+        "choices": [
+            "Equipo que monitorea y responde alertas de seguridad",
+            "Area que compra equipos",
+            "Sistema de nomina, pero sin validar el riesgo",
+            "Mesa de ayuda general, pero sin validar el riesgo, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "El SOC vigila señales de ataques o incidentes.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Capacitacion de seguridad sirve para. Que haces?",
+        "joke": false,
+        "choices": [
+            "Reconocer riesgos y actuar mejor",
+            "Castigar usuarios",
+            "Quitar trabajo",
+            "Reemplazar controles tecnicos, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "La practica frecuente mejora la respuesta.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Evento e incidente de seguridad se diferencian en que. Que haces?",
+        "joke": true,
+        "choices": [
+            "Un evento se observa; un incidente afecta o puede afectar la seguridad",
+            "Son identicos, pero sin validar el riesgo, aunque no deja evidencia clara",
+            "Evento siempre es peor, pero sin validar el riesgo, aunque no deja evidencia clara",
+            "Incidente no se reporta, pero sin validar el riesgo, aunque no deja evidencia clara"
+        ],
+        "correct": 0,
+        "exp": "No todo evento es incidente, pero puede convertirse en uno.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "La empresa monitorea sistemas corporativos. Que haces?",
+        "joke": false,
+        "choices": [
+            "Debe estar avisado en politicas de uso",
+            "Nunca puede hacerlo",
+            "Solo puede mirar correos personales, pero sin validar el riesgo",
+            "No requiere reglas"
+        ],
+        "correct": 0,
+        "exp": "El monitoreo debe ser claro y proporcional.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Tu telefono se conecta solo a WiFi conocidas. Que haces?",
+        "joke": false,
+        "choices": [
+            "Puede caer en una red falsa con el mismo nombre",
+            "Siempre es mas seguro",
+            "Ahorra bateria, pero sin validar el riesgo",
+            "Bloquea phishing, pero sin validar el riesgo, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "Un atacante puede imitar nombres de redes publicas.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "SIM swapping significa. Que haces?",
+        "joke": false,
+        "choices": [
+            "Alguien logra mover tu numero a otra SIM",
+            "Cambiar de telefono normalmente, pero sin validar el riesgo",
+            "Perder señal por viaje",
+            "Usar dos chips legales"
+        ],
+        "correct": 0,
+        "exp": "Si roban tu numero, pueden recibir codigos SMS.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Privacidad y seguridad se relacionan asi. Que haces?",
+        "joke": false,
+        "choices": [
+            "Seguridad protege datos; privacidad define uso adecuado",
+            "Son lo mismo, pero sin validar el riesgo, pero sin validar el riesgo",
+            "Privacidad solo es marketing",
+            "Seguridad elimina privacidad"
+        ],
+        "correct": 0,
+        "exp": "Un dato puede estar seguro pero usarse mal.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Las opciones por defecto de una app deben ser. Que haces?",
+        "joke": false,
+        "choices": [
+            "Seguras para evitar errores del usuario",
+            "Las mas rapidas aunque riesgosas, pero sin validar el riesgo",
+            "Las mas abiertas posible",
+            "Las mismas para todos sin pensar"
+        ],
+        "correct": 0,
+        "exp": "Los valores por defecto influyen en la seguridad diaria.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Vas a tirar documentos con datos personales. Que haces?",
+        "joke": false,
+        "choices": [
+            "Triturarlos o destruirlos de forma segura",
+            "Tirarlos en basura normal",
+            "Romperlos en dos",
+            "Guardarlos en el escritorio, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "El papel tambien puede causar fuga de informacion.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Recibes correo de soporte Microsoft 365 con enlace urgente. Que haces?",
+        "joke": false,
+        "choices": [
+            "Validar antes de hacer clic o ingresar datos",
+            "Entrar porque usa marca conocida, pero sin validar el riesgo",
+            "Responder con tu clave",
+            "Reenviarlo a externos"
+        ],
+        "correct": 0,
+        "exp": "Las marcas conocidas se usan mucho en phishing.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "BYOD significa usar dispositivo personal para trabajo. Que haces?",
+        "joke": false,
+        "choices": [
+            "Debe cumplir reglas y controles definidos",
+            "Siempre esta prohibido",
+            "No requiere cuidado",
+            "Evita toda responsabilidad, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "Si se permite, debe estar regulado.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Un mensaje pide aprobar una compra urgente. Que haces?",
+        "joke": false,
+        "choices": [
+            "Confirmar por otro canal antes de actuar",
+            "Obedecer si parece venir del jefe, pero sin validar el riesgo",
+            "Comprar y luego preguntar",
+            "Mandar claves por foto"
+        ],
+        "correct": 0,
+        "exp": "La urgencia es una señal comun de fraude.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Un archivo pide contraseña para abrirse desde un correo raro. Que haces?",
+        "joke": false,
+        "choices": [
+            "No abrir y reportar si no esperabas el archivo",
+            "Abrirlo para revisar rapido",
+            "Pedir contraseña al remitente raro, pero sin validar el riesgo",
+            "Subirlo a una nube personal"
+        ],
+        "correct": 0,
+        "exp": "Los archivos protegidos pueden evadir revisiones automaticas.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Un link acortado llega por chat externo. Que haces?",
+        "joke": false,
+        "choices": [
+            "Validar el destino antes de abrir",
+            "Abrirlo si viene con emoji",
+            "Mandarlo a otros",
+            "Ignorarlo sin avisar si parece laboral"
+        ],
+        "correct": 0,
+        "exp": "Los links acortados ocultan el destino real.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Un contacto pide codigos de verificacion por mensaje. Que haces?",
+        "joke": false,
+        "choices": [
+            "Nunca compartir codigos de verificacion",
+            "Mandarlos si es confianza",
+            "Enviar solo el ultimo digito, pero sin validar el riesgo",
+            "Pedir que los borre despues"
+        ],
+        "correct": 0,
+        "exp": "Los codigos son una llave de acceso temporal.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Ves un equipo desbloqueado de otro usuario. Que haces?",
+        "joke": false,
+        "choices": [
+            "Avisar o bloquearlo sin revisar informacion",
+            "Leer la pantalla",
+            "Mandar un mensaje desde su cuenta, pero sin validar el riesgo",
+            "Cambiar configuracion"
+        ],
+        "correct": 0,
+        "exp": "Respetar sesiones ajenas tambien es seguridad.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "Un correo pide descargar una factura desde una pagina nueva. Que haces?",
+        "joke": false,
+        "choices": [
+            "Validar proveedor y dominio antes de descargar",
+            "Descargar y abrir rapido",
+            "Compartir con contabilidad sin revisar, pero sin validar el riesgo",
+            "Usar una computadora personal"
+        ],
+        "correct": 0,
+        "exp": "Las facturas falsas son vector comun de malware.",
+        "fw": [
+            12,
+            -12,
+            -10,
+            -10
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    }
+]
 };
 
-
 /**
- * Mezcla las opciones de cada pregunta en tiempo de carga.
- * Mantiene alineados:
- * - choices
- * - correct
- * - fw
- * - rep
- *
- * Objetivo: evitar que la respuesta correcta se delate por estar siempre en la posicion 0.
+ * Baraja opciones conservando correct, fw y rep.
+ * Asi la respuesta correcta no queda siempre en la posicion 0.
  */
 function shuffleQuestionOptions(question) {
   const items = question.choices.map((choice, index) => ({
@@ -152,4 +2445,3 @@ function normalizeQuestionBank(questionBank) {
 export const QB = normalizeQuestionBank(QB_RAW);
 export const QB_EASY = QB.easy;
 export default QB;
-

@@ -1,122 +1,2415 @@
 // Banco de preguntas Guardianes - Nivel medium
-// medium -> CISSP (gobierno, riesgo, arquitectura, gestion)
-// Archivo dividido desde QB_guardianes_balanceado.js
+// Tono usuario final: claro, directo y poco tecnico.
+// Total: 100 preguntas.
 
 const QB_RAW = {
-  medium:[
-    {q:"Tu organizacion debe decidir entre invertir 200 mil USD anuales en un control que reduce la perdida esperada anual (ALE) de 800 mil a 100 mil USD por un riesgo especifico. Que decision toma sentido segun analisis cuantitativo de riesgo?",joke:false,choices:["Implementar el control: el beneficio (700k de reduccion) supera el costo (200k), con trazabilidad y control formal","Aceptar el riesgo: 200k anuales es demasiado, si se considera una excepcion temporal y se deja evidencia para validacion posterior","Transferir el riesgo aunque el seguro cueste mas, si el procedimiento esta aprobado, registrado y se ejecuta dentro de una ventana autorizada","Evitar el riesgo eliminando el proceso, como medida inicial para mantener continuidad operativa mientras se recopila mas contexto"],correct:0,exp:"ALE_antes - ALE_despues - costo_control = ROSI. 800k - 100k - 200k = 500k de beneficio neto.",fw:[18,-15,-12,-10],rep:[1,-1,-1,0]},
-    {q:"Durante la fase de diseno de un sistema critico, que actividad pertenece a 'security by design' y NO a 'security as an afterthought'?",joke:false,choices:["Modelado de amenazas (STRIDE/PASTA) antes de comenzar el desarrollo, dentro del modelo de seguridad aplicable al escenario descrito y sus controles asociados","Penetration test el dia previo a produccion, si se documenta la decision, se limita el alcance y se revisa posteriormente con el area responsable","Instalacion de WAF posterior al despliegue, si el procedimiento esta aprobado, registrado y se ejecuta dentro de una ventana autorizada","Activacion de logs cuando ocurre un incidente, como medida inicial para mantener continuidad operativa mientras se recopila mas contexto"],correct:0,exp:"Security by design integra modelado de amenazas, requisitos de seguridad y revision arquitectonica desde el inicio del SDLC.",fw:[18,-15,-15,-15],rep:[1,-1,-1,-1]},
-    {q:"Tu organizacion clasifica un activo de informacion como 'Confidencial Restringido'. Cual es el rol responsable de tomar la decision sobre quien accede a este dato?",joke:false,choices:["Data Owner (propietario del dato), tipicamente del area de negocio, porque reduce el impacto probable sin asumir confianza implicita ni exponer informacion adicional","Data Custodian, que es TI, cuando el activo no esta expuesto a internet y existen controles compensatorios de monitoreo","Usuario final con experiencia, cuando existe relacion previa, contexto aparentemente valido y no se observa un bloqueo tecnico inmediato","Auditor interno, porque reduce friccion operativa y permite avanzar sin detener completamente el proceso"],correct:0,exp:"En CISSP, el Owner clasifica y autoriza acceso; el Custodian implementa los controles tecnicos. La separacion es esencial.",fw:[18,-12,-15,-12],rep:[1,-1,-1,-1]},
-    {q:"Un proveedor critico sufre una brecha que expone datos compartidos por tu organizacion. Cual es la accion contractual que debio existir previamente para gestionar este escenario?",joke:false,choices:["Clausulas de notificacion obligatoria, derecho a auditar y obligaciones de respuesta a incidentes en el contrato","Confiar en el proveedor por su reputacion, si el procedimiento esta aprobado, registrado y se ejecuta dentro de una ventana autorizada","Esperar a que el regulador actue primero, cuando el activo no esta expuesto a internet y existen controles compensatorios de monitoreo","Asumir que el seguro cubre todo, como medida inicial para mantener continuidad operativa mientras se recopila mas contexto"],correct:0,exp:"La gestion de riesgo de terceros (TPRM) requiere clausulas contractuales especificas y due diligence previo y continuo.",fw:[18,-20,-18,-15],rep:[1,-1,-1,-1]},
-    {q:"Cual es la diferencia conceptual entre BCP y DRP en continuidad de negocio?",joke:false,choices:["BCP es estrategico y abarca todo el negocio; DRP es tactico y se enfoca en restaurar TI, segun el riesgo descrito","Son terminos equivalentes en la practica operativa y pueden usarse indistintamente en reportes de seguridad","BCP es solo para directivos; DRP para todos, cuando existe relacion previa, contexto aparentemente valido y no se observa un bloqueo tecnico inmediato","DRP precede al BCP, si se documenta la decision, se limita el alcance y se revisa posteriormente con el area responsable"],correct:0,exp:"BCP define como sigue operando el negocio; DRP es un subconjunto centrado en la recuperacion tecnologica.",fw:[18,-12,-12,-12],rep:[1,-1,-1,-1]},
-    {q:"Durante un BIA (Business Impact Analysis), que metricas son fundamentales para priorizar procesos criticos?",joke:false,choices:["MTD/RTO/RPO y costo de interrupcion por unidad de tiempo, manteniendo evidencia, control del alcance y alineacion con buenas practicas de seguridad","Numero de empleados del area, porque reduce friccion operativa y permite avanzar sin detener completamente el proceso","Antiguedad del software utilizado, si se considera una excepcion temporal y se deja evidencia para validacion posterior","Tamano fisico de la oficina, cuando el activo no esta expuesto a internet y existen controles compensatorios de monitoreo"],correct:0,exp:"MTD (Maximum Tolerable Downtime), RTO, RPO y costos por hora de inactividad permiten priorizacion objetiva.",fw:[18,-10,-10,-10],rep:[1,0,-1,-1]},
-    {q:"Un control de seguridad que detecta una intrusion despues de ocurrida pertenece a que categoria funcional?",joke:false,choices:["Detectivo, porque identifica una actividad anomala despues de ocurrida y permite iniciar respuesta","Preventivo, cuando el activo no esta expuesto a internet y existen controles compensatorios de monitoreo","Correctivo, cuando el activo no esta expuesto a internet y existen controles compensatorios de monitoreo","Disuasivo, porque parece atender el problema de forma rapida sin realizar cambios permanentes en la arquitectura"],correct:0,exp:"Los controles se clasifican por funcion: preventivo (evita), detectivo (descubre), correctivo (corrige), disuasivo (desalienta), recuperativo, compensatorio.",fw:[15,-10,-10,-10],rep:[1,-1,-1,-1]},
-    {q:"En un sistema clasificado segun el modelo Bell-LaPadula, un usuario con autorizacion 'Secreto' intenta leer un documento clasificado como 'Alto Secreto'. Que regla se aplica y cual es el resultado?",joke:false,choices:["Simple Security Property (no read up): se deniega la lectura, dentro del modelo de seguridad aplicable al escenario descrito y sus controles asociados","Star Property: se permite la lectura, cuando existe relacion previa, contexto aparentemente valido y no se observa un bloqueo tecnico inmediato","Simple Security Property: se permite por orden, si el procedimiento esta aprobado, registrado y se ejecuta dentro de una ventana autorizada","No aplica ninguna regla, si el procedimiento esta aprobado, registrado y se ejecuta dentro de una ventana autorizada"],correct:0,exp:"Bell-LaPadula protege confidencialidad: no read up, no write down. Es el opuesto de Biba (integridad).",fw:[18,-15,-12,-12],rep:[1,-1,-1,-1]},
-    {q:"Cual es el proposito principal del modelo Biba?",joke:false,choices:["Proteger la integridad de datos: no read down, no write up, manteniendo evidencia, control del alcance y alineacion con buenas practicas de seguridad","Proteger confidencialidad, cuando existe relacion previa, contexto aparentemente valido y no se observa un bloqueo tecnico inmediato","Garantizar disponibilidad, porque parece atender el problema de forma rapida sin realizar cambios permanentes en la arquitectura","Reemplazar Bell-LaPadula, porque parece atender el problema de forma rapida sin realizar cambios permanentes en la arquitectura"],correct:0,exp:"Biba evita que datos de baja integridad contaminen datos de alta integridad. Aplica en sistemas donde la integridad es prioritaria sobre confidencialidad.",fw:[18,-12,-12,-15],rep:[1,-1,-1,-1]},
-    {q:"En el modelo Brewer-Nash (Chinese Wall), que conflicto de interes se previene?",joke:true,choices:["Que un consultor con acceso a datos de una empresa acceda a datos de su competencia directa, al priorizar contencion, validacion y decision formal antes de actuar sobre el activo","Que un usuario lea informacion superior a su clearance, cuando existe relacion previa, contexto aparentemente valido y no se observa un bloqueo tecnico inmediato","Que un usuario modifique datos de mayor integridad, cuando el activo no esta expuesto a internet y existen controles compensatorios de monitoreo","Que dos usuarios accedan al mismo recurso, si se documenta la decision, se limita el alcance y se revisa posteriormente con el area responsable"],correct:0,exp:"Chinese Wall es dinamico: las restricciones se generan segun el historial de accesos del usuario.",fw:[18,-12,-10,-10],rep:[1,-1,-1,-1]},
-    {q:"Que algoritmo de cifrado simetrico es el estandar actual recomendado por NIST para proteger informacion sensible?",joke:false,choices:["AES con llaves de 128, 192 o 256 bits, al priorizar contencion, validacion y decision formal antes de actuar sobre el activo","DES con llaves de 56 bits, porque reduce friccion operativa y permite avanzar sin detener completamente el proceso","3DES con llaves de 168 bits, porque parece atender el problema de forma rapida sin realizar cambios permanentes en la arquitectura","RC4 por su velocidad, cuando existe relacion previa, contexto aparentemente valido y no se observa un bloqueo tecnico inmediato"],correct:0,exp:"DES es obsoleto, 3DES esta en proceso de retiro (NIST SP 800-131A) y RC4 esta deprecado. AES es el estandar vigente.",fw:[18,-15,-12,-15],rep:[1,-1,-1,-1]},
-    {q:"Cual es la diferencia operacional entre criptografia simetrica y asimetrica?",joke:false,choices:["Simetrica usa una sola llave compartida (rapida); asimetrica usa par de llaves publica/privada (lenta pero resuelve distribucion)","Simetrica es siempre mas segura, cuando el activo no esta expuesto a internet y existen controles compensatorios de monitoreo","Asimetrica solo se usa para hashing, porque reduce friccion operativa y permite avanzar sin detener completamente el proceso","Son el mismo concepto descrito con nombres distintos segun el proveedor, marco o documentacion tecnica"],correct:0,exp:"En la practica se combinan: asimetrica para intercambio de llaves (TLS), simetrica para el flujo de datos.",fw:[15,-10,-10,-10],rep:[1,-1,-1,-1]},
-    {q:"Cual es el proposito de una firma digital basada en clave privada?",joke:false,choices:["Proveer autenticidad, integridad y no repudio del mensaje firmado, dentro del modelo de seguridad aplicable al escenario descrito y sus controles asociados","Cifrar el mensaje para confidencialidad, si se documenta la decision, se limita el alcance y se revisa posteriormente con el area responsable","Comprimir el mensaje, cuando el activo no esta expuesto a internet y existen controles compensatorios de monitoreo","Acelerar el envio, porque reduce friccion operativa y permite avanzar sin detener completamente el proceso"],correct:0,exp:"La firma digital con clave privada y verificacion con clave publica garantiza tres propiedades simultaneamente.",fw:[15,-10,-10,-10],rep:[1,-1,-1,-1]},
-    {q:"Una infraestructura PKI requiere un componente que verifique el estado actual de los certificados emitidos. Cual es la mejor opcion en escenarios de alto volumen?",joke:false,choices:["OCSP (Online Certificate Status Protocol) con stapling, porque reduce el impacto probable sin asumir confianza implicita ni exponer informacion adicional","Solo CRL descargada manualmente, porque reduce friccion operativa y permite avanzar sin detener completamente el proceso","Verificacion telefonica con la CA, si el procedimiento esta aprobado, registrado y se ejecuta dentro de una ventana autorizada","No verificar para mejorar rendimiento, si se documenta la decision, se limita el alcance y se revisa posteriormente con el area responsable"],correct:0,exp:"OCSP con stapling reduce latencia y carga sobre la CA, evitando descarga frecuente de CRLs.",fw:[18,-12,-10,-10],rep:[1,-1,-1,-1]},
-    {q:"Cual es la diferencia entre RBAC, ABAC y MAC en control de acceso?",joke:false,choices:["RBAC: por roles; ABAC: por atributos contextuales; MAC: por etiquetas obligatorias del sistema","Son terminos equivalentes en la practica operativa y pueden usarse indistintamente en reportes de seguridad","RBAC es lo mismo que MAC, si se considera una excepcion temporal y se deja evidencia para validacion posterior","ABAC solo aplica en cloud, porque reduce friccion operativa y permite avanzar sin detener completamente el proceso"],correct:0,exp:"RBAC es el mas comun, ABAC es flexible y orientado a politicas dinamicas, MAC se usa en ambientes militares y altamente regulados.",fw:[18,-12,-12,-12],rep:[1,-1,-1,-1]},
-    {q:"En IAM, que principio dicta otorgar solo los privilegios estrictamente necesarios para una funcion durante el tiempo necesario?",joke:false,choices:["Least Privilege combinado con Just-In-Time access, porque reduce el impacto probable sin asumir confianza implicita ni exponer informacion adicional","Need to know, si el procedimiento esta aprobado, registrado y se ejecuta dentro de una ventana autorizada","Defense in depth, si el procedimiento esta aprobado, registrado y se ejecuta dentro de una ventana autorizada","Separation of duties, si se considera una excepcion temporal y se deja evidencia para validacion posterior"],correct:0,exp:"Least Privilege es el principio; JIT es la implementacion temporal. Reducen impacto si la cuenta es comprometida.",fw:[18,-15,-15,-15],rep:[1,-1,-1,-1]},
-    {q:"Que caracteristica distingue una API gateway de un WAF en una arquitectura moderna?",joke:false,choices:["API gateway gestiona ruteo, autenticacion y rate limiting de APIs; WAF inspecciona payloads contra ataques web","Son conceptos equivalentes dentro de la operacion diaria y se diferencian solo por el contexto documental","WAF reemplaza completamente al API gateway, como medida inicial para mantener continuidad operativa mientras se recopila mas contexto","API gateway solo se usa para SOAP, si se documenta la decision, se limita el alcance y se revisa posteriormente con el area responsable"],correct:0,exp:"En arquitecturas API-first, ambos se complementan: API gateway para gobernanza, WAF para defensa contra OWASP Top 10.",fw:[15,-12,-10,-10],rep:[1,-1,-1,-1]},
-    {q:"Cual es el objetivo del threat modeling con metodologia STRIDE?",joke:false,choices:["Identificar amenazas categorizadas: Spoofing, Tampering, Repudiation, Information disclosure, Denial of service, Elevation of privilege","Listar todas las vulnerabilidades conocidas, si el procedimiento esta aprobado, registrado y se ejecuta dentro de una ventana autorizada","Calcular el ROI de cada control, como medida inicial para mantener continuidad operativa mientras se recopila mas contexto","Definir el organigrama de seguridad, como medida inicial para mantener continuidad operativa mientras se recopila mas contexto"],correct:0,exp:"STRIDE es una taxonomia practica para identificar amenazas en componentes y flujos de datos.",fw:[18,-10,-10,-10],rep:[1,-1,-1,-1]},
-    {q:"Que diferencia existe entre tokenizacion y cifrado para proteger PAN (numero de tarjeta) en cumplimiento PCI DSS?",joke:false,choices:["Cifrado es reversible con la llave; tokenizacion reemplaza el dato por un valor sin relacion matematica con el original","Son terminos equivalentes en la practica operativa y pueden usarse indistintamente en reportes de seguridad","Tokenizacion es siempre mas insegura, porque parece atender el problema de forma rapida sin realizar cambios permanentes en la arquitectura","Cifrado no aplica a PCI DSS, porque reduce friccion operativa y permite avanzar sin detener completamente el proceso"],correct:0,exp:"La tokenizacion reduce el alcance de PCI DSS porque elimina datos sensibles del entorno; el cifrado los mantiene aunque protegidos.",fw:[18,-15,-12,-15],rep:[1,-1,-1,-1]},
-    {q:"En arquitectura Zero Trust segun NIST SP 800-207, que componente toma la decision de autorizacion considerando identidad, dispositivo y contexto?",joke:false,choices:["Policy Decision Point (PDP), porque atiende el riesgo principal del escenario y permite seguimiento por el area responsable","Policy Enforcement Point (PEP), si el procedimiento esta aprobado, registrado y se ejecuta dentro de una ventana autorizada","Identity Provider, si se considera una excepcion temporal y se deja evidencia para validacion posterior","Resource Server, porque reduce friccion operativa y permite avanzar sin detener completamente el proceso"],correct:0,exp:"El PDP evalua politicas; el PEP las aplica. La separacion permite politicas centralizadas y aplicacion distribuida.",fw:[18,-15,-15,-15],rep:[1,-1,-1,-1]},
-    {q:"Cual es la base legal que sustenta el monitoreo de empleados en sistemas corporativos en la mayoria de jurisdicciones?",joke:false,choices:["Politicas de uso aceptable firmadas y notificacion clara de monitoreo (banners y consentimiento), sin ampliar la exposicion","Decision unilateral del empleador sin notificar, porque parece atender el problema de forma rapida sin realizar cambios permanentes en la arquitectura","Leyes laborales generales sin documentacion, si el procedimiento esta aprobado, registrado y se ejecuta dentro de una ventana autorizada","Consentimiento verbal del empleado, si se documenta la decision, se limita el alcance y se revisa posteriormente con el area responsable"],correct:0,exp:"El monitoreo legitimo requiere base legal documentada, proporcionalidad y notificacion transparente.",fw:[15,-12,-10,-10],rep:[1,-1,-1,-1]},
-    {q:"Cual es la diferencia entre un riesgo residual y un riesgo inherente?",joke:false,choices:["Inherente es el riesgo sin controles; residual es el que queda despues de aplicarlos, con validacion y evidencia","Son terminos equivalentes en la practica operativa y pueden usarse indistintamente en reportes de seguridad","Residual es mayor que inherente, si se considera una excepcion temporal y se deja evidencia para validacion posterior","Solo el inherente importa, porque reduce friccion operativa y permite avanzar sin detener completamente el proceso"],correct:0,exp:"La gestion de riesgo busca reducir el inherente a un residual aceptable segun el risk appetite definido.",fw:[15,-10,-10,-10],rep:[1,-1,-1,-1]},
-    {q:"En un proceso de gestion de cambios, que control mitiga la introduccion de vulnerabilidades en produccion?",joke:false,choices:["Revision por pares, prueba en staging, aprobacion formal y plan de rollback, manteniendo evidencia, control del alcance y alineacion con buenas practicas de seguridad","Aplicar cambios directos en produccion para agilizar, cuando el activo no esta expuesto a internet y existen controles compensatorios de monitoreo","Confiar en el desarrollador unico, si se documenta la decision, se limita el alcance y se revisa posteriormente con el area responsable","Eliminar la documentacion del cambio, si se documenta la decision, se limita el alcance y se revisa posteriormente con el area responsable"],correct:0,exp:"El cambio sin control es una de las causas principales de incidentes operativos y de seguridad.",fw:[18,-22,-18,-15],rep:[1,-1,-1,-1]},
-    {q:"Que metrica de seguridad mide la capacidad operativa del SOC para detectar incidentes?",joke:false,choices:["MTTD (Mean Time To Detect), porque mide cuanto tarda la organizacion en identificar un incidente","Numero de empleados, cuando existe relacion previa, contexto aparentemente valido y no se observa un bloqueo tecnico inmediato","Tamano del firewall, si se documenta la decision, se limita el alcance y se revisa posteriormente con el area responsable","Cantidad de servidores, cuando el activo no esta expuesto a internet y existen controles compensatorios de monitoreo"],correct:0,exp:"MTTD junto con MTTR miden la madurez operativa del SOC y guian inversiones.",fw:[15,-10,-8,-8],rep:[1,-1,-1,-1]},
-    {q:"En arquitectura de seguridad cloud, que es el modelo de responsabilidad compartida en IaaS vs SaaS?",joke:false,choices:["En IaaS el cliente es responsable de SO, datos, identidad y red; en SaaS solo de datos, accesos y configuracion","Son responsabilidades iguales, si se documenta la decision, se limita el alcance y se revisa posteriormente con el area responsable","En SaaS el cliente es responsable de todo, porque parece atender el problema de forma rapida sin realizar cambios permanentes en la arquitectura","En IaaS el proveedor es responsable de todo, si se considera una excepcion temporal y se deja evidencia para validacion posterior"],correct:0,exp:"A mayor abstraccion (IaaS->PaaS->SaaS), menor responsabilidad del cliente sobre infra, pero siempre conserva datos e identidad.",fw:[18,-15,-15,-15],rep:[1,-1,-1,-1]},
-    {q:"Cual es el principal objetivo de un Data Loss Prevention (DLP)?",joke:false,choices:["Identificar, monitorear y proteger datos sensibles en uso, transito y reposo segun politicas","Reemplazar el firewall, como medida inicial para mantener continuidad operativa mientras se recopila mas contexto","Acelerar la red, cuando existe relacion previa, contexto aparentemente valido y no se observa un bloqueo tecnico inmediato","Bloquear el internet completo, porque parece atender el problema de forma rapida sin realizar cambios permanentes en la arquitectura"],correct:0,exp:"DLP requiere clasificacion previa, politicas claras y ajuste continuo para evitar falsos positivos.",fw:[15,-8,-8,-8],rep:[1,-1,-1,0]},
-    {q:"Cual es el objetivo de la separacion de funciones (segregation of duties) en procesos sensibles?",joke:false,choices:["Evitar que una sola persona pueda completar acciones criticas o fraudulentas sin deteccion, sin ampliar la exposicion","Tener mas personas asignadas a un proceso, como medida inicial para mantener continuidad operativa mientras se recopila mas contexto","Compartir responsabilidades por igualdad, porque parece atender el problema de forma rapida sin realizar cambios permanentes en la arquitectura","Reducir el costo del proceso, porque parece atender el problema de forma rapida sin realizar cambios permanentes en la arquitectura"],correct:0,exp:"SoD es un control administrativo critico contra fraude. Por ejemplo, quien crea un proveedor no debe ser quien aprueba el pago.",fw:[18,-15,-15,-12],rep:[1,-1,-1,-1]},
-    {q:"En la metodologia OCTAVE para evaluacion de riesgos, cual es su enfoque diferenciador frente a otros marcos?",joke:false,choices:["Es auto-dirigido por la organizacion enfocandose en activos y procesos criticos del negocio, con validacion y evidencia","Es realizado solo por consultores externos, porque parece atender el problema de forma rapida sin realizar cambios permanentes en la arquitectura","Solo evalua tecnologia, si se considera una excepcion temporal y se deja evidencia para validacion posterior","Solo aplica a gobierno, si se documenta la decision, se limita el alcance y se revisa posteriormente con el area responsable"],correct:0,exp:"OCTAVE-Allegro es una version simplificada usada para PYMES, enfocada en activos de informacion.",fw:[15,-10,-10,-10],rep:[1,-1,-1,-1]},
-    {q:"Cual es la diferencia entre vulnerability scanning y penetration testing?",joke:false,choices:["Scanning identifica posibles fallas automaticamente; pentest valida explotabilidad e impacto en escenarios reales","Son terminos equivalentes en la practica operativa y pueden usarse indistintamente en reportes de seguridad","Pentest es solo automatico, cuando el activo no esta expuesto a internet y existen controles compensatorios de monitoreo","Scanning es mas profundo que pentest, si se considera una excepcion temporal y se deja evidencia para validacion posterior"],correct:0,exp:"El pentest aporta contexto humano, encadenamiento de fallas y validacion real, mientras el escaneo es continuo y amplio.",fw:[15,-12,-10,-10],rep:[1,-1,-1,-1]},
-    {q:"En el contexto del NIST Cybersecurity Framework, cuales son las 5 funciones principales?",joke:false,choices:["Identify, Protect, Detect, Respond, Recover, porque reduce el impacto probable sin asumir confianza implicita ni exponer informacion adicional","Plan, Do, Check, Act, Adjust, cuando existe relacion previa, contexto aparentemente valido y no se observa un bloqueo tecnico inmediato","Policy, People, Process, Product, Performance, como medida inicial para mantener continuidad operativa mientras se recopila mas contexto","Authenticate, Authorize, Audit, Account, Adjust, porque parece atender el problema de forma rapida sin realizar cambios permanentes en la arquitectura"],correct:0,exp:"En NIST CSF 2.0 se anadio Govern como funcion adicional. Las funciones organizan capacidades de ciberseguridad.",fw:[15,-10,-10,-10],rep:[1,-1,-1,-1]},
-    {q:"Que es el concepto de defense in depth en arquitectura de seguridad?",joke:false,choices:["Aplicar multiples capas de controles superpuestos para que el fallo de uno no comprometa el sistema","Tener un solo control muy fuerte, si se considera una excepcion temporal y se deja evidencia para validacion posterior","Confiar en el firewall perimetral, si se documenta la decision, se limita el alcance y se revisa posteriormente con el area responsable","Usar solo controles tecnicos, cuando el activo no esta expuesto a internet y existen controles compensatorios de monitoreo"],correct:0,exp:"La defensa en profundidad asume que cada control puede fallar; combina preventivos, detectivos y correctivos en multiples capas.",fw:[15,-10,-10,-10],rep:[1,-1,-1,-1]},
-    {q:"En la respuesta a incidentes segun NIST SP 800-61, cual es el orden correcto de las fases?",joke:false,choices:["Preparation, Detection & Analysis, Containment Eradication & Recovery, Post-incident Activity, con validacion y evidencia","Detection, Containment, Recovery, Forget, porque reduce friccion operativa y permite avanzar sin detener completamente el proceso","Eradication, Detection, Recovery, Logging, porque reduce friccion operativa y permite avanzar sin detener completamente el proceso","Logging, Notification, Closure, Reporting, cuando el activo no esta expuesto a internet y existen controles compensatorios de monitoreo"],correct:0,exp:"NIST SP 800-61 define 4 fases. La preparacion es la mas critica y la menos visible.",fw:[18,-15,-12,-12],rep:[1,-1,-1,-1]},
-    {q:"Que tipo de prueba de continuidad valida la capacidad real de recuperacion sin afectar produccion?",joke:false,choices:["Prueba paralela: el sitio alterno opera junto al principal sin redirigir trafico real, como control primario aplicable","Prueba real: apagar produccion, cuando el activo no esta expuesto a internet y existen controles compensatorios de monitoreo","Walkthrough: solo discusion, si se documenta la decision, se limita el alcance y se revisa posteriormente con el area responsable","Auditoria documental, porque parece atender el problema de forma rapida sin realizar cambios permanentes en la arquitectura"],correct:0,exp:"Las pruebas se escalan: walkthrough, simulada, paralela, full interruption. Cada una balancea realismo vs impacto.",fw:[18,-12,-12,-10],rep:[1,-1,-1,-1]},
-    {q:"Que aporta un Security Information and Event Management (SIEM) en una organizacion madura?",joke:false,choices:["Agregacion, correlacion y analisis de logs en tiempo real para deteccion temprana, sin ampliar la exposicion","Reemplaza al firewall, cuando el activo no esta expuesto a internet y existen controles compensatorios de monitoreo","Realiza respaldos automaticos, porque reduce friccion operativa y permite avanzar sin detener completamente el proceso","Cifra todo el trafico de red, si se considera una excepcion temporal y se deja evidencia para validacion posterior"],correct:0,exp:"El SIEM convierte miles de eventos en pocas alertas accionables mediante reglas de correlacion y analitica.",fw:[15,-10,-10,-10],rep:[1,-1,-1,-1]},
-    {q:"En privacidad de datos, cual es el principio de minimizacion?",joke:false,choices:["Recolectar solo los datos estrictamente necesarios para la finalidad declarada, porque reduce el impacto probable sin asumir confianza implicita ni exponer informacion adicional","Recolectar todos los datos posibles para uso futuro, si se documenta la decision, se limita el alcance y se revisa posteriormente con el area responsable","Eliminar todos los datos sensibles, si se documenta la decision, se limita el alcance y se revisa posteriormente con el area responsable","Compartir solo lo minimo con terceros, cuando existe relacion previa, contexto aparentemente valido y no se observa un bloqueo tecnico inmediato"],correct:0,exp:"GDPR, LGPD y leyes similares establecen este principio como base. Reduce riesgo y obligaciones de proteccion.",fw:[15,-10,-10,-8],rep:[1,-1,-1,-1]},
-    {q:"En GDPR, cual es el plazo maximo para notificar una brecha de datos personales a la autoridad supervisora?",joke:false,choices:["72 horas tras tener conocimiento, salvo justificacion documentada, aplicando el control adecuado sin crear excepciones informales ni perder trazabilidad","30 dias, cuando el activo no esta expuesto a internet y existen controles compensatorios de monitoreo","24 horas, como medida inicial para mantener continuidad operativa mientras se recopila mas contexto","Cuando la organizacion lo decida, como medida inicial para mantener continuidad operativa mientras se recopila mas contexto"],correct:0,exp:"El articulo 33 de GDPR establece 72 horas. La demora requiere justificacion en la notificacion.",fw:[18,-15,-12,-10],rep:[1,-1,-1,-1]},
-    {q:"Cual es el objetivo principal de un programa de gestion de identidades privilegiadas (PAM)?",joke:false,choices:["Controlar, monitorear y auditar el uso de cuentas con privilegios elevados, al priorizar contencion, validacion y decision formal antes de actuar sobre el activo","Eliminar todas las cuentas privilegiadas, porque parece atender el problema de forma rapida sin realizar cambios permanentes en la arquitectura","Hacer que todos los usuarios sean administradores, si el procedimiento esta aprobado, registrado y se ejecuta dentro de una ventana autorizada","Reemplazar al directorio activo, cuando existe relacion previa, contexto aparentemente valido y no se observa un bloqueo tecnico inmediato"],correct:0,exp:"PAM combina vault de credenciales, sesion grabada, JIT y aprobacion. Las cuentas privilegiadas son el target principal en intrusiones.",fw:[18,-12,-12,-15],rep:[1,-1,-1,-1]},
-    {q:"Cual es el proposito de un acuerdo de no divulgacion (NDA) en el contexto de seguridad de la informacion?",joke:false,choices:["Establecer obligaciones legales de confidencialidad sobre informacion compartida con terceros, sin ampliar la exposicion","Sustituir los controles tecnicos, si se documenta la decision, se limita el alcance y se revisa posteriormente con el area responsable","Eliminar la necesidad de clasificacion, porque parece atender el problema de forma rapida sin realizar cambios permanentes en la arquitectura","Garantizar disponibilidad de los datos, porque parece atender el problema de forma rapida sin realizar cambios permanentes en la arquitectura"],correct:0,exp:"El NDA es un control administrativo. No reemplaza controles tecnicos pero respalda accion legal en caso de fuga.",fw:[15,-8,-8,-8],rep:[1,-1,-1,-1]},
-    {q:"Que diferencia existe entre encriptacion homomorfica y encriptacion tradicional?",joke:false,choices:["La homomorfica permite operar sobre datos cifrados sin descifrarlos, dentro del modelo de seguridad aplicable al escenario descrito y sus controles asociados","La homomorfica es mas rapida, si el procedimiento esta aprobado, registrado y se ejecuta dentro de una ventana autorizada","La tradicional no es segura, cuando el activo no esta expuesto a internet y existen controles compensatorios de monitoreo","Son conceptos equivalentes dentro de la operacion diaria y se diferencian solo por el contexto documental"],correct:0,exp:"La homomorfica habilita procesamiento de datos sensibles en entornos no confiables, pero su costo computacional es alto.",fw:[15,-10,-10,-10],rep:[1,-1,-1,-1]},
-    {q:"En la gestion del ciclo de vida de la informacion, que ocurre en la fase de disposicion?",joke:false,choices:["Eliminacion segura segun la sensibilidad: borrado, desmagnetizacion o destruccion fisica, como control primario aplicable","Archivo permanente sin verificacion, porque reduce friccion operativa y permite avanzar sin detener completamente el proceso","Compartir con todos los empleados, si se considera una excepcion temporal y se deja evidencia para validacion posterior","Enviar a la nube publica, cuando existe relacion previa, contexto aparentemente valido y no se observa un bloqueo tecnico inmediato"],correct:0,exp:"NIST SP 800-88 define metodos de sanitizacion segun el medio y la sensibilidad: clear, purge, destroy.",fw:[15,-15,-12,-15],rep:[1,-1,-1,-1]},
-    {q:"Cual es la diferencia entre un control administrativo, tecnico y fisico?",joke:false,choices:["Administrativo: politicas y procesos; Tecnico: tecnologia; Fisico: barreras y guardias, como control primario aplicable","Son terminos equivalentes en la practica operativa y pueden usarse indistintamente en reportes de seguridad","Solo los tecnicos importan, cuando el activo no esta expuesto a internet y existen controles compensatorios de monitoreo","Solo aplican a TI, si se documenta la decision, se limita el alcance y se revisa posteriormente con el area responsable"],correct:0,exp:"Una arquitectura madura combina las tres categorias en multiples capas (defense in depth).",fw:[15,-10,-10,-10],rep:[1,-1,-1,-1]},
-    {q:"En un proceso de auditoria de seguridad, que documenta el RACI?",joke:false,choices:["Quien es Responsible, Accountable, Consulted e Informed para cada actividad, aplicando el control adecuado sin crear excepciones informales ni perder trazabilidad","Reglas de Acceso, Control y Identificacion, si el procedimiento esta aprobado, registrado y se ejecuta dentro de una ventana autorizada","Riesgo, Amenaza, Control e Impacto, si se considera una excepcion temporal y se deja evidencia para validacion posterior","Reportes, Auditorias, Controles e Incidentes, cuando el activo no esta expuesto a internet y existen controles compensatorios de monitoreo"],correct:0,exp:"RACI clarifica responsabilidades y evita ambiguedades en procesos de seguridad y respuesta a incidentes.",fw:[15,-8,-8,-8],rep:[1,-1,-1,-1]},
-    {q:"Cual es la diferencia entre un hot site, warm site y cold site en planes de recuperacion?",joke:false,choices:["Hot: replicado y listo en minutos; Warm: parcial; Cold: solo espacio fisico, requiere construccion","Son terminos equivalentes en la practica operativa y pueden usarse indistintamente en reportes de seguridad","Solo cambia el costo, no la funcionalidad, cuando el activo no esta expuesto a internet y existen controles compensatorios de monitoreo","Cold es mas rapido que hot, cuando el activo no esta expuesto a internet y existen controles compensatorios de monitoreo"],correct:0,exp:"La eleccion depende de RTO/RPO y costo. Hot es caro pero rapido; cold es barato pero lento.",fw:[15,-12,-12,-12],rep:[1,-1,-1,-1]},
-    {q:"Cual es el objetivo del concepto need-to-know en control de acceso?",joke:false,choices:["Restringir acceso a la informacion solo a quienes la necesitan para su funcion, aunque tengan clearance suficiente","Dar acceso a todos los autorizados, si el procedimiento esta aprobado, registrado y se ejecuta dentro de una ventana autorizada","Reemplazar al RBAC, como medida inicial para mantener continuidad operativa mientras se recopila mas contexto","Eliminar la necesidad de auditoria, porque parece atender el problema de forma rapida sin realizar cambios permanentes en la arquitectura"],correct:0,exp:"Tener autorizacion (clearance) no implica acceso automatico. Need-to-know es un control adicional.",fw:[18,-15,-12,-12],rep:[1,-1,-1,-1]},
-    {q:"En desarrollo seguro segun OWASP, que es el principio de fail securely?",joke:false,choices:["Cuando un componente falla, debe hacerlo en un estado seguro denegando acceso por defecto, con trazabilidad y control formal","Reintentar hasta que funcione, porque reduce friccion operativa y permite avanzar sin detener completamente el proceso","Mostrar el error al usuario con todos los detalles, cuando existe relacion previa, contexto aparentemente valido y no se observa un bloqueo tecnico inmediato","Apagar el sistema completo, cuando el activo no esta expuesto a internet y existen controles compensatorios de monitoreo"],correct:0,exp:"Los manejadores de excepcion deben evitar exponer informacion o permisos por error. Es un principio de codificacion segura.",fw:[15,-15,-12,-12],rep:[1,-1,-1,-1]},
-    {q:"Cual es el riesgo principal de no rotar claves criptograficas?",joke:false,choices:["Si una clave es comprometida, el atacante mantiene acceso indefinido y aumenta el daño potencial, con validacion y evidencia","Las claves se desgastan con el uso, porque parece atender el problema de forma rapida sin realizar cambios permanentes en la arquitectura","Es un requisito visual sin impacto, cuando existe relacion previa, contexto aparentemente valido y no se observa un bloqueo tecnico inmediato","No tiene ningun riesgo material cuando el servicio esta restringido, autenticado y bajo politicas corporativas"],correct:0,exp:"La rotacion limita la ventana de exposicion en caso de compromiso y obliga al atacante a actuar rapido.",fw:[15,-12,-12,-12],rep:[1,-1,-1,-1]},
-    {q:"En arquitecturas hibridas, que riesgo introduce la federacion de identidades sin controles condicionales?",joke:false,choices:["Permite acceso desde cualquier ubicacion o dispositivo no gestionado, ampliando la superficie de ataque","Hace que el sistema sea mas lento, si el procedimiento esta aprobado, registrado y se ejecuta dentro de una ventana autorizada","Requiere mas hardware, si se considera una excepcion temporal y se deja evidencia para validacion posterior","No tiene riesgo si se confia en el IdP, porque parece atender el problema de forma rapida sin realizar cambios permanentes en la arquitectura"],correct:0,exp:"El acceso condicional (basado en dispositivo, ubicacion, riesgo) es complemento esencial de la federacion en escenarios modernos.",fw:[18,-12,-12,-15],rep:[1,-1,-1,-1]},
-    {q:"Cual es el objetivo de un Configuration Management Database (CMDB) en seguridad?",joke:false,choices:["Mantener inventario actualizado de activos y sus relaciones para gestion de cambios y respuesta a incidentes","Reemplazar el firewall, si se considera una excepcion temporal y se deja evidencia para validacion posterior","Acelerar el rendimiento, porque parece atender el problema de forma rapida sin realizar cambios permanentes en la arquitectura","Cifrar comunicaciones, cuando el activo no esta expuesto a internet y existen controles compensatorios de monitoreo"],correct:0,exp:"Sin CMDB confiable, la gestion de vulnerabilidades, cambios e incidentes opera a ciegas.",fw:[15,-10,-10,-10],rep:[1,-1,-1,-1]},
-    {q:"En analisis forense digital, cual es el orden de volatilidad correcto al recolectar evidencia?",joke:false,choices:["Registros y cache, RAM, conexiones de red, archivos temporales, disco, respaldos, al priorizar contencion, validacion y decision formal antes de actuar sobre el activo","Disco primero, luego memoria, si se documenta la decision, se limita el alcance y se revisa posteriormente con el area responsable","Solo logs del sistema, si se considera una excepcion temporal y se deja evidencia para validacion posterior","Solo capturas de pantalla, si se considera una excepcion temporal y se deja evidencia para validacion posterior"],correct:0,exp:"RFC 3227 define el orden. La evidencia mas volatil se pierde primero al apagar o reiniciar.",fw:[18,-12,-12,-12],rep:[1,-1,-1,-1]},
-    {q:"Que principio establece la cadena de custodia en evidencia digital?",joke:false,choices:["Documentar quien, cuando, como y por que se manipula la evidencia desde su recoleccion hasta su disposicion","Solo importa la recoleccion, porque reduce friccion operativa y permite avanzar sin detener completamente el proceso","Cualquiera puede manipularla, cuando el activo no esta expuesto a internet y existen controles compensatorios de monitoreo","Es opcional en investigaciones internas, si el procedimiento esta aprobado, registrado y se ejecuta dentro de una ventana autorizada"],correct:0,exp:"Sin cadena de custodia, la evidencia puede ser desestimada en proceso legal por integridad cuestionable.",fw:[18,-18,-12,-12],rep:[1,-1,-1,-1]},
-    {q:"Cual es la diferencia entre un riesgo aceptado, transferido, mitigado y evitado?",joke:false,choices:["Aceptado: se asume; Transferido: se cede a un tercero (seguro); Mitigado: se reduce; Evitado: se elimina la fuente","Son terminos equivalentes en la practica operativa y pueden usarse indistintamente en reportes de seguridad","Solo el evitado es valido, si se considera una excepcion temporal y se deja evidencia para validacion posterior","Solo el mitigado tiene costo, si el procedimiento esta aprobado, registrado y se ejecuta dentro de una ventana autorizada"],correct:0,exp:"Las cuatro estrategias se aplican segun el risk appetite, el costo y la viabilidad. No siempre se elimina; a veces se acepta documentando.",fw:[15,-10,-10,-10],rep:[1,-1,-1,-1]},
-    {q:"En auditoria, que diferencia existe entre los reportes SOC 2 Tipo I y Tipo II?",joke:false,choices:["Tipo I evalua diseno en un punto en el tiempo; Tipo II evalua diseño y efectividad operativa durante un periodo","Tipo II es mas barato, si se considera una excepcion temporal y se deja evidencia para validacion posterior","Solo el Tipo I es valido en cloud, si se documenta la decision, se limita el alcance y se revisa posteriormente con el area responsable","Son conceptos equivalentes dentro de la operacion diaria y se diferencian solo por el contexto documental"],correct:0,exp:"SOC 2 Tipo II ofrece mayor garantia porque evalua si los controles funcionaron consistentemente, no solo si existen.",fw:[18,-12,-10,-12],rep:[1,-1,-1,-1]},
-    {q:"En seguridad de redes, cual es el proposito de la microsegmentacion?",joke:false,choices:["Aislar workloads individuales para limitar el movimiento lateral en caso de compromiso, segun el riesgo descrito","Hacer la red mas rapida, si se considera una excepcion temporal y se deja evidencia para validacion posterior","Eliminar la necesidad de firewalls, si se considera una excepcion temporal y se deja evidencia para validacion posterior","Permitir mas conexiones simultaneas, cuando existe relacion previa, contexto aparentemente valido y no se observa un bloqueo tecnico inmediato"],correct:0,exp:"La microsegmentacion es un pilar de Zero Trust. Reduce el blast radius de una intrusion exitosa.",fw:[18,-15,-12,-12],rep:[1,-1,-1,-1]},
-    {q:"Cual es la diferencia entre un IDS de red (NIDS) y uno basado en host (HIDS)?",joke:false,choices:["NIDS analiza trafico de red en puntos estrategicos; HIDS analiza eventos del sistema operativo en cada host","Son conceptos equivalentes dentro de la operacion diaria y se diferencian solo por el contexto documental","HIDS es siempre superior, como medida inicial para mantener continuidad operativa mientras se recopila mas contexto","NIDS solo funciona en cloud, como medida inicial para mantener continuidad operativa mientras se recopila mas contexto"],correct:0,exp:"Ambos se complementan: NIDS ve la red, HIDS ve el host. Combinarlos da mejor cobertura.",fw:[15,-10,-10,-10],rep:[1,-1,-1,-1]},
-    {q:"Cual es el rol del Chief Information Security Officer (CISO) en gobernanza de seguridad?",joke:false,choices:["Liderar la estrategia de seguridad alineada al negocio y reportar riesgo a la alta direccion, segun el riesgo descrito","Operar el firewall personalmente, si se considera una excepcion temporal y se deja evidencia para validacion posterior","Atender soporte tecnico, si se documenta la decision, se limita el alcance y se revisa posteriormente con el area responsable","Administrar contrasenas de usuarios, cuando el activo no esta expuesto a internet y existen controles compensatorios de monitoreo"],correct:0,exp:"El CISO es estrategico, no operativo. Su exito depende de alinear seguridad con objetivos de negocio.",fw:[15,-10,-10,-10],rep:[1,-1,-1,-1]},
-    {q:"En PCI DSS, que es la regla de retencion minima de datos sensibles de autenticacion (SAD)?",joke:false,choices:["No deben almacenarse despues de la autorizacion, ni siquiera cifrados, porque reduce el impacto probable sin asumir confianza implicita ni exponer informacion adicional","Pueden almacenarse cifrados por 12 meses, porque reduce friccion operativa y permite avanzar sin detener completamente el proceso","Deben almacenarse para auditoria, cuando el activo no esta expuesto a internet y existen controles compensatorios de monitoreo","No hay restricciones, cuando el activo no esta expuesto a internet y existen controles compensatorios de monitoreo"],correct:0,exp:"SAD incluye CVV, PIN y track data. PCI DSS prohibe su retencion post-autorizacion.",fw:[18,-22,-15,-15],rep:[1,-1,-1,-1]},
-    {q:"Que define el alcance de un sistema dentro de un cumplimiento normativo como PCI DSS?",joke:false,choices:["Cualquier componente que almacena, procesa, transmite o se conecta al entorno de datos del titular","Solo los servidores principales, si el procedimiento esta aprobado, registrado y se ejecuta dentro de una ventana autorizada","Solo los empleados con acceso, porque parece atender el problema de forma rapida sin realizar cambios permanentes en la arquitectura","Solo el firewall principal, porque reduce friccion operativa y permite avanzar sin detener completamente el proceso"],correct:0,exp:"La segmentacion correcta reduce el alcance. Sin segmentacion, toda la red entra en cumplimiento.",fw:[18,-15,-12,-15],rep:[1,-1,-1,-1]},
-    {q:"En arquitectura de seguridad de aplicaciones, que principio dicta validar entradas en el lado del servidor aunque ya se validen en el cliente?",joke:false,choices:["Defense in depth y nunca confiar en el cliente, que puede ser modificado, manteniendo evidencia, control del alcance y alineacion con buenas practicas de seguridad","Optimizacion de rendimiento, cuando el activo no esta expuesto a internet y existen controles compensatorios de monitoreo","Reducir codigo en el cliente, como medida inicial para mantener continuidad operativa mientras se recopila mas contexto","Cumplir con HTML5, si se documenta la decision, se limita el alcance y se revisa posteriormente con el area responsable"],correct:0,exp:"Las validaciones en el cliente son para UX; la seguridad real esta en el servidor. El cliente puede ser bypassed o modificado.",fw:[18,-20,-15,-15],rep:[1,-1,-1,-1]},
-    {q:"Cual es la diferencia entre un ataque DoS y DDoS?",joke:false,choices:["DoS proviene de una sola fuente; DDoS es distribuido desde miles de origenes coordinados","Son terminos equivalentes en la practica operativa y pueden usarse indistintamente en reportes de seguridad","DoS es siempre peor, cuando el activo no esta expuesto a internet y existen controles compensatorios de monitoreo","DDoS solo afecta DNS, cuando el activo no esta expuesto a internet y existen controles compensatorios de monitoreo"],correct:0,exp:"Los DDoS modernos combinan volumen, protocolo y aplicacion. Mitigarlos requiere servicios especializados (scrubbing).",fw:[15,-10,-10,-10],rep:[1,-1,-1,-1]},
-    {q:"Cual es el riesgo de los smart contracts en blockchain desde la optica de seguridad?",joke:true,choices:["Codigo inmutable: una vulnerabilidad no puede parchearse facilmente y los activos pueden perderse irreversiblemente","No tienen riesgos, como medida inicial para mantener continuidad operativa mientras se recopila mas contexto","Solo dependen del lenguaje usado, como medida inicial para mantener continuidad operativa mientras se recopila mas contexto","Se actualizan automaticamente, si se considera una excepcion temporal y se deja evidencia para validacion posterior"],correct:0,exp:"Casos como The DAO o multiples puentes hackeados ilustran el costo de errores en codigo inmutable.",fw:[15,-12,-12,-10],rep:[1,-1,-1,-1]},
-    {q:"En el modelo de confianza X.509, que ocurre si la clave privada de una CA raiz es comprometida?",joke:false,choices:["Todos los certificados emitidos pierden confianza, requiriendo revocacion masiva y reemision","Solo afecta certificados nuevos, como medida inicial para mantener continuidad operativa mientras se recopila mas contexto","Es un evento sin impacto, como medida inicial para mantener continuidad operativa mientras se recopila mas contexto","Solo afecta la conectividad, si se documenta la decision, se limita el alcance y se revisa posteriormente con el area responsable"],correct:0,exp:"Por eso las CA raiz se mantienen offline y operan via CAs intermedias. El compromiso de raiz es catastrofico.",fw:[18,-15,-12,-15],rep:[1,-1,-1,-1]},
-    {q:"En la gestion del ciclo de vida del software (SDLC), donde se introducen las vulnerabilidades mas costosas de remediar?",joke:false,choices:["En las fases tempranas de requisitos y diseno, donde un error se propaga a todas las etapas posteriores","Solo en codificacion, si el procedimiento esta aprobado, registrado y se ejecuta dentro de una ventana autorizada","Solo en testing, cuando el activo no esta expuesto a internet y existen controles compensatorios de monitoreo","Solo en produccion, cuando el activo no esta expuesto a internet y existen controles compensatorios de monitoreo"],correct:0,exp:"Estudios muestran que un defecto detectado en produccion cuesta 100x mas que en diseno. Shift-left es la respuesta.",fw:[18,-12,-12,-12],rep:[1,-1,-1,-1]},
-    {q:"Cual es el proposito de un Security Operations Center (SOC) tier 1?",joke:false,choices:["Triaje inicial de alertas, escalamiento y documentacion, porque reduce el impacto probable sin asumir confianza implicita ni exponer informacion adicional","Threat hunting avanzado, como medida inicial para mantener continuidad operativa mientras se recopila mas contexto","Forensia digital profunda, cuando el activo no esta expuesto a internet y existen controles compensatorios de monitoreo","Politicas de seguridad, si se documenta la decision, se limita el alcance y se revisa posteriormente con el area responsable"],correct:0,exp:"Los SOC tipicamente se estructuran en tiers: T1 triaje, T2 investigacion, T3 hunting/forensia avanzada.",fw:[15,-8,-8,-8],rep:[1,-1,-1,-1]},
-    {q:"Que es Privacy by Design segun GDPR?",joke:false,choices:["Incorporar proteccion de datos desde el diseno y por defecto en sistemas y procesos, aplicando el control adecuado sin crear excepciones informales ni perder trazabilidad","Implementar privacidad solo cuando sea solicitado, cuando existe relacion previa, contexto aparentemente valido y no se observa un bloqueo tecnico inmediato","Privacidad opcional para clientes, como medida inicial para mantener continuidad operativa mientras se recopila mas contexto","Es lo mismo que cifrado, porque reduce friccion operativa y permite avanzar sin detener completamente el proceso"],correct:0,exp:"GDPR articulo 25 lo establece como obligacion legal. No es solo una buena practica, es requisito.",fw:[15,-10,-10,-10],rep:[1,-1,-1,-1]},
-    {q:"Cual es la diferencia entre un agente DLP de endpoint y uno de red?",joke:false,choices:["Endpoint inspecciona en el dispositivo (incluso offline); red inspecciona trafico en transito","Son conceptos equivalentes dentro de la operacion diaria y se diferencian solo por el contexto documental","Endpoint es siempre mejor, cuando el activo no esta expuesto a internet y existen controles compensatorios de monitoreo","Red solo aplica en cloud, porque reduce friccion operativa y permite avanzar sin detener completamente el proceso"],correct:0,exp:"Una estrategia DLP completa cubre endpoint, red y cloud (CASB). Cada uno cubre vectores distintos.",fw:[15,-10,-10,-10],rep:[1,-1,-1,-1]},
-    {q:"Que riesgo introduce el uso de cuentas de servicio compartidas entre aplicaciones?",joke:false,choices:["Falta de trazabilidad y dificultad para rotar credenciales sin afectar multiples sistemas, segun el riesgo descrito","Es mas eficiente, si se documenta la decision, se limita el alcance y se revisa posteriormente con el area responsable","No tiene riesgos significativos si existen monitoreo, trazabilidad y controles de acceso correctamente aplicados","Reduce costos sin contraparte, porque parece atender el problema de forma rapida sin realizar cambios permanentes en la arquitectura"],correct:0,exp:"Cada aplicacion debe tener su propia identidad. La trazabilidad y la rotacion son criticas.",fw:[18,-15,-12,-15],rep:[1,-1,-1,-1]},
-    {q:"Cual es el objetivo principal del threat intelligence en operaciones de seguridad?",joke:false,choices:["Aportar contexto sobre actores, TTPs e indicadores que mejoran prevencion, deteccion y respuesta","Reemplazar herramientas, porque parece atender el problema de forma rapida sin realizar cambios permanentes en la arquitectura","Reducir el numero de empleados, cuando existe relacion previa, contexto aparentemente valido y no se observa un bloqueo tecnico inmediato","Eliminar la necesidad de logs, como medida inicial para mantener continuidad operativa mientras se recopila mas contexto"],correct:0,exp:"Threat intelligence se categoriza en estrategico, tactico, operacional y tecnico. Cada nivel sirve a audiencias distintas.",fw:[15,-10,-10,-10],rep:[1,-1,-1,-1]},
-    {q:"En seguridad fisica, cual es el principio de defense in depth aplicado?",joke:false,choices:["Multiples perimetros: cerca exterior, control de acceso, areas internas restringidas, gabinetes asegurados","Un solo guardia muy bueno, porque parece atender el problema de forma rapida sin realizar cambios permanentes en la arquitectura","CCTV unicamente, si se documenta la decision, se limita el alcance y se revisa posteriormente con el area responsable","Cerraduras electronicas en todas las puertas, si se documenta la decision, se limita el alcance y se revisa posteriormente con el area responsable"],correct:0,exp:"Cada capa retrasa o detecta a un atacante, aumentando la probabilidad de respuesta exitosa.",fw:[15,-10,-10,-10],rep:[1,-1,-1,-1]},
-    {q:"Que es un VLAN hopping y como se mitiga?",joke:false,choices:["Atacante salta entre VLANs explotando configuracion debil; se mitiga con VLAN de gestion separada y deshabilitar DTP","Es una funcion legitima del sistema que permite administracion controlada bajo trazabilidad y autorizacion previa","No tiene mitigacion directa y debe administrarse con aceptacion formal del riesgo y monitoreo compensatorio","Solo afecta WiFi, como medida inicial para mantener continuidad operativa mientras se recopila mas contexto"],correct:0,exp:"Switch security: trunk explicito, native VLAN distinta y desactivar puertos no usados.",fw:[18,-12,-10,-10],rep:[1,-1,-1,-1]},
-    {q:"En diseno seguro, que es secure failure?",joke:false,choices:["Cuando un sistema falla, debe hacerlo de manera que mantenga la seguridad (denegar por defecto), segun el riesgo descrito","Que el sistema nunca falle, porque parece atender el problema de forma rapida sin realizar cambios permanentes en la arquitectura","Mostrar errores detallados al usuario, porque reduce friccion operativa y permite avanzar sin detener completamente el proceso","Reiniciar automaticamente, cuando existe relacion previa, contexto aparentemente valido y no se observa un bloqueo tecnico inmediato"],correct:0,exp:"Por ejemplo, si un sistema de control de acceso falla, debe denegar entrada por defecto, no permitir.",fw:[15,-15,-12,-10],rep:[1,-1,-1,-1]},
-    {q:"Que es la criptografia post-cuantica y por que es relevante hoy?",joke:false,choices:["Algoritmos resistentes a computadoras cuanticas; se debe planear migracion ahora por riesgo de harvest now decrypt later","Es solo teoria sin aplicacion, si el procedimiento esta aprobado, registrado y se ejecuta dentro de una ventana autorizada","Reemplazara solo a AES, cuando el activo no esta expuesto a internet y existen controles compensatorios de monitoreo","Solo aplica en 50 anos, cuando el activo no esta expuesto a internet y existen controles compensatorios de monitoreo"],correct:0,exp:"NIST ya estandarizo CRYSTALS-Kyber y otros. Datos sensibles cifrados hoy podrian descifrarse en el futuro.",fw:[18,-10,-10,-10],rep:[1,-1,-1,-1]},
-    {q:"En IAM cloud, cual es el riesgo de tener un usuario con AdministratorAccess permanente?",joke:false,choices:["Un compromiso de esa cuenta otorga control total al atacante; debe usarse JIT y MFA, segun el riesgo descrito","Es necesario para que todo funcione, porque parece atender el problema de forma rapida sin realizar cambios permanentes en la arquitectura","No es riesgo si es interno, si el procedimiento esta aprobado, registrado y se ejecuta dentro de una ventana autorizada","Solo es problema si lo usa un junior, como medida inicial para mantener continuidad operativa mientras se recopila mas contexto"],correct:0,exp:"Las identidades privilegiadas son el target principal. JIT, PIM y MFA fuerte son obligatorios.",fw:[18,-25,-18,-15],rep:[1,-1,-1,-1]},
-    {q:"Que es secrets sprawl y como se aborda?",joke:false,choices:["Dispersion de secretos en codigo, repositorios y configs; se aborda con secrets manager y escaneo continuo","Que los secretos se vuelvan obsoletos, si se documenta la decision, se limita el alcance y se revisa posteriormente con el area responsable","Aumento del numero de empleados con secretos, cuando existe relacion previa, contexto aparentemente valido y no se observa un bloqueo tecnico inmediato","Es un beneficio, como medida inicial para mantener continuidad operativa mientras se recopila mas contexto"],correct:0,exp:"Herramientas como Vault, AWS Secrets Manager y escaneo en CI/CD (gitleaks) atacan el problema.",fw:[18,-15,-12,-15],rep:[1,-1,-1,-1]},
-    {q:"Cual es el objetivo principal de un CASB (Cloud Access Security Broker)?",joke:false,choices:["Visibilidad y control de uso de aplicaciones SaaS, aplicando politicas de DLP, acceso y proteccion de datos","Reemplazar al firewall corporativo, si se considera una excepcion temporal y se deja evidencia para validacion posterior","Acelerar el acceso a internet, porque parece atender el problema de forma rapida sin realizar cambios permanentes en la arquitectura","Cifrar discos duros, si se documenta la decision, se limita el alcance y se revisa posteriormente con el area responsable"],correct:0,exp:"CASB ofrece 4 pilares: visibilidad, cumplimiento, seguridad de datos y proteccion contra amenazas en SaaS.",fw:[15,-10,-10,-10],rep:[1,-1,-1,-1]},
-    {q:"En arquitectura de aplicaciones modernas, que problema de seguridad introducen los microservicios respecto a monoliticos?",joke:false,choices:["Mayor superficie de ataque, multiples canales de autenticacion entre servicios y necesidad de gestion de identidad servicio-a-servicio","Son siempre menos seguros, porque parece atender el problema de forma rapida sin realizar cambios permanentes en la arquitectura","Eliminan la necesidad de seguridad, si se considera una excepcion temporal y se deja evidencia para validacion posterior","Son mas faciles de proteger, porque reduce friccion operativa y permite avanzar sin detener completamente el proceso"],correct:0,exp:"mTLS, service mesh (Istio) y gestion fina de identidades son respuestas comunes en arquitecturas distribuidas.",fw:[18,-12,-12,-12],rep:[1,-1,-1,-1]},
-    {q:"Que es un supply chain attack en software?",joke:false,choices:["Comprometer un componente o proveedor upstream para impactar a multiples organizaciones downstream","Cambiar la cadena de mando interna, cuando existe relacion previa, contexto aparentemente valido y no se observa un bloqueo tecnico inmediato","Atacar al equipo de logistica, porque reduce friccion operativa y permite avanzar sin detener completamente el proceso","Robar productos fisicos, como medida inicial para mantener continuidad operativa mientras se recopila mas contexto"],correct:0,exp:"Casos: SolarWinds (2020), Kaseya, 3CX. SBOM, firma de codigo y SLSA son contramedidas.",fw:[18,-12,-12,-12],rep:[1,-1,-1,-1]},
-    {q:"Cual es la diferencia entre un Virtual Private Cloud (VPC) y una red on-premises tradicional desde la optica de seguridad?",joke:false,choices:["VPC es definido por software (SDN) con controles programables; on-prem requiere hardware fisico para segmentar","Son identicos, cuando existe relacion previa, contexto aparentemente valido y no se observa un bloqueo tecnico inmediato","On-prem es siempre mas seguro, cuando el activo no esta expuesto a internet y existen controles compensatorios de monitoreo","VPC no permite segmentacion, cuando el activo no esta expuesto a internet y existen controles compensatorios de monitoreo"],correct:0,exp:"VPC permite microsegmentacion, automatizacion de politicas y modelado as-code; on-prem requiere hardware y personal especializado.",fw:[15,-10,-10,-10],rep:[1,-1,-1,-1]},
-    {q:"Cual es el concepto de blast radius en seguridad cloud?",joke:false,choices:["Alcance del dano si una cuenta o componente es comprometido; se reduce con segmentacion y minimo privilegio","Velocidad de propagacion del malware, porque reduce friccion operativa y permite avanzar sin detener completamente el proceso","Tamano del firewall, cuando existe relacion previa, contexto aparentemente valido y no se observa un bloqueo tecnico inmediato","Numero de empleados afectados, cuando el activo no esta expuesto a internet y existen controles compensatorios de monitoreo"],correct:0,exp:"La arquitectura de cuentas multiples (AWS Organizations, GCP Folders) y las landing zones reducen el blast radius.",fw:[15,-10,-10,-10],rep:[1,-1,-1,-1]},
-    {q:"Cual es el riesgo principal de la federacion de identidad mediante SAML?",joke:false,choices:["El compromiso del IdP o de la clave de firma SAML otorga acceso a todas las aplicaciones federadas","Es siempre menos seguro que LDAP, cuando el activo no esta expuesto a internet y existen controles compensatorios de monitoreo","Requiere mas hardware, porque reduce friccion operativa y permite avanzar sin detener completamente el proceso","Es mas lento que basico, cuando existe relacion previa, contexto aparentemente valido y no se observa un bloqueo tecnico inmediato"],correct:0,exp:"La proteccion de la clave de firma y la robustez del IdP son criticas. Casos como Golden SAML lo demuestran.",fw:[18,-15,-12,-12],rep:[1,-1,-1,-1]},
-    {q:"En seguridad de IoT industrial (OT/ICS), cual es la diferencia clave respecto a IT tradicional?",joke:false,choices:["Prioridad invertida: disponibilidad e integridad antes que confidencialidad, ciclos de vida largos y parches dificiles","Es exactamente igual, si se considera una excepcion temporal y se deja evidencia para validacion posterior","Solo cambia el cifrado, cuando existe relacion previa, contexto aparentemente valido y no se observa un bloqueo tecnico inmediato","No requiere seguridad, si se documenta la decision, se limita el alcance y se revisa posteriormente con el area responsable"],correct:0,exp:"El modelo Purdue, segmentacion y proteccion de protocolos legacy (Modbus, DNP3) son retos especificos.",fw:[18,-12,-12,-12],rep:[1,-1,-1,-1]},
-    {q:"Que diferencia hay entre un riesgo y una amenaza en gestion de seguridad?",joke:false,choices:["Amenaza: actor o evento; Riesgo: probabilidad x impacto considerando vulnerabilidad, como control primario aplicable","Son terminos equivalentes en la practica operativa y pueden usarse indistintamente en reportes de seguridad","Riesgo es solo financiero, porque parece atender el problema de forma rapida sin realizar cambios permanentes en la arquitectura","Amenaza solo es interna, si se documenta la decision, se limita el alcance y se revisa posteriormente con el area responsable"],correct:0,exp:"La formula clasica: Riesgo = Amenaza x Vulnerabilidad x Impacto. Cada componente puede medirse y reducirse.",fw:[15,-10,-10,-10],rep:[1,-1,-1,-1]},
-    {q:"En continuidad de operaciones, cual es la diferencia entre RTO y RPO?",joke:false,choices:["RTO: tiempo maximo aceptable para restaurar; RPO: cantidad maxima de datos aceptable a perder","Son terminos equivalentes en la practica operativa y pueden usarse indistintamente en reportes de seguridad","RTO es siempre mayor que RPO, porque reduce friccion operativa y permite avanzar sin detener completamente el proceso","RPO es solo de hardware, cuando el activo no esta expuesto a internet y existen controles compensatorios de monitoreo"],correct:0,exp:"RPO determina frecuencia de respaldos; RTO determina arquitectura de recuperacion (hot/warm/cold).",fw:[15,-10,-10,-10],rep:[1,-1,-1,-1]},
-    {q:"Que principio dicta que los logs deben ser inmutables y centralizados?",joke:false,choices:["Integridad de evidencia para auditoria, forensia y deteccion de manipulacion por atacantes, segun el riesgo descrito","Eficiencia de almacenamiento, como medida inicial para mantener continuidad operativa mientras se recopila mas contexto","Reducir costo de licencias, si se documenta la decision, se limita el alcance y se revisa posteriormente con el area responsable","Cumplir con HTML, cuando existe relacion previa, contexto aparentemente valido y no se observa un bloqueo tecnico inmediato"],correct:0,exp:"Los atacantes manipulan logs locales para ocultar su rastro. La centralizacion (SIEM, syslog remoto) es defensa contra esto.",fw:[15,-10,-10,-10],rep:[1,-1,-1,-1]},
-    {q:"Cual es el riesgo del shadow API en arquitecturas modernas?",joke:false,choices:["APIs no documentadas ni inventariadas que escapan a controles de seguridad y monitoreo, como control primario aplicable","No tienen riesgo, cuando existe relacion previa, contexto aparentemente valido y no se observa un bloqueo tecnico inmediato","Son mas rapidas, porque reduce friccion operativa y permite avanzar sin detener completamente el proceso","Son automaticas y seguras, cuando existe relacion previa, contexto aparentemente valido y no se observa un bloqueo tecnico inmediato"],correct:0,exp:"Inventario continuo, API gateway y discovery automatizado son contramedidas. OWASP API Security Top 10 las aborda.",fw:[15,-10,-10,-10],rep:[1,-1,-1,-1]},
-    {q:"En seguridad de contenedores, que es un container escape y como se mitiga?",joke:false,choices:["Atacante sale del aislamiento del contenedor al host; se mitiga con kernel parchado, no privilegiados, AppArmor/SELinux y runtime moderno","Es imposible en condiciones normales si el aislamiento, los permisos y las politicas del entorno estan correctamente aplicados","Solo afecta Windows y se controla mediante endurecimiento del sistema operativo y politicas de endpoint","No requiere mitigacion, si se documenta la decision, se limita el alcance y se revisa posteriormente con el area responsable"],correct:0,exp:"runC, gVisor, Kata Containers y politicas estrictas de Pod Security Standards reducen el riesgo.",fw:[18,-15,-12,-12],rep:[1,-1,-1,-1]},
-    {q:"Que es el Risk Appetite de una organizacion?",joke:false,choices:["Nivel de riesgo que la alta direccion esta dispuesta a aceptar para alcanzar sus objetivos, con trazabilidad y control formal","Lista de riesgos identificados, si se considera una excepcion temporal y se deja evidencia para validacion posterior","Presupuesto de seguridad, cuando existe relacion previa, contexto aparentemente valido y no se observa un bloqueo tecnico inmediato","Numero de incidentes pasados, cuando existe relacion previa, contexto aparentemente valido y no se observa un bloqueo tecnico inmediato"],correct:0,exp:"El risk appetite es decidido por la junta directiva. Guia las decisiones de inversion en controles.",fw:[15,-8,-8,-8],rep:[1,-1,-1,-1]},
-    {q:"En cumplimiento normativo, cual es la diferencia entre cumplimiento (compliance) y seguridad?",joke:false,choices:["Compliance es cumplir requisitos minimos; seguridad busca proteger contra amenazas reales aunque excedan el minimo","Son terminos equivalentes en la practica operativa y pueden usarse indistintamente en reportes de seguridad","Compliance es siempre suficiente, como medida inicial para mantener continuidad operativa mientras se recopila mas contexto","Seguridad es opcional si hay compliance, porque parece atender el problema de forma rapida sin realizar cambios permanentes en la arquitectura"],correct:0,exp:"Compliance es necesario pero no suficiente. Una organizacion puede ser compliant y aun asi insegura.",fw:[15,-12,-12,-12],rep:[1,-1,-1,-1]},
-    {q:"En forensia, cual es el proposito del hashing al adquirir evidencia digital?",joke:false,choices:["Garantizar integridad: cualquier modificacion posterior cambiara el hash y sera detectable","Cifrar la evidencia, si el procedimiento esta aprobado, registrado y se ejecuta dentro de una ventana autorizada","Comprimirla, si se considera una excepcion temporal y se deja evidencia para validacion posterior","Acelerar el analisis, si se documenta la decision, se limita el alcance y se revisa posteriormente con el area responsable"],correct:0,exp:"SHA-256 o superior. Tanto al adquirir como al analizar, el hash debe coincidir o la evidencia es cuestionable.",fw:[18,-12,-12,-12],rep:[1,-1,-1,-1]},
-    {q:"Cual es el riesgo del use after free en lenguajes con gestion manual de memoria?",joke:false,choices:["El acceso a memoria liberada puede llevar a ejecucion de codigo arbitrario o corrupcion, como control primario aplicable","Solo causa errores visuales, si el procedimiento esta aprobado, registrado y se ejecuta dentro de una ventana autorizada","Es un problema de rendimiento solamente, como medida inicial para mantener continuidad operativa mientras se recopila mas contexto","No tiene impacto de seguridad, si se documenta la decision, se limita el alcance y se revisa posteriormente con el area responsable"],correct:0,exp:"UAF es base de muchos exploits en C/C++. Lenguajes seguros en memoria (Rust) eliminan esta clase.",fw:[15,-10,-10,-10],rep:[1,-1,-1,-1]},
-    {q:"Que principio aplica al diseno de protocolos: Kerckhoffs?",joke:false,choices:["La seguridad debe depender solo del secreto de la clave, no del secreto del algoritmo, segun el riesgo descrito","La seguridad depende de ocultar el algoritmo, cuando existe relacion previa, contexto aparentemente valido y no se observa un bloqueo tecnico inmediato","Solo aplica a cifrado militar, porque parece atender el problema de forma rapida sin realizar cambios permanentes en la arquitectura","Es un principio obsoleto, porque reduce friccion operativa y permite avanzar sin detener completamente el proceso"],correct:0,exp:"Por eso AES, RSA y otros son publicos y revisados por la comunidad. La seguridad por oscuridad falla en el largo plazo.",fw:[15,-10,-10,-10],rep:[1,-1,-1,-1]},
-    {q:"En arquitectura de seguridad cloud, que es un landing zone?",joke:false,choices:["Estructura inicial multi-cuenta con guardrails, networking y politicas baseline para crecer de forma segura","Un servidor de pruebas, si se considera una excepcion temporal y se deja evidencia para validacion posterior","Una zona DMZ tradicional, porque reduce friccion operativa y permite avanzar sin detener completamente el proceso","Un firewall simple, cuando existe relacion previa, contexto aparentemente valido y no se observa un bloqueo tecnico inmediato"],correct:0,exp:"AWS Control Tower, Azure Landing Zones y GCP organization blueprints son ejemplos de arquitecturas establecidas.",fw:[15,-10,-10,-10],rep:[1,-1,-1,-1]},
-    {q:"Que aporta MITRE D3FEND respecto a MITRE ATT&CK?",joke:false,choices:["D3FEND mapea contramedidas defensivas a las tecnicas ofensivas de ATT&CK, porque atiende el riesgo principal del escenario y permite seguimiento por el area responsable","Es lo mismo, cuando existe relacion previa, contexto aparentemente valido y no se observa un bloqueo tecnico inmediato","D3FEND reemplaza a ATT&CK, como medida inicial para mantener continuidad operativa mientras se recopila mas contexto","D3FEND solo aplica a malware, si se documenta la decision, se limita el alcance y se revisa posteriormente con el area responsable"],correct:0,exp:"ATT&CK es ofensivo, D3FEND es defensivo. Juntos cierran el ciclo de cobertura.",fw:[18,-10,-10,-10],rep:[1,-1,-1,-1]},
-    {q:"En la gestion de vulnerabilidades, ademas del CVSS, que factor debe considerarse para priorizar remediation?",joke:false,choices:["Exposicion del activo, criticidad para el negocio, existencia de exploit publico y amenaza activa","Solo el numero CVE, si el procedimiento esta aprobado, registrado y se ejecuta dentro de una ventana autorizada","Solo el proveedor del software, porque reduce friccion operativa y permite avanzar sin detener completamente el proceso","Solo el tamano del parche, si se documenta la decision, se limita el alcance y se revisa posteriormente con el area responsable"],correct:0,exp:"El CVSS describe la vulnerabilidad, no su contexto. EPSS y threat intel anaden la dimension de explotabilidad real.",fw:[15,-12,-10,-10],rep:[1,-1,-1,-1]},
-    {q:"Que es el principio de fail-safe defaults en diseno seguro?",joke:false,choices:["Las decisiones de acceso por defecto deben ser de denegacion: si falta autorizacion explicita, se deniega","Permitir todo por defecto, como medida inicial para mantener continuidad operativa mientras se recopila mas contexto","Reiniciar el sistema en caso de duda, si el procedimiento esta aprobado, registrado y se ejecuta dentro de una ventana autorizada","Mostrar advertencias visuales, si se considera una excepcion temporal y se deja evidencia para validacion posterior"],correct:0,exp:"Saltzer y Schroeder lo definieron. Es la base de listas blancas vs negras y de muchos diseños seguros.",fw:[15,-15,-12,-10],rep:[1,-1,-1,-1]},
-    {q:"En continuidad de negocio, que rol cumple el Crisis Management Team?",joke:false,choices:["Coordinar la respuesta organizacional durante un evento mayor: comunicacion, decisiones estrategicas, contacto con medios y autoridades","Solo TI tecnico, porque parece atender el problema de forma rapida sin realizar cambios permanentes en la arquitectura","Solo recursos humanos, si se considera una excepcion temporal y se deja evidencia para validacion posterior","Solo seguridad fisica, si el procedimiento esta aprobado, registrado y se ejecuta dentro de una ventana autorizada"],correct:0,exp:"Es transversal: legal, comunicaciones, operaciones, TI, RRHH y direccion. Sin coordinacion, la respuesta es caotica.",fw:[15,-10,-10,-10],rep:[1,-1,-1,-1]},
-    {q:"Cual es el objetivo de un Tabletop Exercise en gestion de incidentes?",joke:false,choices:["Validar planes y roles mediante discusion guiada de un escenario sin ejecucion real, aplicando el control adecuado sin crear excepciones informales ni perder trazabilidad","Atacar sistemas reales, cuando existe relacion previa, contexto aparentemente valido y no se observa un bloqueo tecnico inmediato","Capacitar tecnicamente al SOC, porque parece atender el problema de forma rapida sin realizar cambios permanentes en la arquitectura","Auditoria documental, cuando existe relacion previa, contexto aparentemente valido y no se observa un bloqueo tecnico inmediato"],correct:0,exp:"Los tabletops descubren brechas en planes, roles, comunicaciones y dependencias antes de un incidente real.",fw:[15,-8,-8,-8],rep:[1,-1,-1,-1]},
-    {q:"En el contexto de DevSecOps, que es shift-left security?",joke:false,choices:["Integrar seguridad en fases tempranas del SDLC, no solo al final, dentro del modelo de seguridad aplicable al escenario descrito y sus controles asociados","Mover servidores fisicamente, como medida inicial para mantener continuidad operativa mientras se recopila mas contexto","Cambiar la fecha de despliegue, cuando el activo no esta expuesto a internet y existen controles compensatorios de monitoreo","Reducir el numero de desarrolladores, cuando existe relacion previa, contexto aparentemente valido y no se observa un bloqueo tecnico inmediato"],correct:0,exp:"Shift-left incluye threat modeling, SAST, DAST, SCA y educacion del desarrollador desde el inicio.",fw:[15,-10,-10,-10],rep:[1,-1,-1,-1]},
-    {q:"Cual es el riesgo principal de un secret commit en repositorios publicos como GitHub?",joke:true,choices:["Exposicion permanente: aunque se borre, queda en el historial git y puede haber sido clonado o indexado","Solo afecta el dia que ocurre, cuando existe relacion previa, contexto aparentemente valido y no se observa un bloqueo tecnico inmediato","No tiene impacto si es privado luego, porque reduce friccion operativa y permite avanzar sin detener completamente el proceso","Se borra automaticamente, si se documenta la decision, se limita el alcance y se revisa posteriormente con el area responsable"],correct:0,exp:"Los secretos comprometidos deben rotarse inmediatamente. Herramientas como gitleaks, trufflehog y GitHub Advanced Security ayudan a prevenir.",fw:[18,-22,-15,-15],rep:[1,-1,-1,-1]},
-    {q:"En seguridad de aplicaciones web, cual es el principal riesgo del OWASP Top 10 actualmente (2021)?",joke:false,choices:["Broken Access Control (A01:2021), porque permite acciones o accesos no autorizados sobre recursos protegidos","Cross-Site Scripting, cuando se ejecuta codigo del lado del navegador por falta de validacion o codificacion","SQL Injection, cuando la aplicacion permite alterar consultas a base de datos mediante entradas no controladas","Buffer Overflow, cuando un proceso escribe fuera de los limites de memoria y puede alterar el flujo de ejecucion"],correct:0,exp:"La actualizacion 2021 movio Broken Access Control al primer lugar reflejando datos de incidentes reales.",fw:[15,-10,-10,-10],rep:[1,-1,-1,-1]},
-    {q:"Que es un Insider Threat y como se mitiga estructuralmente?",joke:false,choices:["Riesgo de empleados, contratistas o socios con acceso legitimo; se mitiga con SoD, monitoreo, UEBA y cultura","Es lo mismo que ataque externo, si se considera una excepcion temporal y se deja evidencia para validacion posterior","No se puede mitigar, si se considera una excepcion temporal y se deja evidencia para validacion posterior","Solo afecta gobierno, porque reduce friccion operativa y permite avanzar sin detener completamente el proceso"],correct:0,exp:"El insider puede ser malicioso, negligente o comprometido. Cada tipo requiere estrategias distintas.",fw:[18,-12,-12,-15],rep:[1,-1,-1,-1]},
-  ],
+  medium: [
+    {
+        "q": "En la organizacion, un sistema guarda informacion de clientes. Cual es la mejor decision?",
+        "joke": true,
+        "choices": [
+            "Definir quien es dueño del dato y quien puede verlo",
+            "Dar acceso a todos para trabajar mas rapido, pero sin validar el riesgo",
+            "Copiar la base a hojas personales",
+            "Ocultar el sistema a auditoria"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, un proveedor manejara datos internos. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Firmar acuerdos y revisar sus controles antes de compartir",
+            "Confiar solo por reputacion, pero sin validar el riesgo, pero sin validar el riesgo",
+            "Enviar datos antes de revisar contrato",
+            "Dar acceso amplio de prueba, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, una area quiere lanzar una app nueva. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Revisar seguridad desde el diseño, no al final",
+            "Probar seguridad solo el ultimo dia, pero sin validar el riesgo",
+            "Publicarla y corregir luego",
+            "Quitar validaciones para avanzar"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, un proceso no puede detenerse por muchas horas. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Definir cuanto tiempo puede estar caido y preparar recuperacion",
+            "Esperar al incidente para decidir, pero sin validar el riesgo, aunque no deja evidencia clara",
+            "Comprar mas computadoras sin plan",
+            "Guardar solo capturas del proceso"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, se aprueba un cambio en produccion. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Probarlo antes, documentarlo y tener plan de regreso",
+            "Cambiar directo sin aviso",
+            "Pedir permiso despues, pero sin validar el riesgo, pero sin validar el riesgo",
+            "Quitar logs para evitar ruido"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, un equipo de trabajo usa muchas apps de nube. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Inventariar apps y aplicar reglas de uso",
+            "Permitir cualquiera si ayuda al trabajo, pero sin validar el riesgo",
+            "Bloquear todo sin revisar",
+            "Pedir contraseñas por correo"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, un usuario pide permisos altos permanentes. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Dar permisos minimos y por tiempo limitado",
+            "Dar admin para evitar tickets, pero sin validar el riesgo",
+            "Compartir una cuenta admin",
+            "Quitar MFA para facilitar"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, una cuenta de servicio es usada por varias aplicaciones. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Separar cuentas para tener trazabilidad",
+            "Usar una cuenta compartida para todo, pero sin validar el riesgo",
+            "Poner la clave en el codigo",
+            "No cambiarla nunca"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, un equipo necesita respaldos. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Hacer respaldos separados y probar restauracion",
+            "Guardar copia en la misma carpeta, pero sin validar el riesgo",
+            "Respaldar solo al final del año",
+            "Confiar en que nunca fallara"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, una brecha afecta datos personales. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Activar el proceso de notificacion y respuesta",
+            "Esperar a ver si se hace publica, pero sin validar el riesgo",
+            "Borrar evidencias locales",
+            "Avisar solo por chat informal"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, un reporte de seguridad muestra riesgo alto. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Revisar impacto y decidir tratamiento formal",
+            "Ignorarlo si no hay incidente, pero sin validar el riesgo",
+            "Eliminar el reporte",
+            "Mandarlo sin responsable"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, se contrata un nuevo sistema SaaS. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Revisar acceso, datos, contrato y salida del servicio",
+            "Usarlo con cuentas personales, pero sin validar el riesgo",
+            "Subir datos antes de aprobar",
+            "Aceptar terminos sin revisar"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, un empleado cambia de puesto. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Actualizar permisos segun su nueva funcion",
+            "Mantener permisos antiguos por comodidad, pero sin validar el riesgo",
+            "Dar permisos de ambas areas para siempre",
+            "Prestar la cuenta anterior"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, el SOC reporta muchas alertas repetidas. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Ajustar reglas y priorizar las de mayor riesgo",
+            "Cerrar todas sin revisar",
+            "Desactivar alertas de noche, pero sin validar el riesgo",
+            "Eliminar logs antiguos"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, un sistema critico no tiene dueño claro. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Asignar responsable de negocio y tecnico",
+            "Dejarlo sin dueño si funciona, pero sin validar el riesgo",
+            "Asignarlo al primer usuario",
+            "Evitar documentarlo"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, un archivo contiene datos sensibles. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Clasificarlo y aplicar controles segun sensibilidad",
+            "Mandarlo por cualquier canal, pero sin validar el riesgo",
+            "Ponerle nombre generico",
+            "Guardarlo en escritorio"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, se requiere monitoreo de empleados en sistemas corporativos. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Avisarlo en politicas y hacerlo de forma proporcional",
+            "Hacerlo sin informar nunca",
+            "Monitorear equipos personales sin permiso, pero sin validar el riesgo",
+            "Publicar actividad de usuarios"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, se evalua aceptar un riesgo. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Documentar aceptacion, dueño y fecha de revision",
+            "Aceptarlo verbalmente",
+            "No informarlo a nadie",
+            "Eliminar el control sin registro, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, se necesita medir respuesta a incidentes. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Medir tiempo de deteccion y de recuperacion",
+            "Contar solo numero de computadoras, pero sin validar el riesgo",
+            "Medir color de reportes",
+            "Ignorar tendencias"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, una auditoria pide evidencia. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Entregar registros completos y trazables",
+            "Mandar capturas sueltas sin contexto, pero sin validar el riesgo",
+            "Modificar fechas para que coincidan",
+            "Borrar hallazgos menores"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, una persona no necesita todos los datos para su trabajo. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Aplicar necesidad de saber",
+            "Permitir acceso total por confianza",
+            "Mandar copia completa",
+            "Quitar contraseñas"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, un sistema falla de forma inesperada. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Debe quedar en modo seguro y negar accesos riesgosos",
+            "Debe abrir todo para no detener operacion",
+            "Debe mostrar claves al usuario",
+            "Debe borrar logs, pero sin validar el riesgo, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, se revisan logs de seguridad. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Centralizarlos y protegerlos contra cambios",
+            "Guardarlos solo localmente",
+            "Permitir que cualquiera los borre, pero sin validar el riesgo",
+            "Desactivarlos por espacio"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, una API no esta documentada. Cual es la mejor decision?",
+        "joke": true,
+        "choices": [
+            "Inventariarla y ponerla bajo controles",
+            "Dejarla porque nadie la conoce",
+            "Abrirla para pruebas publicas",
+            "Ocultarla del equipo de seguridad, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, una app valida datos solo en pantalla del usuario. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Validar tambien en el servidor",
+            "Confiar en el navegador",
+            "Quitar validacion para ser rapido",
+            "Guardar errores en pantalla"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, un proyecto maneja tarjetas bancarias. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Reducir datos guardados y protegerlos con controles fuertes",
+            "Guardar CVV para comodidad, pero sin validar el riesgo, pero sin validar el riesgo",
+            "Mandar tarjetas por correo, pero sin validar el riesgo",
+            "Copiar datos a Excel personal"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, un directivo pide acceso a todo por urgencia. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Dar acceso necesario y aprobado",
+            "Dar todo sin fecha limite, pero sin validar el riesgo",
+            "Quitar revisiones",
+            "Compartir otra cuenta"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, un proceso depende de una sola persona. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Separar funciones y documentar respaldo",
+            "Aceptar el riesgo sin plan",
+            "Dar todas las claves a esa persona, pero sin validar el riesgo",
+            "No capacitar a nadie mas"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, una nube permite acceso desde cualquier pais. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Aplicar reglas por riesgo, ubicacion y dispositivo",
+            "Permitir todo por facilidad",
+            "Quitar MFA, pero sin validar el riesgo, pero sin validar el riesgo",
+            "Usar una clave compartida"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, un sistema viejo no se puede parchar. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Aislarlo, monitorearlo y planear reemplazo",
+            "Exponerlo igual",
+            "Apagar controles, pero sin validar el riesgo, aunque no deja evidencia clara",
+            "No documentarlo"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, se revisa continuidad del negocio. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Probar planes con ejercicios y evidencias",
+            "Leer el plan una vez al año, pero sin validar el riesgo",
+            "No involucrar areas",
+            "Asumir que TI resuelve todo"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, una empresa quiere cumplir norma. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Cumplir requisitos y tambien revisar riesgos reales",
+            "Pensar que cumplir es suficiente siempre, pero sin validar el riesgo",
+            "Hacer solo documentos",
+            "Ignorar amenazas actuales"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, se detecta cuenta inactiva con acceso. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Deshabilitarla y revisar actividad",
+            "Mantenerla por si se usa luego, pero sin validar el riesgo",
+            "Cambiarle el nombre",
+            "Compartirla temporalmente"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, un contrato no exige aviso de incidentes. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Agregar clausula de notificacion y tiempos",
+            "Confiar en buena voluntad",
+            "No pedir auditoria",
+            "Evitar hablar de incidentes, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, se compra herramienta de seguridad nueva. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Definir problema, responsables y medicion",
+            "Comprar por moda",
+            "Instalar sin proceso, pero sin validar el riesgo",
+            "Usarla sin capacitar"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, un empleado usa datos para otro fin. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Revisar privacidad y finalidad autorizada",
+            "Permitirlo si parece util, pero sin validar el riesgo",
+            "Copiar todos los datos",
+            "Omitir aviso al usuario"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, se eliminan discos duros antiguos. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Usar borrado seguro o destruccion certificada",
+            "Tirarlos a reciclaje sin borrar, pero sin validar el riesgo",
+            "Formatear rapido y listo",
+            "Venderlos tal cual"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, un sistema de pagos requiere alta disponibilidad. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Definir RTO y RPO segun negocio",
+            "Usar una sola copia",
+            "No probar recuperacion",
+            "Depender de memoria del equipo, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, un usuario reporta posible phishing. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Agradecer, analizar y bloquear si aplica",
+            "Culpar al usuario",
+            "Ignorar por ser simulacro",
+            "Reenviar el correo a todos, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, un equipo tiene privilegios locales innecesarios. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Retirar privilegios y usar elevacion controlada",
+            "Dejar admin permanente, pero sin validar el riesgo",
+            "Compartir admin local",
+            "Desactivar auditoria"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, un servicio requiere una clave secreta. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Guardarla en gestor de secretos",
+            "Ponerla en el codigo",
+            "Mandarla por chat",
+            "Usarla en todos los ambientes, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, se planea usar IA con datos internos. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Revisar que datos se suben y reglas de uso",
+            "Subir bases completas para probar, pero sin validar el riesgo",
+            "Usar cuentas personales",
+            "Copiar datos de clientes"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, un equipo de ventas usa hojas con datos de clientes. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Definir almacenamiento oficial y acceso controlado",
+            "Compartir por correo personal",
+            "Duplicar versiones, pero sin validar el riesgo",
+            "Quitar protecciones, pero sin validar el riesgo, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, se recibe hallazgo de auditoria. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Asignar dueño, fecha y plan de remediacion",
+            "Archivarlo sin accion",
+            "Discutir sin evidencia, pero sin validar el riesgo",
+            "Eliminarlo del tablero"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, un usuario necesita acceso temporal. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Dar acceso con vencimiento",
+            "Dar acceso permanente, pero sin validar el riesgo",
+            "Prestar cuenta",
+            "Quitar aprobaciones"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, se detecta fuga de informacion impresa. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Activar investigacion y reforzar impresion segura",
+            "Culpar sin evidencia",
+            "Ocultar el caso, pero sin validar el riesgo",
+            "Publicar nombres, pero sin validar el riesgo, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, el area pide excepcion a una politica. Cual es la mejor decision?",
+        "joke": true,
+        "choices": [
+            "Documentar motivo, riesgo, controles y fecha fin",
+            "Aprobar verbalmente",
+            "Dejarla indefinida",
+            "No avisar a seguridad, pero sin validar el riesgo, aunque no deja evidencia clara"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, una aplicacion externa pide demasiados permisos. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Revisar necesidad y negar permisos excesivos",
+            "Aceptar todo para terminar, pero sin validar el riesgo",
+            "Usarla con datos reales",
+            "Ignorar permisos"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, se necesita capacitar usuarios. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Usar ejemplos claros y medir aprendizaje",
+            "Enviar solo un PDF largo",
+            "Hacerlo una vez y olvidar, pero sin validar el riesgo",
+            "Usar lenguaje muy tecnico"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, un sistema nuevo no tiene logs suficientes. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Definir eventos importantes antes de operar",
+            "Activar logs despues del primer incidente, pero sin validar el riesgo",
+            "Guardar solo errores visuales",
+            "No registrar accesos"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, el area comparte datos con un tercero. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Minimizar datos y usar canal aprobado",
+            "Mandar todo para que el tercero decida",
+            "No firmar acuerdo",
+            "Usar correos personales"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, se detecta configuracion distinta entre equipos. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Aplicar una configuracion base segura",
+            "Dejar cada equipo distinto, pero sin validar el riesgo",
+            "Corregir solo los visibles",
+            "No documentar cambios"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, un proyecto usa codigo abierto. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Revisar dependencias y mantenerlas actualizadas",
+            "Usar cualquier paquete popular",
+            "Ignorar licencias y vulnerabilidades, pero sin validar el riesgo",
+            "Copiar codigo sin revisar"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, se planea acceso remoto. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Usar MFA, VPN o acceso seguro y registro",
+            "Abrir escritorio remoto a internet, pero sin validar el riesgo",
+            "Compartir una clave comun",
+            "Quitar bloqueo por intentos"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, un sistema muestra informacion de errores. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Ocultar detalles tecnicos al usuario y registrar internamente",
+            "Mostrar todo para ayudar, pero sin validar el riesgo, pero sin validar el riesgo",
+            "Mandar errores por correo publico",
+            "No guardar registro, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, un usuario pide borrar datos personales. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Revisar proceso de privacidad y atender segun politica",
+            "Ignorarlo si es complicado",
+            "Borrar sin validar identidad, pero sin validar el riesgo, aunque no deja evidencia clara",
+            "Mandar datos a cualquiera"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, un proveedor termina contrato. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Retirar accesos y confirmar devolucion o borrado de datos",
+            "Dejar accesos por si vuelve",
+            "No pedir evidencia, pero sin validar el riesgo",
+            "Permitir uso de datos, pero sin validar el riesgo, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, un equipo trabaja fuera de oficina. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Aplicar controles de equipo, conexion y datos",
+            "Permitir cualquier red",
+            "Eliminar MFA, pero sin validar el riesgo, pero sin validar el riesgo",
+            "Guardar archivos locales sin control"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, una cuenta admin no usa MFA. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Activar MFA fuerte de inmediato",
+            "Dejarla por ser interna, pero sin validar el riesgo",
+            "Usar clave mas corta",
+            "Compartirla con soporte"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, un sistema recibe datos de clientes. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Validar datos y protegerlos desde entrada",
+            "Confiar en que todos escriben bien, pero sin validar el riesgo",
+            "Guardar datos sin revisar",
+            "Mostrar datos completos en logs"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, se analiza un incidente. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Preservar evidencia antes de limpiar",
+            "Formatear de inmediato siempre",
+            "Borrar archivos sospechosos primero, pero sin validar el riesgo",
+            "Reiniciar sin avisar"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, una solucion de nube ofrece muchas opciones. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Configurar minimo privilegio y revisar valores por defecto",
+            "Aceptar todo por defecto, pero sin validar el riesgo, pero sin validar el riesgo",
+            "Abrir acceso publico, pero sin validar el riesgo",
+            "Usar claves compartidas, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, un usuario ya no requiere un permiso. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Retirarlo en la revision periodica",
+            "Dejarlo por si acaso",
+            "Darlo a su equipo completo, pero sin validar el riesgo",
+            "No revisar permisos"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, se evalua seguro cyber. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Verlo como transferencia parcial, no sustituto de controles",
+            "Creer que elimina riesgos, pero sin validar el riesgo, pero sin validar el riesgo",
+            "Quitar respaldos, pero sin validar el riesgo",
+            "Reducir monitoreo, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, un indicador de amenaza llega al SOC. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Validar si aplica al entorno y crear deteccion",
+            "Copiarlo sin revisar",
+            "Ignorarlo siempre",
+            "Publicarlo en abierto, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, un equipo usa puertos no necesarios. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Cerrar servicios que no se usan",
+            "Abrir todos para pruebas, pero sin validar el riesgo",
+            "No revisar puertos",
+            "Permitir acceso publico"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, se prepara reporte a direccion. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Explicar riesgo en lenguaje de negocio",
+            "Usar solo siglas tecnicas, pero sin validar el riesgo",
+            "Omitir impacto",
+            "Mostrar solo herramientas"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, se implementa nueva politica. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Comunicarla, capacitar y medir cumplimiento",
+            "Publicarla sin explicar",
+            "Aplicarla solo a nuevos usuarios, pero sin validar el riesgo",
+            "No revisar excepciones"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, una cuenta tiene muchos intentos fallidos. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Investigar posible ataque o contraseña comprometida",
+            "Ignorar si al final entra",
+            "Bajar bloqueo, pero sin validar el riesgo",
+            "Quitar registro, pero sin validar el riesgo, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, un sistema esta expuesto a internet. Cual es la mejor decision?",
+        "joke": true,
+        "choices": [
+            "Reducir superficie, parchar y monitorear",
+            "Asumir que nadie lo encontrara, pero sin validar el riesgo",
+            "Ocultar nombre del servidor",
+            "Quitar autenticacion"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, un archivo importante se borra por error. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Restaurar desde respaldo probado",
+            "Buscar copias en chats personales",
+            "Pedir a todos que revisen USBs",
+            "Crear otro desde cero sin analizar"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, se diseña proceso de baja de personal. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Cerrar accesos, recuperar equipos y validar pendientes",
+            "Esperar a fin de mes, pero sin validar el riesgo, pero sin validar el riesgo",
+            "Dejar correo activo por siempre",
+            "Dar la cuenta al reemplazo"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, un sistema requiere datos de salud. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Aplicar controles reforzados y limitar acceso",
+            "Tratarlos como datos normales, pero sin validar el riesgo",
+            "Mandarlos por correo abierto",
+            "Usarlos para otros fines"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, se sospecha uso de cuenta compartida. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Eliminarla y crear identidades individuales",
+            "Mantenerla por comodidad",
+            "Cambiar clave una vez al año",
+            "Usarla solo en emergencias sin registro, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, un proceso critico no tiene responsable suplente. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Nombrar respaldo y documentar conocimiento",
+            "Depender de una persona",
+            "Esperar vacaciones para resolver, pero sin validar el riesgo",
+            "Quitar controles"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, se revisa riesgo de correo externo. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Configurar protecciones y educar usuarios",
+            "Bloquear todo correo externo sin analizar, pero sin validar el riesgo",
+            "Permitir adjuntos siempre",
+            "Desactivar filtros"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, una persona reporta error de seguridad. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Recibirlo sin culpar y guiar el reporte",
+            "Ignorarlo si no es tecnico, pero sin validar el riesgo",
+            "Pedir que no avise",
+            "Regañarlo por preguntar"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, se detecta actividad fuera de horario. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Revisar si es normal o sospechosa",
+            "Ignorar por ser de noche, pero sin validar el riesgo",
+            "Cerrar todas las cuentas",
+            "Borrar logs"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, se crea nueva base de datos. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Definir cifrado, accesos y respaldos desde el inicio",
+            "Subir datos y configurar despues",
+            "Usar clave compartida, pero sin validar el riesgo, pero sin validar el riesgo",
+            "No registrar accesos, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, un reporte contiene demasiados datos personales. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Reducir datos al minimo necesario",
+            "Agregar mas datos por si sirven, pero sin validar el riesgo",
+            "Enviar version completa a todos",
+            "Dejarlo publico"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, se detecta correo con marca conocida. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Validar remitente y enlaces, no solo el logo",
+            "Confiar por el logo",
+            "Hacer clic si se ve bonito, pero sin validar el riesgo",
+            "Responder con datos"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, un equipo no cumple configuracion base. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Corregirlo o aislarlo hasta cumplir",
+            "Permitirlo por ser urgente, pero sin validar el riesgo",
+            "Eliminarlo del inventario",
+            "Apagar alertas"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, un usuario solicita excepcion de MFA. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Evaluar riesgo y usar alternativa aprobada si procede",
+            "Quitar MFA sin fecha fin",
+            "Compartir token de otro usuario",
+            "Ignorar el caso, pero sin validar el riesgo, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, una aplicacion guarda datos sin cifrar. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Evaluar sensibilidad y aplicar cifrado adecuado",
+            "Dejarlo si nadie lo ve",
+            "Cambiar solo el nombre del archivo, pero sin validar el riesgo",
+            "Moverlo a otra carpeta"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, un equipo de proyecto cambia proveedores. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Retirar accesos del proveedor anterior",
+            "Mantenerlos hasta nuevo aviso",
+            "Pasar cuentas al nuevo proveedor, pero sin validar el riesgo",
+            "No revisar contratos"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, una herramienta nueva manda datos a internet. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Revisar destino y aprobacion antes de usarla",
+            "Permitirla si funciona bien, pero sin validar el riesgo",
+            "Ignorar trafico externo",
+            "Instalarla en todos"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, un plan de respuesta no se ha probado. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Hacer ejercicio de mesa y corregir huecos",
+            "Esperar un incidente real, pero sin validar el riesgo",
+            "Guardar el plan en PDF",
+            "Revisarlo solo una vez"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, se quiere reducir riesgo de fraude interno. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Separar funciones, registrar acciones y revisar permisos",
+            "Confiar solo en buena fe, pero sin validar el riesgo, pero sin validar el riesgo",
+            "Dar menos vacaciones, pero sin validar el riesgo",
+            "Quitar auditorias, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, un sistema tiene datos duplicados en muchas carpetas. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Centralizar y controlar copias",
+            "Dejar copias por comodidad, pero sin validar el riesgo",
+            "Mandar todo por correo",
+            "No clasificar informacion"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, se evalua una compra de tecnologia. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Incluir seguridad, privacidad y soporte desde el inicio",
+            "Comprar primero y revisar despues",
+            "Ignorar contratos, pero sin validar el riesgo, pero sin validar el riesgo",
+            "Usar prueba con datos reales"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, la direccion pregunta por ciberseguridad. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Presentar riesgos, impacto y avance de controles",
+            "Mostrar solo nombres de herramientas",
+            "Usar solo lenguaje tecnico",
+            "Ocultar problemas, pero sin validar el riesgo, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, un empleado reporta perdida de celular corporativo. Cual es la mejor decision?",
+        "joke": false,
+        "choices": [
+            "Bloquear o borrar remoto y registrar incidente",
+            "Esperar a que lo encuentre, pero sin validar el riesgo",
+            "Pedirle que compre otro",
+            "No avisar a nadie"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, un proceso requiere aprobacion doble. Cual es la mejor decision?",
+        "joke": true,
+        "choices": [
+            "Mantenerla para acciones de alto impacto",
+            "Quitarla por rapidez",
+            "Permitir aprobacion propia",
+            "Hacerla por mensaje informal, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, un sistema guarda informacion de clientes. Que accion corresponde?",
+        "joke": true,
+        "choices": [
+            "Definir quien es dueño del dato y quien puede verlo",
+            "Dar acceso a todos para trabajar mas rapido, pero sin validar el riesgo",
+            "Copiar la base a hojas personales",
+            "Ocultar el sistema a auditoria"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara. Aplica el mismo principio en casos similares.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, un proveedor manejara datos internos. Que accion corresponde?",
+        "joke": false,
+        "choices": [
+            "Firmar acuerdos y revisar sus controles antes de compartir",
+            "Confiar solo por reputacion, pero sin validar el riesgo, pero sin validar el riesgo",
+            "Enviar datos antes de revisar contrato",
+            "Dar acceso amplio de prueba, pero sin validar el riesgo"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara. Aplica el mismo principio en casos similares.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, una area quiere lanzar una app nueva. Que accion corresponde?",
+        "joke": false,
+        "choices": [
+            "Revisar seguridad desde el diseño, no al final",
+            "Probar seguridad solo el ultimo dia, pero sin validar el riesgo",
+            "Publicarla y corregir luego",
+            "Quitar validaciones para avanzar"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara. Aplica el mismo principio en casos similares.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, un proceso no puede detenerse por muchas horas. Que accion corresponde?",
+        "joke": false,
+        "choices": [
+            "Definir cuanto tiempo puede estar caido y preparar recuperacion",
+            "Esperar al incidente para decidir, pero sin validar el riesgo, aunque no deja evidencia clara",
+            "Comprar mas computadoras sin plan",
+            "Guardar solo capturas del proceso"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara. Aplica el mismo principio en casos similares.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, se aprueba un cambio en produccion. Que accion corresponde?",
+        "joke": false,
+        "choices": [
+            "Probarlo antes, documentarlo y tener plan de regreso",
+            "Cambiar directo sin aviso",
+            "Pedir permiso despues, pero sin validar el riesgo, pero sin validar el riesgo",
+            "Quitar logs para evitar ruido"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara. Aplica el mismo principio en casos similares.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, un equipo de trabajo usa muchas apps de nube. Que accion corresponde?",
+        "joke": false,
+        "choices": [
+            "Inventariar apps y aplicar reglas de uso",
+            "Permitir cualquiera si ayuda al trabajo, pero sin validar el riesgo",
+            "Bloquear todo sin revisar",
+            "Pedir contraseñas por correo"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara. Aplica el mismo principio en casos similares.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    },
+    {
+        "q": "En la organizacion, un usuario pide permisos altos permanentes. Que accion corresponde?",
+        "joke": false,
+        "choices": [
+            "Dar permisos minimos y por tiempo limitado",
+            "Dar admin para evitar tickets, pero sin validar el riesgo",
+            "Compartir una cuenta admin",
+            "Quitar MFA para facilitar"
+        ],
+        "correct": 0,
+        "exp": "La decision correcta reduce riesgo sin frenar el trabajo y deja trazabilidad clara. Aplica el mismo principio en casos similares.",
+        "fw": [
+            18,
+            -14,
+            -12,
+            -12
+        ],
+        "rep": [
+            1,
+            -1,
+            -1,
+            -1
+        ]
+    }
+]
 };
 
-
 /**
- * Mezcla las opciones de cada pregunta en tiempo de carga.
- * Mantiene alineados:
- * - choices
- * - correct
- * - fw
- * - rep
- *
- * Objetivo: evitar que la respuesta correcta se delate por estar siempre en la posicion 0.
+ * Baraja opciones conservando correct, fw y rep.
+ * Asi la respuesta correcta no queda siempre en la posicion 0.
  */
 function shuffleQuestionOptions(question) {
   const items = question.choices.map((choice, index) => ({
