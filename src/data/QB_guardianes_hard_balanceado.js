@@ -1,2447 +1,2412 @@
-// Banco de preguntas Guardianes - Nivel hard
-// Tono usuario final: claro, directo y poco tecnico.
-// Total: 100 preguntas.
+// Banco de preguntas Guardianes - Nivel difícil
+// Revaluado: 100 preguntas únicas, tono usuario final y respuestas coherentes.
+// Estructura compatible con src/data/questions.js
 
 const QB_RAW = {
-  hard: [
-    {
-        "q": "Escenario critico: varias cuentas intentan entrar con la misma contraseña comun. Cual es la accion mas segura?",
-        "joke": true,
-        "choices": [
-            "Bloquear el patron, forzar MFA y revisar cuentas afectadas",
-            "Cambiar solo la clave del primer usuario",
-            "Ignorar si nadie entro, pero sin validar el riesgo",
-            "Quitar bloqueo por intentos, pero sin validar el riesgo, pero sin validar el riesgo"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un atacante entro por la cuenta de un proveedor. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Cortar acceso del proveedor y revisar que pudo ver o cambiar",
-            "Borrar la cuenta sin revisar, pero sin validar el riesgo, pero sin validar el riesgo",
-            "Pedir disculpa y seguir, pero sin validar el riesgo",
-            "Dar acceso nuevo para no afectar servicio"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: aparece una regla que reenvia correos a un dominio externo. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Desactivar la regla, revisar la cuenta y buscar otros cambios",
-            "Dejarla si el usuario no se queja",
-            "Cambiar asunto de correos, pero sin validar el riesgo, pero sin validar el riesgo",
-            "Borrar mensajes antiguos, pero sin validar el riesgo"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: los respaldos tambien fueron cifrados por ransomware. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Usar respaldos aislados e inmutables en la estrategia",
-            "Hacer mas respaldos en el mismo servidor, pero sin validar el riesgo",
-            "Guardar respaldos sin control",
-            "Pagar de inmediato sin analizar"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un servicio critico queda expuesto a internet por error. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Cerrar exposicion, revisar accesos y buscar actividad rara",
-            "Ocultarlo cambiando nombre, pero sin validar el riesgo, pero sin validar el riesgo",
-            "Esperar a la ventana mensual",
-            "Publicar aviso interno nada mas"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: una cuenta con permisos altos inicia sesion desde ubicacion rara. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Bloquear sesion y validar identidad con el usuario",
-            "Ignorar si la contraseña es correcta",
-            "Dar mas permisos, pero sin validar el riesgo, pero sin validar el riesgo",
-            "Borrar alerta, pero sin validar el riesgo"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un sistema de nube tiene llaves publicas en un repositorio. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Revocar llaves, revisar uso y mover secretos a un gestor",
-            "Cambiar nombre del repositorio",
-            "Borrar solo el commit visible",
-            "Pedir que nadie mire, pero sin validar el riesgo, pero sin validar el riesgo"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un colaborador usa una herramienta IA publica con datos internos. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Detener el uso y revisar que datos se compartieron",
-            "Permitirlo si dio buen resultado",
-            "Subir mas datos para mejorar respuesta, pero sin validar el riesgo",
-            "Copiar respuestas sin revisar"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: se detecta trafico raro saliendo de un equipo. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Aislar el equipo y revisar posible malware o fuga",
-            "Reiniciar y continuar",
-            "Desactivar monitoreo",
-            "Cambiar el cable de red, pero sin validar el riesgo, aunque no deja evidencia clara"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un proveedor avisa tarde que tuvo una brecha. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Activar plan de terceros y revisar obligaciones contractuales",
-            "Aceptar la explicacion sin evidencia, pero sin validar el riesgo",
-            "Ignorar si el servicio funciona",
-            "Compartir mas datos para investigar"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: la cuenta de un directivo manda solicitudes extrañas. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Validar por otro canal y revisar posible compromiso",
-            "Cumplir porque es directivo, pero sin validar el riesgo",
-            "Responder con informacion",
-            "Reenviar a todo el equipo"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un usuario reporta que aprobo una solicitud MFA por error. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Cambiar credenciales, cerrar sesiones y revisar actividad",
-            "Decirle que tenga mas cuidado y cerrar",
-            "Quitar MFA, pero sin validar el riesgo, aunque no deja evidencia clara",
-            "Ignorar si ya paso, pero sin validar el riesgo"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: se descubre una cuenta admin compartida. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Eliminar uso compartido y crear cuentas individuales",
-            "Cambiar la clave y seguir",
-            "Compartirla solo por correo seguro, pero sin validar el riesgo",
-            "Usarla solo en emergencia"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un sistema viejo no soporta MFA. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Aislarlo y crear controles compensatorios mientras se reemplaza",
-            "Dejarlo igual por ser viejo, pero sin validar el riesgo",
-            "Publicarlo sin restricciones, pero sin validar el riesgo, pero sin validar el riesgo",
-            "Quitar contraseña, pero sin validar el riesgo"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: se detectan muchos archivos comprimidos saliendo por correo. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Bloquear envio y revisar si hay fuga de datos",
-            "Permitirlo por productividad",
-            "Cambiar extension del archivo, pero sin validar el riesgo",
-            "Borrar registros"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: alguien intenta iniciar sesion a muchas cuentas lentamente. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Tratarlo como password spraying y ajustar controles",
-            "Ignorarlo por ser lento",
-            "Bajar alertas, pero sin validar el riesgo",
-            "Reiniciar servidor, pero sin validar el riesgo, pero sin validar el riesgo"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: una aplicacion critica no registra accesos de administradores. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Activar registro y revisar acciones privilegiadas",
-            "Confiar en los admins",
-            "Guardar capturas manuales, pero sin validar el riesgo",
-            "Borrar usuarios viejos"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un equipo de desarrollo usa paquetes de internet sin revisar. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Revisar dependencias y usar repositorios aprobados",
-            "Instalar todo paquete popular",
-            "Copiar codigo sin fuente",
-            "Desactivar analisis, pero sin validar el riesgo, pero sin validar el riesgo"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: una API permite ver datos cambiando un numero en la URL. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Corregir autorizacion por usuario y revisar accesos previos",
-            "Ocultar el numero con otro nombre",
-            "Pedir a usuarios no hacerlo, pero sin validar el riesgo",
-            "Cambiar colores de la pagina, pero sin validar el riesgo, pero sin validar el riesgo"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: se detecta correo que roba sesion aunque habia MFA. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Usar MFA resistente a phishing y revisar tokens activos",
-            "Quitar MFA por no servir, pero sin validar el riesgo, pero sin validar el riesgo",
-            "Cambiar logo del portal, pero sin validar el riesgo",
-            "Ignorar si paso una vez, pero sin validar el riesgo"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un atacante creo una cuenta local en un servidor. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Deshabilitarla, revisar origen y buscar persistencia",
-            "Cambiarle nombre, pero sin validar el riesgo",
-            "Usarla para soporte, pero sin validar el riesgo, pero sin validar el riesgo",
-            "Borrar solo el acceso directo"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: hay demasiados permisos en carpetas compartidas. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Aplicar minimo privilegio y revisar accesos reales",
-            "Dar acceso a todos, pero sin validar el riesgo, pero sin validar el riesgo",
-            "Mover carpetas a escritorio",
-            "Quitar auditoria, pero sin validar el riesgo"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un sistema de pagos muestra errores con datos internos. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Corregir mensajes y registrar detalles solo internamente",
-            "Mostrar mas detalles al usuario",
-            "Borrar logs, pero sin validar el riesgo, pero sin validar el riesgo",
-            "Ignorar si solo pasa a veces"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un celular corporativo perdido seguia con correo abierto. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Bloquear dispositivo, cerrar sesiones y revisar acceso",
-            "Esperar a que lo devuelvan",
-            "Mandar mensaje al telefono",
-            "Cambiar solo PIN, pero sin validar el riesgo, pero sin validar el riesgo"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un sitio falso copia el login corporativo. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Bloquear dominio, avisar usuarios y revisar credenciales usadas",
-            "Solo cambiar diseño del login, pero sin validar el riesgo",
-            "Esperar que nadie caiga, pero sin validar el riesgo",
-            "Compartir el link para advertir, pero sin validar el riesgo, pero sin validar el riesgo"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un archivo con macros llego a muchas personas. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Bloquearlo, buscar ejecuciones y avisar a usuarios",
-            "Pedir que no lo abran si quieren, pero sin validar el riesgo",
-            "Abrirlo en una laptop vieja",
-            "Borrar solo tu copia"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un usuario tiene permisos que no corresponden a su area. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Corregir permisos y revisar quien los autorizo",
-            "Dejarlos por si ayudan",
-            "Ocultarlos en el sistema, pero sin validar el riesgo",
-            "Dar los mismos a todos"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un sistema de produccion no tiene plan de regreso. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "No cambiar hasta tener rollback probado",
-            "Cambiar y cruzar dedos",
-            "Guardar una captura antes, pero sin validar el riesgo",
-            "Avisar despues"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: se sospecha fuga por impresiones. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Revisar logs de impresion y activar impresion segura",
-            "Quitar todas las impresoras",
-            "No investigar para evitar conflictos",
-            "Cambiar papel, pero sin validar el riesgo, pero sin validar el riesgo"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un correo de proveedor trae factura con enlace raro. Cual es la accion mas segura?",
-        "joke": true,
-        "choices": [
-            "Validar por canal conocido antes de descargar",
-            "Abrir por urgencia",
-            "Mandarlo a contabilidad, pero sin validar el riesgo",
-            "Descargar en casa"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un usuario conecta equipo personal a red interna. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Aplicar control de acceso a red y revisar el equipo",
-            "Permitir si trabaja bien",
-            "Ignorar si es visitante",
-            "Compartir clave WiFi interna, pero sin validar el riesgo"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un tablero muestra datos de clientes a demasiadas areas. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Limitar vistas segun necesidad de negocio",
-            "Dejarlo abierto para transparencia, pero sin validar el riesgo",
-            "Exportarlo a Excel",
-            "Quitar contraseñas"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: una alerta critica se repite cada noche. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Investigar causa y documentar respuesta",
-            "Silenciarla sin revisar",
-            "Eliminar regla",
-            "Apagar monitoreo nocturno, pero sin validar el riesgo"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: una cuenta de servicio no rota clave desde hace años. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Rotarla con plan y usar gestor de secretos",
-            "Dejarla para no romper sistemas, pero sin validar el riesgo",
-            "Compartirla por correo",
-            "Ponerla en documento"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: se detecta actividad rara en horarios de vacaciones. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Verificar si el usuario esta ausente y cerrar riesgo",
-            "Ignorar por ser vacaciones",
-            "Cambiar nombre de usuario",
-            "Borrar eventos, pero sin validar el riesgo, pero sin validar el riesgo"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un proveedor requiere acceso remoto permanente. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Aprobar acceso temporal, registrado y revisado",
-            "Abrir VPN permanente, pero sin validar el riesgo, aunque no deja evidencia clara",
-            "Compartir una cuenta",
-            "Quitar monitoreo"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: se reciben muchas quejas por correos sospechosos. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Buscar campaña activa y bloquear indicadores",
-            "Responder uno por uno sin investigar, pero sin validar el riesgo",
-            "Pedir que borren todo",
-            "Desactivar correo externo"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un empleado descarga base completa sin razon clara. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Validar necesidad y revisar posible fuga",
-            "Asumir que era trabajo normal, pero sin validar el riesgo",
-            "Aumentar cuota de descarga",
-            "Borrar alerta"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un control falla y permite acceso abierto. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Cerrar acceso por defecto hasta corregir",
-            "Dejar abierto para no afectar, pero sin validar el riesgo",
-            "Avisar sin cambiar nada",
-            "Crear excepcion permanente"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un servidor no aparece en inventario. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Inventariarlo, asignar dueño y revisar exposicion",
-            "Ignorarlo porque funciona",
-            "Apagarlo sin revisar",
-            "Cambiarle IP, pero sin validar el riesgo, pero sin validar el riesgo"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un reporte de cumplimiento oculta hallazgos. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Corregir reporte y mantener evidencia real",
-            "Aceptar version bonita, pero sin validar el riesgo",
-            "Eliminar pruebas",
-            "Cambiar fechas"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un usuario usa correo personal para trabajo. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Migrar comunicacion a canal corporativo",
-            "Permitirlo si es rapido",
-            "Reenviar datos sensibles, pero sin validar el riesgo",
-            "Guardar claves ahi"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un equipo admin usa la misma clave local. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Usar administracion segura de contraseñas locales",
-            "Mantener por facilidad, pero sin validar el riesgo, aunque no deja evidencia clara",
-            "Poner clave en manual",
-            "Compartirla con todos"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: una app movil corporativa guarda datos sin bloqueo. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Exigir bloqueo, cifrado y borrado remoto",
-            "Confiar en el usuario, pero sin validar el riesgo",
-            "Guardar todo local",
-            "No pedir PIN"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: se requiere compartir datos con auditor externo. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Compartir solo lo necesario por canal seguro",
-            "Mandar base completa",
-            "Usar correo personal",
-            "Quitar marcas de clasificacion, pero sin validar el riesgo"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: se detecta un enlace malicioso despues de varios clics. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Identificar usuarios afectados y cerrar sesiones si aplica",
-            "Solo borrar el correo original",
-            "No avisar para evitar panico",
-            "Cambiar asunto, pero sin validar el riesgo, pero sin validar el riesgo"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un sistema tiene usuarios genericos como ventas1. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Cambiar a usuarios individuales trazables",
-            "Seguir usando genericos",
-            "Compartir clave por turno, pero sin validar el riesgo",
-            "No registrar acciones"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un incidente afecta a clientes. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Coordinar comunicacion legal, negocio y seguridad",
-            "Publicar detalles sin validar, pero sin validar el riesgo",
-            "Ocultarlo indefinidamente",
-            "Culpar al proveedor"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un archivo sensible esta publico por enlace. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Revocar enlace y revisar accesos previos",
-            "Cambiar nombre del archivo, pero sin validar el riesgo",
-            "Esperar que nadie lo abra",
-            "Mandar otro enlace"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un empleado instala extension de navegador desconocida. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Revisar permisos y bloquear extensiones no aprobadas",
-            "Permitir todas, pero sin validar el riesgo",
-            "Ignorar si es gratis, pero sin validar el riesgo, pero sin validar el riesgo",
-            "Pedir que la use solo poco"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un sistema critico depende de una clave en texto plano. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Moverla a gestor de secretos y rotarla",
-            "Ocultarla cambiando nombre, pero sin validar el riesgo",
-            "Dejarla porque funciona",
-            "Mandarla a soporte"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un ataque usa marca corporativa en redes sociales. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Reportar perfiles falsos y avisar a usuarios",
-            "Ignorar redes sociales",
-            "Responder publicamente con datos, pero sin validar el riesgo",
-            "Compartir el perfil"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un colaborador copia datos a USB. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Revisar autorizacion y aplicar controles de medios",
-            "Permitir si es rapido",
-            "No registrar el evento",
-            "Usar USB personal, pero sin validar el riesgo, pero sin validar el riesgo"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un nuevo sistema no tiene pruebas de seguridad. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "No pasarlo a produccion sin revision minima",
-            "Publicarlo y revisar despues, pero sin validar el riesgo",
-            "Confiar en proveedor",
-            "Quitar autenticacion"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un servidor tiene muchas cuentas antiguas. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Deshabilitar cuentas sin uso y revisar permisos",
-            "Mantenerlas por historia, pero sin validar el riesgo",
-            "Cambiarles nombre",
-            "Ignorar si no molestan"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un ejecutivo pide saltar controles por urgencia. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Escalar y buscar alternativa segura",
-            "Saltar controles sin registro, pero sin validar el riesgo",
-            "Prestar cuenta admin",
-            "Quitar logs"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: se detecta informacion confidencial en papelera comun. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Investigar y reforzar destruccion segura",
-            "Ignorar si ya esta rota, pero sin validar el riesgo",
-            "Tomar foto y compartir",
-            "Mezclar con mas basura"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un equipo se conecta a paises no esperados. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Revisar sesion, dispositivo y cuenta afectada",
-            "Bloquear todo internet, pero sin validar el riesgo",
-            "Ignorar si usa VPN",
-            "Cambiar zona horaria"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: se planea migracion a nube. Cual es la accion mas segura?",
-        "joke": true,
-        "choices": [
-            "Definir seguridad, identidad y registros desde el inicio",
-            "Subir todo y configurar luego",
-            "Usar una cuenta admin, pero sin validar el riesgo, pero sin validar el riesgo",
-            "No hacer inventario, pero sin validar el riesgo"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un tercero pide datos para soporte. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Validar identidad, contrato y minimo necesario",
-            "Enviar todo para acelerar",
-            "Usar WhatsApp, pero sin validar el riesgo, pero sin validar el riesgo",
-            "No registrar entrega"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: una alerta muestra uso de herramienta remota no aprobada. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Aislar equipo y validar si hubo acceso no autorizado",
-            "Permitir si soluciona problemas",
-            "Cambiar icono, pero sin validar el riesgo",
-            "Borrar acceso directo, pero sin validar el riesgo, pero sin validar el riesgo"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un sistema muestra todos los clientes a cualquier usuario. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Corregir permisos por rol y necesidad",
-            "Dejarlo para eficiencia",
-            "Pedir que no miren",
-            "Ocultar columnas visualmente, pero sin validar el riesgo"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: una clave de API queda en historial de chat. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Revocarla y crear una nueva por canal seguro",
-            "Borrar mensaje y seguir, pero sin validar el riesgo",
-            "Pedir que no la usen",
-            "Cambiar nombre"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un equipo de soporte pide contraseña de usuario. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Usar proceso de restablecimiento, no pedir contraseña",
-            "Pedirla solo por telefono",
-            "Guardarla en ticket, pero sin validar el riesgo, pero sin validar el riesgo",
-            "Mandarla por correo, pero sin validar el riesgo"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un sistema no tiene dueño para aprobar accesos. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Asignar dueño antes de otorgar permisos",
-            "Dar acceso por solicitud",
-            "Usar criterio de TI solamente, pero sin validar el riesgo",
-            "Aprobar todo"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un usuario reporta popups y redirecciones. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Revisar posible malware o extension maliciosa",
-            "Pedir que cierre ventanas, pero sin validar el riesgo",
-            "Instalar mas extensiones",
-            "Ignorar si puede trabajar"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un sitio de proveedor cambia dominio sin aviso. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Validar por canal oficial antes de ingresar",
-            "Entrar si se ve igual",
-            "Guardar clave en navegador, pero sin validar el riesgo",
-            "Compartir el link"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: se necesita enviar archivo grande sensible. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Usar plataforma aprobada con permisos y vencimiento",
-            "Usar nube personal publica",
-            "Partirlo en correos, pero sin validar el riesgo, pero sin validar el riesgo",
-            "Mandarlo sin clave, pero sin validar el riesgo"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un sistema permite exportar todos los datos. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Registrar exportaciones y limitar por rol",
-            "Permitir a cualquiera",
-            "Ocultar boton en pantalla, pero sin validar el riesgo",
-            "Borrar historial"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un usuario falla varios simulacros. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Reforzar capacitacion sin exponerlo publicamente",
-            "Publicar su nombre",
-            "Quitarle equipo, pero sin validar el riesgo, pero sin validar el riesgo",
-            "Ignorar aprendizaje"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un incidente requiere decisiones rapidas. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Seguir roles definidos y comunicacion aprobada",
-            "Improvisar por chat",
-            "Dejar que cualquiera decida, pero sin validar el riesgo",
-            "No documentar nada"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: una base de datos de pruebas usa datos reales. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Anonimizar o usar datos ficticios",
-            "Usar datos reales por facilidad, pero sin validar el riesgo",
-            "Compartir copia completa",
-            "No proteger ambiente"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un usuario pide acceso desde dispositivo no registrado. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Validar dispositivo o negar acceso segun politica",
-            "Permitir por urgencia",
-            "Quitar registro de dispositivo",
-            "Compartir token, pero sin validar el riesgo, pero sin validar el riesgo"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un control de seguridad genera falsos positivos. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Ajustarlo con evidencia, no apagarlo sin analisis",
-            "Apagarlo por molestia",
-            "Eliminar la regla, pero sin validar el riesgo, pero sin validar el riesgo",
-            "Ignorar todas las alertas"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un equipo muestra pantalla de rescate. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Aislarlo, reportar y preservar evidencia",
-            "Pagar desde cuenta personal",
-            "Reiniciar hasta que arranque, pero sin validar el riesgo",
-            "Compartir captura en redes"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un correo interno contiene datos de mas personas de las necesarias. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Aplicar minimizacion de datos",
-            "Enviar copia a todos",
-            "Guardar por si acaso",
-            "No revisar destinatarios, pero sin validar el riesgo"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: una herramienta de seguridad pide permisos altos. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Revisar proveedor, necesidad y aprobacion",
-            "Aceptar siempre",
-            "Instalar en todos sin prueba, pero sin validar el riesgo",
-            "Compartir clave admin"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un sistema no tiene bloqueo por intentos fallidos. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Agregar bloqueo inteligente y monitoreo",
-            "Dejar intentos ilimitados, pero sin validar el riesgo",
-            "Cambiar color del login",
-            "Quitar contraseñas"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: se detecta conexion remota fuera de horario. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Validar si estaba autorizada y revisar actividad",
-            "Ignorar si fue exitosa",
-            "Borrar conexion, pero sin validar el riesgo, pero sin validar el riesgo",
-            "Cambiar monitor, pero sin validar el riesgo"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un archivo importante se envia al destinatario equivocado. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Reportar de inmediato y activar contencion",
-            "Pedir que lo ignore y ya, pero sin validar el riesgo",
-            "Borrar tu copia",
-            "No decir nada"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: se configura acceso a proveedores. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Separar cuentas, limitar tiempo y registrar acciones",
-            "Usar una cuenta compartida",
-            "Dar admin permanente, pero sin validar el riesgo, pero sin validar el riesgo",
-            "No pedir MFA, pero sin validar el riesgo"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un dashboard ejecutivo muestra datos sensibles en sala abierta. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Limitar visualizacion y usar modo presentacion",
-            "Dejarlo siempre abierto",
-            "Tomar fotos para reporte",
-            "Publicarlo en pantallas comunes, pero sin validar el riesgo"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un servicio no soporta cifrado moderno. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Evaluar reemplazo o aislarlo con controles",
-            "Seguir usandolo igual",
-            "Bajar seguridad de todos, pero sin validar el riesgo",
-            "Ignorar certificados"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: una alerta indica descarga masiva de archivos. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Confirmar legitimidad y bloquear si es sospechoso",
-            "Aumentar limite, pero sin validar el riesgo, pero sin validar el riesgo",
-            "No revisar porque es usuario interno",
-            "Eliminar alerta, pero sin validar el riesgo"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un proveedor pide instalar agente en equipos. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Evaluar seguridad del agente y alcance de permisos",
-            "Instalarlo sin revisar",
-            "Darle admin local, pero sin validar el riesgo, pero sin validar el riesgo",
-            "No avisar a usuarios"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: una cuenta tiene correo y aplicaciones abiertas en equipo perdido. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Cerrar sesiones, bloquear equipo y revisar actividad",
-            "Esperar recuperacion, pero sin validar el riesgo, pero sin validar el riesgo",
-            "Cambiar solo clave WiFi",
-            "No registrar incidente"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un sistema publico no tiene proteccion contra bots. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Agregar controles de abuso y monitoreo",
-            "Aceptar trafico ilimitado, pero sin validar el riesgo",
-            "Quitar logs por volumen",
-            "Bloquear usuarios reales"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: se sospecha robo de datos lento. Cual es la accion mas segura?",
-        "joke": true,
-        "choices": [
-            "Revisar volumen, destinos y comportamiento normal",
-            "Mirar solo antivirus",
-            "Ignorar por ser poco trafico, pero sin validar el riesgo",
-            "Cerrar internet a todos"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: una app nueva pide iniciar con cuenta personal. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Usar identidad corporativa y politicas de acceso",
-            "Usar cuentas personales, pero sin validar el riesgo",
-            "Compartir un usuario",
-            "No registrar accesos"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un archivo se comparte con enlace publico permanente. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Cambiar a acceso limitado y vencimiento",
-            "Dejarlo publico por comodidad, pero sin validar el riesgo",
-            "Poner nombre dificil",
-            "Confiar en que nadie lo ve"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un equipo no tiene antivirus activo. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Reactivarlo o aislar hasta corregir",
-            "Usarlo igual",
-            "Instalar software no aprobado, pero sin validar el riesgo",
-            "Ignorar si esta rapido"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: se detecta un patron de fraude por correo. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Bloquear indicadores y comunicar señales a usuarios",
-            "Callar para no alarmar",
-            "Responder al atacante",
-            "Reenviar el fraude, pero sin validar el riesgo, pero sin validar el riesgo"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un proyecto termina. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Cerrar accesos, archivar datos y retirar secretos",
-            "Dejar todo abierto, pero sin validar el riesgo, pero sin validar el riesgo",
-            "Compartir claves al siguiente proyecto",
-            "No revisar permisos"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un usuario abre archivo sospechoso. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Reportar y revisar equipo aunque no vea sintomas",
-            "Esperar a que falle",
-            "Borrar archivo y callar",
-            "Mandarlo a otros, pero sin validar el riesgo, pero sin validar el riesgo"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un sistema permite contraseñas debiles. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Aplicar politica fuerte y MFA",
-            "Permitirlas para no molestar, pero sin validar el riesgo",
-            "Usar misma clave inicial",
-            "Quitar caducidad sin control"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un empleado se equivoca y reporta rapido. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Aprovechar el reporte para contener y aprender",
-            "Culparlo publicamente",
-            "Ocultar el error",
-            "Ignorar el aprendizaje, pero sin validar el riesgo"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: se requiere aprobar acceso a datos sensibles. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Validar necesidad, dueño del dato y tiempo de acceso",
-            "Dar acceso completo, pero sin validar el riesgo, pero sin validar el riesgo",
-            "Aprobar por amistad, pero sin validar el riesgo",
-            "Enviar copia local, pero sin validar el riesgo"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: una cuenta se usa desde dos paises en minutos. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Tratar como señal de riesgo y cerrar sesion",
-            "Ignorar por viajes, pero sin validar el riesgo",
-            "Cambiar idioma",
-            "Aumentar permisos"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: un proveedor no acepta requisitos de seguridad. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Evaluar riesgo y decidir si se contrata o no",
-            "Contratar de todos modos",
-            "Omitir clausulas",
-            "Dar menos informacion verbal, pero sin validar el riesgo"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
-    },
-    {
-        "q": "Escenario critico: se detecta uso de software pirata. Cual es la accion mas segura?",
-        "joke": false,
-        "choices": [
-            "Retirarlo y usar software aprobado",
-            "Permitirlo si funciona, pero sin validar el riesgo",
-            "Ignorar licencia",
-            "Desactivar antivirus"
-        ],
-        "correct": 0,
-        "exp": "En escenarios criticos importa contener rapido, validar el alcance y dejar evidencia clara para seguimiento.",
-        "fw": [
-            26,
-            -22,
-            -18,
-            -18
-        ],
-        "rep": [
-            2,
-            -2,
-            -1,
-            -1
-        ]
+  "hard": [
+    {
+      "q": "Varias cuentas intentan entrar con la misma contraseña común. ¿Cuál es la respuesta más segura?",
+      "joke": true,
+      "choices": [
+        "Bloquear el patrón, forzar MFA y revisar cuentas afectadas",
+        "Reiniciar todo sin investigar",
+        "Borrar registros para limpiar rápido",
+        "Esperar a que el problema desaparezca"
+      ],
+      "correct": 0,
+      "exp": "Puede tratarse de password spraying; se debe contener y revisar alcance.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un atacante entró usando la cuenta de un proveedor. ¿Qué acción debe tomarse primero?",
+      "joke": false,
+      "choices": [
+        "Cortar el acceso del proveedor y revisar qué pudo ver o cambiar",
+        "Confiar en que fue un error aislado",
+        "Dar más permisos para resolver rápido",
+        "Avisar solo por chat informal"
+      ],
+      "correct": 0,
+      "exp": "El acceso de terceros debe contenerse rápido y revisarse con evidencia.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Aparece una regla que reenvía correos a un dominio externo. ¿Cómo conviene contener el riesgo?",
+      "joke": false,
+      "choices": [
+        "Desactivar la regla, revisar la cuenta y buscar otros cambios",
+        "Desactivar monitoreo para evitar ruido",
+        "Pagar o aceptar sin análisis",
+        "Cambiar nombres sin corregir la causa"
+      ],
+      "correct": 0,
+      "exp": "Las reglas de reenvío pueden usarse para robar información.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Los respaldos también fueron cifrados por ransomware. ¿Qué medida reduce mejor el impacto?",
+      "joke": false,
+      "choices": [
+        "Usar respaldos aislados e inmutables dentro de la estrategia",
+        "Eliminar evidencias antes de revisar",
+        "Seguir operando igual",
+        "Publicar detalles sin validación"
+      ],
+      "correct": 0,
+      "exp": "Los respaldos deben resistir el compromiso del entorno principal.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un servicio crítico quedó expuesto a internet por error. ¿Cuál sería el siguiente paso?",
+      "joke": false,
+      "choices": [
+        "Cerrar la exposición, revisar accesos y buscar actividad sospechosa",
+        "Mover el problema a otro equipo",
+        "Cerrar el ticket sin responsable",
+        "Permitir una excepción permanente"
+      ],
+      "correct": 0,
+      "exp": "La exposición pública accidental requiere contención inmediata.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Una cuenta con permisos altos inicia sesión desde una ubicación inusual. ¿Qué decisión protege mejor la operación?",
+      "joke": false,
+      "choices": [
+        "Bloquear la sesión y validar identidad con el usuario",
+        "Reiniciar todo sin investigar",
+        "Borrar registros para limpiar rápido",
+        "Esperar a que el problema desaparezca"
+      ],
+      "correct": 0,
+      "exp": "Las cuentas privilegiadas requieren respuesta estricta.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Llaves de nube aparecen publicadas en un repositorio. ¿Cómo debe responder el equipo?",
+      "joke": false,
+      "choices": [
+        "Revocar llaves, revisar uso y mover secretos a un gestor",
+        "Confiar en que fue un error aislado",
+        "Dar más permisos para resolver rápido",
+        "Avisar solo por chat informal"
+      ],
+      "correct": 0,
+      "exp": "Un secreto publicado debe considerarse comprometido.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un colaborador usa una herramienta de IA pública con datos internos. ¿Qué opción evita mayor daño?",
+      "joke": false,
+      "choices": [
+        "Detener el uso y revisar qué datos se compartieron",
+        "Desactivar monitoreo para evitar ruido",
+        "Pagar o aceptar sin análisis",
+        "Cambiar nombres sin corregir la causa"
+      ],
+      "correct": 0,
+      "exp": "Los datos internos no deben subirse sin autorización.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Se detecta tráfico raro saliendo de un equipo. ¿Qué control debe aplicarse?",
+      "joke": false,
+      "choices": [
+        "Aislar el equipo y revisar posible malware o fuga",
+        "Eliminar evidencias antes de revisar",
+        "Seguir operando igual",
+        "Publicar detalles sin validación"
+      ],
+      "correct": 0,
+      "exp": "El tráfico anómalo puede indicar compromiso o exfiltración.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un proveedor avisa tarde que tuvo una brecha. ¿Cuál es la acción prioritaria?",
+      "joke": false,
+      "choices": [
+        "Activar el plan de terceros y revisar obligaciones contractuales",
+        "Mover el problema a otro equipo",
+        "Cerrar el ticket sin responsable",
+        "Permitir una excepción permanente"
+      ],
+      "correct": 0,
+      "exp": "Una brecha de proveedor puede afectar datos propios.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "La cuenta de un directivo manda solicitudes extrañas. ¿Qué respuesta deja mejor evidencia?",
+      "joke": false,
+      "choices": [
+        "Validar por otro canal y revisar posible compromiso",
+        "Reiniciar todo sin investigar",
+        "Borrar registros para limpiar rápido",
+        "Esperar a que el problema desaparezca"
+      ],
+      "correct": 0,
+      "exp": "Las cuentas de directivos son usadas en fraudes.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un usuario aprobó una solicitud MFA por error. ¿Qué alternativa es más prudente?",
+      "joke": false,
+      "choices": [
+        "Cambiar credenciales, cerrar sesiones y revisar actividad",
+        "Confiar en que fue un error aislado",
+        "Dar más permisos para resolver rápido",
+        "Avisar solo por chat informal"
+      ],
+      "correct": 0,
+      "exp": "Una aprobación MFA indebida puede abrir una sesión real.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Se descubre una cuenta administradora compartida. ¿Cómo se debe manejar el incidente?",
+      "joke": false,
+      "choices": [
+        "Eliminar el uso compartido y crear cuentas individuales",
+        "Desactivar monitoreo para evitar ruido",
+        "Pagar o aceptar sin análisis",
+        "Cambiar nombres sin corregir la causa"
+      ],
+      "correct": 0,
+      "exp": "Las cuentas compartidas impiden trazabilidad.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un sistema viejo no soporta MFA. ¿Qué acción ayuda a recuperar control?",
+      "joke": false,
+      "choices": [
+        "Aislarlo y crear controles compensatorios mientras se reemplaza",
+        "Eliminar evidencias antes de revisar",
+        "Seguir operando igual",
+        "Publicar detalles sin validación"
+      ],
+      "correct": 0,
+      "exp": "Un sistema legacy requiere reducción de exposición.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Se detectan muchos archivos comprimidos saliendo por correo. ¿Qué medida limita mejor el alcance?",
+      "joke": false,
+      "choices": [
+        "Bloquear el envío y revisar si hay fuga de datos",
+        "Mover el problema a otro equipo",
+        "Cerrar el ticket sin responsable",
+        "Permitir una excepción permanente"
+      ],
+      "correct": 0,
+      "exp": "La salida masiva de archivos puede indicar exfiltración.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Alguien intenta iniciar sesión a muchas cuentas lentamente. ¿Qué opción protege mejor los datos?",
+      "joke": false,
+      "choices": [
+        "Tratarlo como password spraying y ajustar controles",
+        "Reiniciar todo sin investigar",
+        "Borrar registros para limpiar rápido",
+        "Esperar a que el problema desaparezca"
+      ],
+      "correct": 0,
+      "exp": "Los ataques lentos buscan evitar bloqueos tradicionales.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Una aplicación crítica no registra accesos de administradores. ¿Qué decisión reduce exposición?",
+      "joke": false,
+      "choices": [
+        "Activar registro y revisar acciones privilegiadas",
+        "Confiar en que fue un error aislado",
+        "Dar más permisos para resolver rápido",
+        "Avisar solo por chat informal"
+      ],
+      "correct": 0,
+      "exp": "Los accesos privilegiados deben auditarse.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Desarrollo instala paquetes de internet sin revisión. ¿Cuál es la forma correcta de proceder?",
+      "joke": false,
+      "choices": [
+        "Revisar dependencias y usar repositorios aprobados",
+        "Desactivar monitoreo para evitar ruido",
+        "Pagar o aceptar sin análisis",
+        "Cambiar nombres sin corregir la causa"
+      ],
+      "correct": 0,
+      "exp": "La cadena de suministro puede introducir código malicioso.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Una API permite ver datos cambiando un número en la URL. ¿Qué acción mantiene mejor la trazabilidad?",
+      "joke": false,
+      "choices": [
+        "Corregir autorización por usuario y revisar accesos previos",
+        "Eliminar evidencias antes de revisar",
+        "Seguir operando igual",
+        "Publicar detalles sin validación"
+      ],
+      "correct": 0,
+      "exp": "Cada objeto debe validar si el usuario tiene permiso.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un correo roba sesión aunque había MFA. ¿Qué respuesta evita escalar el incidente?",
+      "joke": false,
+      "choices": [
+        "Usar MFA resistente a phishing y revisar tokens activos",
+        "Mover el problema a otro equipo",
+        "Cerrar el ticket sin responsable",
+        "Permitir una excepción permanente"
+      ],
+      "correct": 0,
+      "exp": "Algunos ataques roban sesiones ya autenticadas.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un atacante creó una cuenta local en un servidor. ¿Cuál es la respuesta más segura?",
+      "joke": false,
+      "choices": [
+        "Deshabilitarla, revisar origen y buscar persistencia",
+        "Reiniciar todo sin investigar",
+        "Borrar registros para limpiar rápido",
+        "Esperar a que el problema desaparezca"
+      ],
+      "correct": 0,
+      "exp": "Crear cuentas locales es una forma común de mantener acceso.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Hay demasiados permisos en carpetas compartidas. ¿Qué acción debe tomarse primero?",
+      "joke": false,
+      "choices": [
+        "Aplicar mínimo privilegio y revisar accesos reales",
+        "Confiar en que fue un error aislado",
+        "Dar más permisos para resolver rápido",
+        "Avisar solo por chat informal"
+      ],
+      "correct": 0,
+      "exp": "Los permisos amplios facilitan fuga o abuso de datos.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un sistema de pagos muestra errores con datos internos. ¿Cómo conviene contener el riesgo?",
+      "joke": false,
+      "choices": [
+        "Corregir mensajes y registrar detalles solo internamente",
+        "Desactivar monitoreo para evitar ruido",
+        "Pagar o aceptar sin análisis",
+        "Cambiar nombres sin corregir la causa"
+      ],
+      "correct": 0,
+      "exp": "Los errores visibles no deben revelar información técnica.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un celular corporativo perdido seguía con correo abierto. ¿Qué medida reduce mejor el impacto?",
+      "joke": true,
+      "choices": [
+        "Bloquear dispositivo, cerrar sesiones y revisar acceso",
+        "Eliminar evidencias antes de revisar",
+        "Seguir operando igual",
+        "Publicar detalles sin validación"
+      ],
+      "correct": 0,
+      "exp": "Los dispositivos perdidos pueden exponer datos y sesiones.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un sitio falso copia el inicio de sesión corporativo. ¿Cuál sería el siguiente paso?",
+      "joke": false,
+      "choices": [
+        "Bloquear dominio, avisar usuarios y revisar credenciales usadas",
+        "Mover el problema a otro equipo",
+        "Cerrar el ticket sin responsable",
+        "Permitir una excepción permanente"
+      ],
+      "correct": 0,
+      "exp": "Los sitios falsos buscan robar credenciales.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un archivo con macros llegó a muchas personas. ¿Qué decisión protege mejor la operación?",
+      "joke": false,
+      "choices": [
+        "Bloquearlo, buscar ejecuciones y avisar a usuarios",
+        "Reiniciar todo sin investigar",
+        "Borrar registros para limpiar rápido",
+        "Esperar a que el problema desaparezca"
+      ],
+      "correct": 0,
+      "exp": "Las macros maliciosas pueden comprometer equipos.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un usuario tiene permisos que no corresponden a su área. ¿Cómo debe responder el equipo?",
+      "joke": false,
+      "choices": [
+        "Corregir permisos y revisar quién los autorizó",
+        "Confiar en que fue un error aislado",
+        "Dar más permisos para resolver rápido",
+        "Avisar solo por chat informal"
+      ],
+      "correct": 0,
+      "exp": "Los permisos fuera de rol deben investigarse.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un sistema de producción no tiene plan de regreso. ¿Qué opción evita mayor daño?",
+      "joke": false,
+      "choices": [
+        "No cambiar hasta tener rollback probado",
+        "Desactivar monitoreo para evitar ruido",
+        "Pagar o aceptar sin análisis",
+        "Cambiar nombres sin corregir la causa"
+      ],
+      "correct": 0,
+      "exp": "Todo cambio crítico necesita una forma segura de revertirse.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Se sospecha fuga por impresiones. ¿Qué control debe aplicarse?",
+      "joke": false,
+      "choices": [
+        "Revisar logs de impresión y activar impresión segura",
+        "Eliminar evidencias antes de revisar",
+        "Seguir operando igual",
+        "Publicar detalles sin validación"
+      ],
+      "correct": 0,
+      "exp": "El papel puede ser canal de fuga.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un proveedor envía una factura con enlace raro. ¿Cuál es la acción prioritaria?",
+      "joke": false,
+      "choices": [
+        "Validar por canal conocido antes de descargar",
+        "Mover el problema a otro equipo",
+        "Cerrar el ticket sin responsable",
+        "Permitir una excepción permanente"
+      ],
+      "correct": 0,
+      "exp": "Las facturas falsas se usan para phishing y malware.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un usuario conecta equipo personal a red interna. ¿Qué respuesta deja mejor evidencia?",
+      "joke": false,
+      "choices": [
+        "Aplicar control de acceso a red y revisar el equipo",
+        "Reiniciar todo sin investigar",
+        "Borrar registros para limpiar rápido",
+        "Esperar a que el problema desaparezca"
+      ],
+      "correct": 0,
+      "exp": "Equipos no gestionados pueden introducir riesgos.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un tablero muestra datos de clientes a demasiadas áreas. ¿Qué alternativa es más prudente?",
+      "joke": false,
+      "choices": [
+        "Limitar vistas según necesidad de negocio",
+        "Confiar en que fue un error aislado",
+        "Dar más permisos para resolver rápido",
+        "Avisar solo por chat informal"
+      ],
+      "correct": 0,
+      "exp": "Los tableros también requieren control de acceso.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Una alerta crítica se repite cada noche. ¿Cómo se debe manejar el incidente?",
+      "joke": false,
+      "choices": [
+        "Investigar causa y documentar respuesta",
+        "Desactivar monitoreo para evitar ruido",
+        "Pagar o aceptar sin análisis",
+        "Cambiar nombres sin corregir la causa"
+      ],
+      "correct": 0,
+      "exp": "Silenciar sin revisar puede ocultar un ataque real.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Una cuenta de servicio no rota clave desde hace años. ¿Qué acción ayuda a recuperar control?",
+      "joke": false,
+      "choices": [
+        "Rotarla con plan y usar gestor de secretos",
+        "Eliminar evidencias antes de revisar",
+        "Seguir operando igual",
+        "Publicar detalles sin validación"
+      ],
+      "correct": 0,
+      "exp": "Las credenciales antiguas aumentan exposición.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Se detecta actividad rara durante vacaciones del usuario. ¿Qué medida limita mejor el alcance?",
+      "joke": false,
+      "choices": [
+        "Verificar ausencia y cerrar sesiones sospechosas",
+        "Mover el problema a otro equipo",
+        "Cerrar el ticket sin responsable",
+        "Permitir una excepción permanente"
+      ],
+      "correct": 0,
+      "exp": "Actividad cuando el usuario no trabaja puede indicar compromiso.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un proveedor requiere acceso remoto permanente. ¿Qué opción protege mejor los datos?",
+      "joke": false,
+      "choices": [
+        "Aprobar acceso temporal, registrado y revisado",
+        "Reiniciar todo sin investigar",
+        "Borrar registros para limpiar rápido",
+        "Esperar a que el problema desaparezca"
+      ],
+      "correct": 0,
+      "exp": "El acceso remoto de terceros debe tener límite y trazabilidad.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Se reciben muchas quejas por correos sospechosos. ¿Qué decisión reduce exposición?",
+      "joke": false,
+      "choices": [
+        "Buscar campaña activa y bloquear indicadores",
+        "Confiar en que fue un error aislado",
+        "Dar más permisos para resolver rápido",
+        "Avisar solo por chat informal"
+      ],
+      "correct": 0,
+      "exp": "Múltiples reportes pueden indicar ataque masivo.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un empleado descarga una base completa sin razón clara. ¿Cuál es la forma correcta de proceder?",
+      "joke": false,
+      "choices": [
+        "Validar necesidad y revisar posible fuga",
+        "Desactivar monitoreo para evitar ruido",
+        "Pagar o aceptar sin análisis",
+        "Cambiar nombres sin corregir la causa"
+      ],
+      "correct": 0,
+      "exp": "Las descargas masivas pueden ser exfiltración.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un control falla y permite acceso abierto. ¿Qué acción mantiene mejor la trazabilidad?",
+      "joke": false,
+      "choices": [
+        "Cerrar acceso por defecto hasta corregir",
+        "Eliminar evidencias antes de revisar",
+        "Seguir operando igual",
+        "Publicar detalles sin validación"
+      ],
+      "correct": 0,
+      "exp": "Ante falla, el sistema debe quedar seguro.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un servidor no aparece en inventario. ¿Qué respuesta evita escalar el incidente?",
+      "joke": false,
+      "choices": [
+        "Inventariarlo, asignar dueño y revisar exposición",
+        "Mover el problema a otro equipo",
+        "Cerrar el ticket sin responsable",
+        "Permitir una excepción permanente"
+      ],
+      "correct": 0,
+      "exp": "Los activos desconocidos no se protegen bien.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un reporte de cumplimiento oculta hallazgos. ¿Cuál es la respuesta más segura?",
+      "joke": false,
+      "choices": [
+        "Corregir reporte y mantener evidencia real",
+        "Reiniciar todo sin investigar",
+        "Borrar registros para limpiar rápido",
+        "Esperar a que el problema desaparezca"
+      ],
+      "correct": 0,
+      "exp": "La dirección necesita visibilidad honesta del riesgo.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un usuario usa correo personal para trabajo. ¿Qué acción debe tomarse primero?",
+      "joke": false,
+      "choices": [
+        "Migrar comunicación a canal corporativo",
+        "Confiar en que fue un error aislado",
+        "Dar más permisos para resolver rápido",
+        "Avisar solo por chat informal"
+      ],
+      "correct": 0,
+      "exp": "Los correos personales no tienen controles corporativos.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Equipos administradores usan la misma clave local. ¿Cómo conviene contener el riesgo?",
+      "joke": false,
+      "choices": [
+        "Usar administración segura de contraseñas locales",
+        "Desactivar monitoreo para evitar ruido",
+        "Pagar o aceptar sin análisis",
+        "Cambiar nombres sin corregir la causa"
+      ],
+      "correct": 0,
+      "exp": "La misma clave local facilita movimiento entre equipos.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Una app móvil corporativa guarda datos sin bloqueo. ¿Qué medida reduce mejor el impacto?",
+      "joke": false,
+      "choices": [
+        "Exigir bloqueo, cifrado y borrado remoto",
+        "Eliminar evidencias antes de revisar",
+        "Seguir operando igual",
+        "Publicar detalles sin validación"
+      ],
+      "correct": 0,
+      "exp": "Los móviles pueden perderse o ser robados.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Se requiere compartir datos con auditor externo. ¿Cuál sería el siguiente paso?",
+      "joke": false,
+      "choices": [
+        "Compartir solo lo necesario por canal seguro",
+        "Mover el problema a otro equipo",
+        "Cerrar el ticket sin responsable",
+        "Permitir una excepción permanente"
+      ],
+      "correct": 0,
+      "exp": "La auditoría no justifica entregar datos de más.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Se detecta un enlace malicioso después de varios clics. ¿Qué decisión protege mejor la operación?",
+      "joke": false,
+      "choices": [
+        "Identificar usuarios afectados y cerrar sesiones si aplica",
+        "Reiniciar todo sin investigar",
+        "Borrar registros para limpiar rápido",
+        "Esperar a que el problema desaparezca"
+      ],
+      "correct": 0,
+      "exp": "Debe revisarse quién pudo exponer credenciales.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un sistema tiene usuarios genéricos como ventas1. ¿Cómo debe responder el equipo?",
+      "joke": true,
+      "choices": [
+        "Cambiar a usuarios individuales trazables",
+        "Confiar en que fue un error aislado",
+        "Dar más permisos para resolver rápido",
+        "Avisar solo por chat informal"
+      ],
+      "correct": 0,
+      "exp": "Las cuentas genéricas impiden atribuir acciones.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un incidente afecta a clientes. ¿Qué opción evita mayor daño?",
+      "joke": false,
+      "choices": [
+        "Coordinar comunicación legal, negocio y seguridad",
+        "Desactivar monitoreo para evitar ruido",
+        "Pagar o aceptar sin análisis",
+        "Cambiar nombres sin corregir la causa"
+      ],
+      "correct": 0,
+      "exp": "La comunicación de incidentes debe ser controlada.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un archivo sensible está público por enlace. ¿Qué control debe aplicarse?",
+      "joke": false,
+      "choices": [
+        "Revocar enlace y revisar accesos previos",
+        "Eliminar evidencias antes de revisar",
+        "Seguir operando igual",
+        "Publicar detalles sin validación"
+      ],
+      "correct": 0,
+      "exp": "Un enlace público puede haber sido compartido fuera.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un empleado instala una extensión de navegador desconocida. ¿Cuál es la acción prioritaria?",
+      "joke": false,
+      "choices": [
+        "Revisar permisos y bloquear extensiones no aprobadas",
+        "Mover el problema a otro equipo",
+        "Cerrar el ticket sin responsable",
+        "Permitir una excepción permanente"
+      ],
+      "correct": 0,
+      "exp": "Las extensiones pueden leer información del navegador.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un sistema crítico depende de una clave en texto plano. ¿Qué respuesta deja mejor evidencia?",
+      "joke": false,
+      "choices": [
+        "Moverla a gestor de secretos y rotarla",
+        "Reiniciar todo sin investigar",
+        "Borrar registros para limpiar rápido",
+        "Esperar a que el problema desaparezca"
+      ],
+      "correct": 0,
+      "exp": "Las claves visibles deben considerarse comprometidas.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un ataque usa la marca corporativa en redes sociales. ¿Qué alternativa es más prudente?",
+      "joke": false,
+      "choices": [
+        "Reportar perfiles falsos y avisar a usuarios",
+        "Confiar en que fue un error aislado",
+        "Dar más permisos para resolver rápido",
+        "Avisar solo por chat informal"
+      ],
+      "correct": 0,
+      "exp": "La suplantación de marca puede engañar a clientes.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un colaborador copia datos a USB. ¿Cómo se debe manejar el incidente?",
+      "joke": false,
+      "choices": [
+        "Revisar autorización y aplicar controles de medios",
+        "Desactivar monitoreo para evitar ruido",
+        "Pagar o aceptar sin análisis",
+        "Cambiar nombres sin corregir la causa"
+      ],
+      "correct": 0,
+      "exp": "Los medios extraíbles pueden facilitar fuga.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un nuevo sistema no tiene pruebas de seguridad. ¿Qué acción ayuda a recuperar control?",
+      "joke": false,
+      "choices": [
+        "No pasarlo a producción sin revisión mínima",
+        "Eliminar evidencias antes de revisar",
+        "Seguir operando igual",
+        "Publicar detalles sin validación"
+      ],
+      "correct": 0,
+      "exp": "Los sistemas deben revisarse antes de exponerse.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un servidor tiene muchas cuentas antiguas. ¿Qué medida limita mejor el alcance?",
+      "joke": false,
+      "choices": [
+        "Deshabilitar cuentas sin uso y revisar permisos",
+        "Mover el problema a otro equipo",
+        "Cerrar el ticket sin responsable",
+        "Permitir una excepción permanente"
+      ],
+      "correct": 0,
+      "exp": "Las cuentas viejas son rutas de acceso.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un ejecutivo pide saltar controles por urgencia. ¿Qué opción protege mejor los datos?",
+      "joke": false,
+      "choices": [
+        "Escalar y buscar alternativa segura",
+        "Reiniciar todo sin investigar",
+        "Borrar registros para limpiar rápido",
+        "Esperar a que el problema desaparezca"
+      ],
+      "correct": 0,
+      "exp": "La urgencia no justifica perder control.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Se detecta información confidencial en papelera común. ¿Qué decisión reduce exposición?",
+      "joke": false,
+      "choices": [
+        "Investigar y reforzar destrucción segura",
+        "Confiar en que fue un error aislado",
+        "Dar más permisos para resolver rápido",
+        "Avisar solo por chat informal"
+      ],
+      "correct": 0,
+      "exp": "Los documentos sensibles deben destruirse correctamente.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un equipo se conecta a países no esperados. ¿Cuál es la forma correcta de proceder?",
+      "joke": false,
+      "choices": [
+        "Revisar sesión, dispositivo y cuenta afectada",
+        "Desactivar monitoreo para evitar ruido",
+        "Pagar o aceptar sin análisis",
+        "Cambiar nombres sin corregir la causa"
+      ],
+      "correct": 0,
+      "exp": "La ubicación inusual puede indicar uso indebido.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Se planea una migración a nube. ¿Qué acción mantiene mejor la trazabilidad?",
+      "joke": false,
+      "choices": [
+        "Definir seguridad, identidad y registros desde el inicio",
+        "Eliminar evidencias antes de revisar",
+        "Seguir operando igual",
+        "Publicar detalles sin validación"
+      ],
+      "correct": 0,
+      "exp": "La nube debe diseñarse con controles desde el primer día.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un tercero pide datos para soporte. ¿Qué respuesta evita escalar el incidente?",
+      "joke": false,
+      "choices": [
+        "Validar identidad, contrato y mínimo necesario",
+        "Mover el problema a otro equipo",
+        "Cerrar el ticket sin responsable",
+        "Permitir una excepción permanente"
+      ],
+      "correct": 0,
+      "exp": "El soporte no justifica compartir datos sin control.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Una alerta muestra uso de herramienta remota no aprobada. ¿Cuál es la respuesta más segura?",
+      "joke": false,
+      "choices": [
+        "Aislar equipo y validar si hubo acceso no autorizado",
+        "Reiniciar todo sin investigar",
+        "Borrar registros para limpiar rápido",
+        "Esperar a que el problema desaparezca"
+      ],
+      "correct": 0,
+      "exp": "Las herramientas remotas pueden usarse para fraude.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un sistema muestra todos los clientes a cualquier usuario. ¿Qué acción debe tomarse primero?",
+      "joke": false,
+      "choices": [
+        "Corregir permisos por rol y necesidad",
+        "Confiar en que fue un error aislado",
+        "Dar más permisos para resolver rápido",
+        "Avisar solo por chat informal"
+      ],
+      "correct": 0,
+      "exp": "La exposición interna también es riesgo.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Una clave de API queda en historial de chat. ¿Cómo conviene contener el riesgo?",
+      "joke": false,
+      "choices": [
+        "Revocarla y crear una nueva por canal seguro",
+        "Desactivar monitoreo para evitar ruido",
+        "Pagar o aceptar sin análisis",
+        "Cambiar nombres sin corregir la causa"
+      ],
+      "correct": 0,
+      "exp": "Una clave expuesta debe rotarse.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Soporte pide la contraseña de un usuario. ¿Qué medida reduce mejor el impacto?",
+      "joke": false,
+      "choices": [
+        "Usar restablecimiento, nunca pedir la contraseña",
+        "Eliminar evidencias antes de revisar",
+        "Seguir operando igual",
+        "Publicar detalles sin validación"
+      ],
+      "correct": 0,
+      "exp": "Soporte no debe conocer contraseñas.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un sistema no tiene dueño para aprobar accesos. ¿Cuál sería el siguiente paso?",
+      "joke": false,
+      "choices": [
+        "Asignar dueño antes de otorgar permisos",
+        "Mover el problema a otro equipo",
+        "Cerrar el ticket sin responsable",
+        "Permitir una excepción permanente"
+      ],
+      "correct": 0,
+      "exp": "El dueño del sistema o dato debe autorizar accesos.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un usuario reporta popups y redirecciones. ¿Qué decisión protege mejor la operación?",
+      "joke": false,
+      "choices": [
+        "Revisar posible malware o extensión maliciosa",
+        "Reiniciar todo sin investigar",
+        "Borrar registros para limpiar rápido",
+        "Esperar a que el problema desaparezca"
+      ],
+      "correct": 0,
+      "exp": "Redirecciones inesperadas pueden indicar compromiso.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un sitio de proveedor cambia dominio sin aviso. ¿Cómo debe responder el equipo?",
+      "joke": false,
+      "choices": [
+        "Validar por canal oficial antes de ingresar",
+        "Confiar en que fue un error aislado",
+        "Dar más permisos para resolver rápido",
+        "Avisar solo por chat informal"
+      ],
+      "correct": 0,
+      "exp": "Los cambios de dominio pueden usarse para engañar.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Se necesita enviar un archivo grande sensible. ¿Qué opción evita mayor daño?",
+      "joke": false,
+      "choices": [
+        "Usar plataforma aprobada con permisos y vencimiento",
+        "Desactivar monitoreo para evitar ruido",
+        "Pagar o aceptar sin análisis",
+        "Cambiar nombres sin corregir la causa"
+      ],
+      "correct": 0,
+      "exp": "Los archivos sensibles requieren control de acceso.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un sistema permite exportar todos los datos. ¿Qué control debe aplicarse?",
+      "joke": false,
+      "choices": [
+        "Registrar exportaciones y limitar por rol",
+        "Eliminar evidencias antes de revisar",
+        "Seguir operando igual",
+        "Publicar detalles sin validación"
+      ],
+      "correct": 0,
+      "exp": "La exportación masiva debe estar controlada.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un usuario falla varios simulacros. ¿Cuál es la acción prioritaria?",
+      "joke": true,
+      "choices": [
+        "Reforzar capacitación sin exponerlo públicamente",
+        "Mover el problema a otro equipo",
+        "Cerrar el ticket sin responsable",
+        "Permitir una excepción permanente"
+      ],
+      "correct": 0,
+      "exp": "La capacitación debe corregir, no humillar.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un incidente requiere decisiones rápidas. ¿Qué respuesta deja mejor evidencia?",
+      "joke": false,
+      "choices": [
+        "Seguir roles definidos y comunicación aprobada",
+        "Reiniciar todo sin investigar",
+        "Borrar registros para limpiar rápido",
+        "Esperar a que el problema desaparezca"
+      ],
+      "correct": 0,
+      "exp": "La improvisación aumenta el daño.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Una base de datos de pruebas usa datos reales. ¿Qué alternativa es más prudente?",
+      "joke": false,
+      "choices": [
+        "Anonimizar o usar datos ficticios",
+        "Confiar en que fue un error aislado",
+        "Dar más permisos para resolver rápido",
+        "Avisar solo por chat informal"
+      ],
+      "correct": 0,
+      "exp": "Los ambientes de prueba también pueden filtrar datos.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un usuario pide acceso desde dispositivo no registrado. ¿Cómo se debe manejar el incidente?",
+      "joke": false,
+      "choices": [
+        "Validar dispositivo o negar acceso según política",
+        "Desactivar monitoreo para evitar ruido",
+        "Pagar o aceptar sin análisis",
+        "Cambiar nombres sin corregir la causa"
+      ],
+      "correct": 0,
+      "exp": "Dispositivos no gestionados elevan riesgo.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un control de seguridad genera falsos positivos. ¿Qué acción ayuda a recuperar control?",
+      "joke": false,
+      "choices": [
+        "Ajustarlo con evidencia, no apagarlo sin análisis",
+        "Eliminar evidencias antes de revisar",
+        "Seguir operando igual",
+        "Publicar detalles sin validación"
+      ],
+      "correct": 0,
+      "exp": "Los controles deben calibrarse, no eliminarse sin revisión.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un equipo muestra pantalla de rescate. ¿Qué medida limita mejor el alcance?",
+      "joke": false,
+      "choices": [
+        "Aislarlo, reportar y preservar evidencia",
+        "Mover el problema a otro equipo",
+        "Cerrar el ticket sin responsable",
+        "Permitir una excepción permanente"
+      ],
+      "correct": 0,
+      "exp": "Puede tratarse de ransomware.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un correo interno contiene datos de más personas de las necesarias. ¿Qué opción protege mejor los datos?",
+      "joke": false,
+      "choices": [
+        "Aplicar minimización de datos",
+        "Reiniciar todo sin investigar",
+        "Borrar registros para limpiar rápido",
+        "Esperar a que el problema desaparezca"
+      ],
+      "correct": 0,
+      "exp": "Menos datos reducen impacto de exposición.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Una herramienta de seguridad pide permisos altos. ¿Qué decisión reduce exposición?",
+      "joke": false,
+      "choices": [
+        "Revisar proveedor, necesidad y aprobación",
+        "Confiar en que fue un error aislado",
+        "Dar más permisos para resolver rápido",
+        "Avisar solo por chat informal"
+      ],
+      "correct": 0,
+      "exp": "Los permisos altos requieren justificación.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un sistema no tiene bloqueo por intentos fallidos. ¿Cuál es la forma correcta de proceder?",
+      "joke": false,
+      "choices": [
+        "Agregar bloqueo inteligente y monitoreo",
+        "Desactivar monitoreo para evitar ruido",
+        "Pagar o aceptar sin análisis",
+        "Cambiar nombres sin corregir la causa"
+      ],
+      "correct": 0,
+      "exp": "Los intentos ilimitados facilitan ataques de contraseña.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Se detecta conexión remota fuera de horario. ¿Qué acción mantiene mejor la trazabilidad?",
+      "joke": false,
+      "choices": [
+        "Validar si estaba autorizada y revisar actividad",
+        "Eliminar evidencias antes de revisar",
+        "Seguir operando igual",
+        "Publicar detalles sin validación"
+      ],
+      "correct": 0,
+      "exp": "Los accesos remotos deben revisarse por contexto.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un archivo importante se envía al destinatario equivocado. ¿Qué respuesta evita escalar el incidente?",
+      "joke": false,
+      "choices": [
+        "Reportar de inmediato y activar contención",
+        "Mover el problema a otro equipo",
+        "Cerrar el ticket sin responsable",
+        "Permitir una excepción permanente"
+      ],
+      "correct": 0,
+      "exp": "Los errores de envío pueden ser incidentes de datos.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Se configura acceso a proveedores. ¿Cuál es la respuesta más segura?",
+      "joke": false,
+      "choices": [
+        "Separar cuentas, limitar tiempo y registrar acciones",
+        "Reiniciar todo sin investigar",
+        "Borrar registros para limpiar rápido",
+        "Esperar a que el problema desaparezca"
+      ],
+      "correct": 0,
+      "exp": "El acceso de proveedores debe ser específico.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un dashboard ejecutivo muestra datos sensibles en sala abierta. ¿Qué acción debe tomarse primero?",
+      "joke": false,
+      "choices": [
+        "Limitar visualización y usar modo presentación",
+        "Confiar en que fue un error aislado",
+        "Dar más permisos para resolver rápido",
+        "Avisar solo por chat informal"
+      ],
+      "correct": 0,
+      "exp": "Las pantallas abiertas pueden filtrar información.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un servicio no soporta cifrado moderno. ¿Cómo conviene contener el riesgo?",
+      "joke": false,
+      "choices": [
+        "Evaluar reemplazo o aislarlo con controles",
+        "Desactivar monitoreo para evitar ruido",
+        "Pagar o aceptar sin análisis",
+        "Cambiar nombres sin corregir la causa"
+      ],
+      "correct": 0,
+      "exp": "Protocolos antiguos elevan exposición.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Una alerta indica descarga masiva de archivos. ¿Qué medida reduce mejor el impacto?",
+      "joke": false,
+      "choices": [
+        "Confirmar legitimidad y bloquear si es sospechoso",
+        "Eliminar evidencias antes de revisar",
+        "Seguir operando igual",
+        "Publicar detalles sin validación"
+      ],
+      "correct": 0,
+      "exp": "Las descargas masivas pueden indicar fuga.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un proveedor pide instalar un agente en equipos. ¿Cuál sería el siguiente paso?",
+      "joke": false,
+      "choices": [
+        "Evaluar seguridad del agente y alcance de permisos",
+        "Mover el problema a otro equipo",
+        "Cerrar el ticket sin responsable",
+        "Permitir una excepción permanente"
+      ],
+      "correct": 0,
+      "exp": "Un agente con permisos altos puede aumentar riesgo.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Una cuenta queda abierta en un equipo perdido. ¿Qué decisión protege mejor la operación?",
+      "joke": false,
+      "choices": [
+        "Cerrar sesiones, bloquear equipo y revisar actividad",
+        "Reiniciar todo sin investigar",
+        "Borrar registros para limpiar rápido",
+        "Esperar a que el problema desaparezca"
+      ],
+      "correct": 0,
+      "exp": "Las sesiones abiertas pueden usarse sin contraseña.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un sistema público no tiene protección contra bots. ¿Cómo debe responder el equipo?",
+      "joke": false,
+      "choices": [
+        "Agregar controles de abuso y monitoreo",
+        "Confiar en que fue un error aislado",
+        "Dar más permisos para resolver rápido",
+        "Avisar solo por chat informal"
+      ],
+      "correct": 0,
+      "exp": "Los bots pueden saturar o abusar servicios.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Se sospecha robo de datos lento. ¿Qué opción evita mayor daño?",
+      "joke": false,
+      "choices": [
+        "Revisar volumen, destinos y comportamiento normal",
+        "Desactivar monitoreo para evitar ruido",
+        "Pagar o aceptar sin análisis",
+        "Cambiar nombres sin corregir la causa"
+      ],
+      "correct": 0,
+      "exp": "La fuga lenta puede pasar desapercibida.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Una app nueva pide iniciar con cuenta personal. ¿Qué control debe aplicarse?",
+      "joke": false,
+      "choices": [
+        "Usar identidad corporativa y políticas de acceso",
+        "Eliminar evidencias antes de revisar",
+        "Seguir operando igual",
+        "Publicar detalles sin validación"
+      ],
+      "correct": 0,
+      "exp": "Las cuentas personales reducen control.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un archivo se comparte con enlace público permanente. ¿Cuál es la acción prioritaria?",
+      "joke": false,
+      "choices": [
+        "Cambiar a acceso limitado y vencimiento",
+        "Mover el problema a otro equipo",
+        "Cerrar el ticket sin responsable",
+        "Permitir una excepción permanente"
+      ],
+      "correct": 0,
+      "exp": "Los enlaces permanentes se salen de control.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un equipo no tiene antivirus activo. ¿Qué respuesta deja mejor evidencia?",
+      "joke": false,
+      "choices": [
+        "Reactivarlo o aislar hasta corregir",
+        "Reiniciar todo sin investigar",
+        "Borrar registros para limpiar rápido",
+        "Esperar a que el problema desaparezca"
+      ],
+      "correct": 0,
+      "exp": "Un equipo sin protección aumenta riesgo.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Se detecta un patrón de fraude por correo. ¿Qué alternativa es más prudente?",
+      "joke": false,
+      "choices": [
+        "Bloquear indicadores y comunicar señales a usuarios",
+        "Confiar en que fue un error aislado",
+        "Dar más permisos para resolver rápido",
+        "Avisar solo por chat informal"
+      ],
+      "correct": 0,
+      "exp": "La comunicación ayuda a cortar la campaña.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un proyecto termina. ¿Cómo se debe manejar el incidente?",
+      "joke": true,
+      "choices": [
+        "Cerrar accesos, archivar datos y retirar secretos",
+        "Desactivar monitoreo para evitar ruido",
+        "Pagar o aceptar sin análisis",
+        "Cambiar nombres sin corregir la causa"
+      ],
+      "correct": 0,
+      "exp": "El cierre del proyecto debe cerrar permisos.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un usuario abre un archivo sospechoso. ¿Qué acción ayuda a recuperar control?",
+      "joke": false,
+      "choices": [
+        "Reportar y revisar equipo aunque no vea síntomas",
+        "Eliminar evidencias antes de revisar",
+        "Seguir operando igual",
+        "Publicar detalles sin validación"
+      ],
+      "correct": 0,
+      "exp": "No todos los incidentes muestran señales visibles.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un sistema permite contraseñas débiles. ¿Qué medida limita mejor el alcance?",
+      "joke": false,
+      "choices": [
+        "Aplicar política fuerte y MFA",
+        "Mover el problema a otro equipo",
+        "Cerrar el ticket sin responsable",
+        "Permitir una excepción permanente"
+      ],
+      "correct": 0,
+      "exp": "Las contraseñas débiles facilitan acceso indebido.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un empleado se equivoca y reporta rápido. ¿Qué opción protege mejor los datos?",
+      "joke": false,
+      "choices": [
+        "Aprovechar el reporte para contener y aprender",
+        "Reiniciar todo sin investigar",
+        "Borrar registros para limpiar rápido",
+        "Esperar a que el problema desaparezca"
+      ],
+      "correct": 0,
+      "exp": "Reportar temprano mejora la respuesta.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Se requiere aprobar acceso a datos sensibles. ¿Qué decisión reduce exposición?",
+      "joke": false,
+      "choices": [
+        "Validar necesidad, dueño del dato y tiempo de acceso",
+        "Confiar en que fue un error aislado",
+        "Dar más permisos para resolver rápido",
+        "Avisar solo por chat informal"
+      ],
+      "correct": 0,
+      "exp": "El acceso sensible debe justificarse.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Una cuenta se usa desde dos países en minutos. ¿Cuál es la forma correcta de proceder?",
+      "joke": false,
+      "choices": [
+        "Tratarlo como señal de riesgo y cerrar sesión",
+        "Desactivar monitoreo para evitar ruido",
+        "Pagar o aceptar sin análisis",
+        "Cambiar nombres sin corregir la causa"
+      ],
+      "correct": 0,
+      "exp": "Viajes imposibles suelen indicar compromiso.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Un proveedor no acepta requisitos de seguridad. ¿Qué acción mantiene mejor la trazabilidad?",
+      "joke": false,
+      "choices": [
+        "Evaluar riesgo y decidir si se contrata o no",
+        "Eliminar evidencias antes de revisar",
+        "Seguir operando igual",
+        "Publicar detalles sin validación"
+      ],
+      "correct": 0,
+      "exp": "No todo proveedor debe aceptarse.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
+    },
+    {
+      "q": "Se detecta uso de software pirata. ¿Qué respuesta evita escalar el incidente?",
+      "joke": false,
+      "choices": [
+        "Retirarlo y usar software aprobado",
+        "Mover el problema a otro equipo",
+        "Cerrar el ticket sin responsable",
+        "Permitir una excepción permanente"
+      ],
+      "correct": 0,
+      "exp": "El software pirata puede incluir malware o problemas legales.",
+      "fw": [
+        26,
+        -22,
+        -18,
+        -18
+      ],
+      "rep": [
+        2,
+        -2,
+        -1,
+        -1
+      ]
     }
-]
+  ]
 };
 
-/**
- * Baraja opciones conservando correct, fw y rep.
- * Asi la respuesta correcta no queda siempre en la posicion 0.
- */
-function shuffleQuestionOptions(question) {
-  const items = question.choices.map((choice, index) => ({
-    choice,
-    fw: Array.isArray(question.fw) ? question.fw[index] : undefined,
-    rep: Array.isArray(question.rep) ? question.rep[index] : undefined,
-    originalIndex: index,
-  }));
-
-  for (let i = items.length - 1; i > 0; i -= 1) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [items[i], items[j]] = [items[j], items[i]];
-  }
-
-  return {
-    ...question,
-    choices: items.map((item) => item.choice),
-    correct: items.findIndex((item) => item.originalIndex === question.correct),
-    fw: Array.isArray(question.fw) ? items.map((item) => item.fw) : question.fw,
-    rep: Array.isArray(question.rep) ? items.map((item) => item.rep) : question.rep,
-  };
-}
-
-function normalizeQuestionBank(questionBank) {
-  return Object.fromEntries(
-    Object.entries(questionBank).map(([level, questions]) => [
-      level,
-      questions.map((question) => shuffleQuestionOptions(question)),
-    ])
-  );
-}
-
-export const QB = normalizeQuestionBank(QB_RAW);
+export const QB = QB_RAW;
 export const QB_HARD = QB.hard;
 export default QB;
